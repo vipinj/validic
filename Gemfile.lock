@@ -6,6 +6,7 @@ PATH
       faraday (~> 0.8)
       faraday_middleware (~> 0.9)
       hashie (~> 2.0.3)
+      multi_json
 
 GEM
   remote: https://rubygems.org/
