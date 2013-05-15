@@ -20,7 +20,7 @@ describe Validic::Profile do
       @updated_profile = client.update_profile({gender: "F",
                                                location: "TX",
                                                birth_year: "1985",
-                                               height: 167.75,
+                                               height: "167.75",
                                                weight: 69,
                                                first_name: "Demo",
                                                last_name: "User"})
@@ -32,5 +32,3 @@ describe Validic::Profile do
   end
 
 end
-
-

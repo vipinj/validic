@@ -1,0 +1,102 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.validic.com/v1/fitness.json?access_token=DEMO_KEY
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby Gem by Validic 0.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "U2VydmVy":
+      - !binary |-
+        bmdpbngvMS4yLjc=
+      !binary "RGF0ZQ==":
+      - !binary |-
+        V2VkLCAxNSBNYXkgMjAxMyAxNjoxODo1MCBHTVQ=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
+      !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
+      - !binary |-
+        Y2h1bmtlZA==
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+      !binary "U3RhdHVz":
+      - !binary |-
+        MjAwIE9L
+      !binary "U3RyaWN0LVRyYW5zcG9ydC1TZWN1cml0eQ==":
+      - !binary |-
+        bWF4LWFnZT0zMTUzNjAwMA==
+      !binary "WC1VYS1Db21wYXRpYmxl":
+      - !binary |-
+        SUU9RWRnZSxjaHJvbWU9MQ==
+      !binary "RXRhZw==":
+      - !binary |-
+        IjJmMjNlZWQzNWJlYjY0ZmRiYWJlZGQ1YWMwNzBkMWVlIg==
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        bWF4LWFnZT0wLCBwcml2YXRlLCBtdXN0LXJldmFsaWRhdGU=
+      !binary "WC1SZXF1ZXN0LUlk":
+      - !binary |-
+        NWVhYThlNDg4ZTNhNTFmZDRjNTNkMDcyZjRlMGVkYjA=
+      !binary "WC1SdW50aW1l":
+      - !binary |-
+        MC4wNTIzMzE=
+      !binary "WC1SYWNrLUNhY2hl":
+      - !binary |-
+        bWlzcw==
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+    http_version: 
+  recorded_at: Wed, 15 May 2013 16:17:47 GMT
+recorded_with: VCR 2.4.0

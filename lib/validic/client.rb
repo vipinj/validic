@@ -4,6 +4,7 @@ require 'validic/request'
 require 'validic/activity'
 require 'validic/user'
 require 'validic/profile'
+require 'validic/fitness'
 
 module Validic
   class Client
@@ -13,6 +14,7 @@ module Validic
     include Activity
     include User
     include Profile
+    include Fitness
 
     attr_reader :api_url, :api_version, :access_token
 
