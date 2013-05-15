@@ -2,6 +2,8 @@
 require 'forwardable'
 require 'validic/request'
 require 'validic/activity'
+require 'validic/user'
+require 'validic/profile'
 
 module Validic
   class Client
@@ -9,6 +11,8 @@ module Validic
 
     include Request
     include Activity
+    include User
+    include Profile
 
     attr_reader :api_url, :api_version, :access_token
 

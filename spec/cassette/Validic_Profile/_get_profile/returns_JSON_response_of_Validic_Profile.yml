@@ -1,0 +1,146 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.validic.com/v1/me.json?access_token=DEMO_KEY
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby Gem by Validic 0.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "U2VydmVy":
+      - !binary |-
+        bmdpbngvMS4yLjc=
+      !binary "RGF0ZQ==":
+      - !binary |-
+        V2VkLCAxNSBNYXkgMjAxMyAxNDoxNzoyMSBHTVQ=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
+      !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
+      - !binary |-
+        Y2h1bmtlZA==
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+      !binary "U3RhdHVz":
+      - !binary |-
+        MjAwIE9L
+      !binary "U3RyaWN0LVRyYW5zcG9ydC1TZWN1cml0eQ==":
+      - !binary |-
+        bWF4LWFnZT0zMTUzNjAwMA==
+      !binary "WC1VYS1Db21wYXRpYmxl":
+      - !binary |-
+        SUU9RWRnZSxjaHJvbWU9MQ==
+      !binary "RXRhZw==":
+      - !binary |-
+        IjViYmUzYTkzYmM2ZWIzOTVjMjg4YmQyMDU4NWE5YWQwIg==
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        bWF4LWFnZT0wLCBwcml2YXRlLCBtdXN0LXJldmFsaWRhdGU=
+      !binary "WC1SZXF1ZXN0LUlk":
+      - !binary |-
+        MmUxZTg4MDVhMzJiNTAwYjE0NDJjMTk1MTZjZjBkMTA=
+      !binary "WC1SdW50aW1l":
+      - !binary |-
+        MC4wMjE2ODA=
+      !binary "WC1SYWNrLUNhY2hl":
+      - !binary |-
+        bWlzcw==
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA4WMSw7CIBiE7zIbN10IhKrcwRNY02D5W0hIIRRjTMPdheje
+        2X3z2vHcKEHtGJ2BgmRy4kLMvSFjtBDEj00cHWIKs/P0t8tqd6HVtFtcK/gw
+        6ezCWrHSw6VsxzfpFrPLWVbvRW6xGYqd+g72B5AHObSFjtG778UGdbuXUj55
+        64XmtwAAAA==
+    http_version: 
+  recorded_at: Wed, 15 May 2013 14:16:22 GMT
+- request:
+    method: get
+    uri: https://api.validic.com/v1/profile.json?access_token=DEMO_KEY
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby Gem by Validic 0.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "U2VydmVy":
+      - !binary |-
+        bmdpbngvMS4yLjc=
+      !binary "RGF0ZQ==":
+      - !binary |-
+        V2VkLCAxNSBNYXkgMjAxMyAxNDo0NDoxNCBHTVQ=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
+      !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
+      - !binary |-
+        Y2h1bmtlZA==
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+      !binary "U3RhdHVz":
+      - !binary |-
+        MjAwIE9L
+      !binary "U3RyaWN0LVRyYW5zcG9ydC1TZWN1cml0eQ==":
+      - !binary |-
+        bWF4LWFnZT0zMTUzNjAwMA==
+      !binary "WC1VYS1Db21wYXRpYmxl":
+      - !binary |-
+        SUU9RWRnZSxjaHJvbWU9MQ==
+      !binary "RXRhZw==":
+      - !binary |-
+        ImY3MzU5MThiZjgyMWJhOTc1M2QxNmYwZDQ4MDBhMjk4Ig==
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        bWF4LWFnZT0wLCBwcml2YXRlLCBtdXN0LXJldmFsaWRhdGU=
+      !binary "WC1SZXF1ZXN0LUlk":
+      - !binary |-
+        NmM2ZmQxNGI0NjY2MmQ0MzQxNzZlZDY1MDFlOTA4OTQ=
+      !binary "WC1SdW50aW1l":
+      - !binary |-
+        MC4wMjUzNzU=
+      !binary "WC1SYWNrLUNhY2hl":
+      - !binary |-
+        bWlzcw==
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAAy2MTQrCMBCF7/I2browDamaO3gClRKbaTMQmhADIqV3d4K+
+        3ff+NuSSZo4Eu2FkDwujzNRrPQ+evHdaU39sUuiw0OqpSOcqENPkKqdVUOjJ
+        pYbxQ67F6nI24r2Jl1Bh1WnoEP4AczD3tnA5R/5dvGBvj33/AlauU6KNAAAA
+    http_version: 
+  recorded_at: Wed, 15 May 2013 14:43:14 GMT
+recorded_with: VCR 2.4.0
