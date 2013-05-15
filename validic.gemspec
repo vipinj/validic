@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "validic"
   spec.version       = Validic::VERSION
   spec.authors       = ["Julius Francisco"]
-  spec.email         = ["baldrailers@gmail.com"]
+  spec.email         = ["julius@motivationscience.com"]
   spec.description   = %q{API Wrapper for Validic}
   spec.summary       = spec.description
   spec.homepage      = "https://www.validic.com"
@@ -33,4 +33,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "vcr"
   spec.add_development_dependency "shoulda"
   spec.add_development_dependency "webmock"
+  spec.add_development_dependency "api_matchers"
 end

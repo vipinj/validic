@@ -1,12 +1,14 @@
 # encoding: utf-8
 require 'forwardable'
 require 'validic/request'
+require 'validic/activity'
 
 module Validic
   class Client
     extend Forwardable
 
     include Request
+    include Activity
 
     attr_reader :api_url, :api_version, :access_token
 
@@ -16,7 +18,7 @@ module Validic
     # @params options[Hash]
     def initialize(options={})
       @api_url        = options[:api_url]       || Validic.api_url
-      @api_version    = options[:api_version]   || Validic.api_version
+      @api_version    = options[:api_version]   || Validic.api_version || 'v1'
       @access_token   = options[:access_token]  || Validic.access_token
     end
 

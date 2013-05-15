@@ -2,6 +2,7 @@ require 'validic'
 require 'vcr'
 require 'simplecov'
 require 'simplecov-rcov'
+require 'api_matchers'
 
 class SimpleCov::Formatter::MergedFormatter
   def format(result)
@@ -24,6 +25,8 @@ VCR.configure do |c|
 end
 
 RSpec.configure do |c|
+  c.include APIMatchers::RSpecMatchers
+
   c.treat_symbols_as_metadata_keys_with_true_values = true
 
   ##

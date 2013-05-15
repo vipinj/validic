@@ -14,6 +14,7 @@ module Validic
     end
 
     def request(method, path, options)
+      options[:access_token] = Validic.access_token
       response = connection.send(method) do |request|
         case method
         when :get
