@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'forwardable'
 require 'validic/request'
+require 'validic/organization'
 require 'validic/activity'
 require 'validic/user'
 require 'validic/profile'
@@ -12,12 +13,14 @@ require 'validic/diabetes'
 require 'validic/general_measurement'
 require 'validic/routine'
 require 'validic/tobacco_cessation'
+require 'validic/third_party_app'
 
 module Validic
   class Client
     extend Forwardable
 
     include Request
+    include Organization
     include Activity
     include User
     include Profile
@@ -29,6 +32,7 @@ module Validic
     include GeneralMeasurement
     include Routine
     include TobaccoCessation
+    include ThirdPartyApp
 
     attr_reader :api_url, :api_version, :access_token
 

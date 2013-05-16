@@ -8,12 +8,18 @@ module Validic
     # 
     # @return [Hashie::Mash] with list of Weight
     def get_weights(options={})
+      org_id = options[:org_id]
       options = {
         start_date: options[:start_date],
-        end_date: options[:end_date]
+        end_date: options[:end_date],
+        access_token: options[:access_token]
       }
-      response = get("/#{Validic.api_version}/weight.json", options)
-      response if response
+
+      if options[:access_token] && org_id
+        response = get("/#{Validic.api_version}/organizations/#{org_id}/weight.json", options)
+      else
+        response = get("/#{Validic.api_version}/weight.json", options)
+      end
     end
 
     ##

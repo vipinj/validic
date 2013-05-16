@@ -41,7 +41,24 @@ describe Validic::Fitness do
       @new_fitness.fitness.duration.should eq 1959.90
       @new_fitness.fitness.source.should eq "Sample App"
     end
-  
+  end
+
+  context "#get_fitnesses by organization" do
+    before do
+      @fitness = client.get_fitnesses({org_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
+    end
+
+    it "returns JSON response of Validic::Fitness", vcr: true do
+      @fitness.should_not be_nil
+    end
+
+    it "status 200" do
+      @fitness.summary.status.should == 200 
+    end
+
+    it "has summary node" do
+      @fitness.summary.should_not be_nil
+    end
   end
 
 end

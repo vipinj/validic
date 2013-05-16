@@ -40,4 +40,22 @@ describe Validic::TobaccoCessation do
     end
   end
 
+  context "#get_tobacco_cessations by organization" do
+    before do
+      @tobacco_cessation = client.get_tobacco_cessations({org_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
+    end
+
+    it "returns JSON response of Validic::TobaccoCessation", vcr: true do
+      @tobacco_cessation.should_not be_nil
+    end
+
+    it "status 200" do
+      @tobacco_cessation.summary.status.should == 200 
+    end
+
+    it "has summary node" do
+      @tobacco_cessation.summary.should_not be_nil
+    end
+  end
+
 end

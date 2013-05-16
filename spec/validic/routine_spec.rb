@@ -41,4 +41,21 @@ describe Validic::Routine do
     end
   end
 
+  context "#get_routines by organization" do
+    before do
+      @routine = client.get_routines({org_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
+    end
+
+    it "returns JSON response of Validic::Routine", vcr: true do
+      @routine.should_not be_nil
+    end
+
+    it "status 200" do
+      @routine.summary.status.should == 200 
+    end
+
+    it "has summary node" do
+      @routine.summary.should_not be_nil
+    end
+  end
 end

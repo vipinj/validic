@@ -4,15 +4,23 @@ module Validic
   module Diabetes
 
     ##
-    # Get Diabetes Activities base on `access_token`
+    # Get User Diabetes Activities base on `access_token`
     # 
     # @return [Hashie::Mash] with list of Diabetes
     def get_diabetes(options={})
+      org_id = options[:org_id]
       options = {
         start_date: options[:start_date],
-        end_date: options[:end_date]
+        end_date: options[:end_date],
+        access_token: options[:access_token]
       }
-      response = get("/#{Validic.api_version}/diabetes.json", options)
+
+      if options[:access_token] && org_id
+        response = get("/#{Validic.api_version}/organizations/#{org_id}/diabetes.json", options)
+      else
+        response = get("/#{Validic.api_version}/diabetes.json", options)
+      end
+      
       response if response
     end
 

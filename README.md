@@ -29,7 +29,6 @@ Or install it yourself as:
     Validic.configure do |config|
       config.api_url        = 'https://api.validic.com'
       config.api_version    = 'v1'
-      config.access_token   = 'DEMO_KEY'
     end
 
     # If your using plain RUBY
@@ -48,6 +47,9 @@ Or install it yourself as:
     # => Get Account Activities
     client.get_activities
 
+    # => Get Organization Activities
+    client.get_activites({org_id: "YOUR_ORG_ID", access_token:
+                          "YOUR_ACCESS_TOKEN"})
 ```
 
 ## Contributing

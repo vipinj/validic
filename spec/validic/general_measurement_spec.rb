@@ -79,4 +79,22 @@ describe Validic::GeneralMeasurement do
     end
   end
 
+  context "#get_general_measurements by organization" do
+    before do
+      @general_measurement = client.get_general_measurements({org_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
+    end
+
+    it "returns JSON response of Validic::GeneralMeasurement", vcr: true do
+      @general_measurement.should_not be_nil
+    end
+
+    it "status 200" do
+      @general_measurement.summary.status.should == 200 
+    end
+
+    it "has summary node" do
+      @general_measurement.summary.should_not be_nil
+    end
+  end
+
 end

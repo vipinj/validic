@@ -7,19 +7,19 @@ describe Validic::Diabetes do
 
   context "#get_diabetes" do
     before do
-      @diabetes = client.get_diabetes({})
+      @user_diabetes = client.get_diabetes({})
     end
 
-    it "returns JSON response of Validic::diabetes", vcr: true do
-      @diabetes.should_not be_nil
+    it "returns JSON response of Validic::Diabetes", vcr: true do
+      @user_diabetes.should_not be_nil
     end
 
     it "status 200" do
-      @diabetes.summary.status.should == 200 
+      @user_diabetes.summary.status.should == 200
     end
 
     it "has summary node" do
-      @diabetes.summary.should_not be_nil
+      @user_diabetes.summary.should_not be_nil
     end
   end
 
@@ -44,6 +44,24 @@ describe Validic::Diabetes do
       @new_diabetes.diabetes.random_plasma_glucose_test.should eq 200.0
       @new_diabetes.diabetes.triglyceride 100.0
       @new_diabetes.diabetes.source.should eq "Sample App"
+    end
+  end
+
+  context "#get_diabetes by organization" do
+    before do
+      @org_diabetes = client.get_diabetes({org_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
+    end
+
+    it "returns JSON response of Validic::Diabetes", vcr: true do
+      @org_diabetes.should_not be_nil
+    end
+
+    it "status 200" do
+      @org_diabetes.summary.status.should == 200 
+    end
+
+    it "has summary node" do
+      @org_diabetes.summary.should_not be_nil
     end
   end
 

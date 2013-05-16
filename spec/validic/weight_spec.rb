@@ -46,4 +46,22 @@ describe Validic::Weight do
     end
   end
 
+  context "#get_weights by organization" do
+    before do
+      @weight = client.get_weights({org_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
+    end
+
+    it "returns JSON response of Validic::Weight", vcr: true do
+      @weight.should_not be_nil
+    end
+
+    it "status 200" do
+      @weight.summary.status.should == 200 
+    end
+
+    it "has summary node" do
+      @weight.summary.should_not be_nil
+    end
+  end
+
 end

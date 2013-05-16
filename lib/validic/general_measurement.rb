@@ -8,11 +8,18 @@ module Validic
     # 
     # @return [Hashie::Mash] with list of GeneralMeasurement
     def get_general_measurements(options={})
+      org_id = options[:org_id]
       options = {
         start_date: options[:start_date],
-        end_date: options[:end_date]
+        end_date: options[:end_date],
+        access_token: options[:access_token]
       }
-      response = get("/#{Validic.api_version}/biometrics.json", options)
+
+      if options[:access_token] && org_id
+        response = get("/#{Validic.api_version}/organizations/#{org_id}/biometrics.json", options)
+      else
+        response = get("/#{Validic.api_version}/biometrics.json", options)
+      end
       response if response
     end
 

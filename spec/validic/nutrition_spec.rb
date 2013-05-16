@@ -49,4 +49,22 @@ describe Validic::Nutrition do
     end
   end
 
+  context "#get_nutritions by organization" do
+    before do
+      @nutrition = client.get_nutritions({org_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
+    end
+
+    it "returns JSON response of Validic::Nutrition", vcr: true do
+      @nutrition.should_not be_nil
+    end
+
+    it "status 200" do
+      @nutrition.summary.status.should == 200 
+    end
+
+    it "has summary node" do
+      @nutrition.summary.should_not be_nil
+    end
+  end
+
 end

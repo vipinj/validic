@@ -18,15 +18,15 @@ describe Validic do
   end
 
   context "handles custom configuration" do
-    let(:new_client) { Validic::Client.new(api_url: 'https://api.validic.net', access_token: 'MYTOKEN', api_version: 'v2')}
+    let(:new_client) { Validic::Client.new(api_url: 'https://api.validic.net', api_version: 'v2')}#, access_token: 'MYTOKEN')}
 
     it "::Client API_URL configuration" do
       new_client.api_url.should eq 'https://api.validic.net'
     end
 
-    it "::Client ACCESS_TOKEN configuration" do
-      new_client.access_token.should eq 'MYTOKEN'
-    end
+    # it "::Client ACCESS_TOKEN configuration" do
+    #   new_client.access_token.should eq 'MYTOKEN'
+    # end
 
     it "::Client API_VERSION configuration" do
       new_client.api_version.should eq 'v2'

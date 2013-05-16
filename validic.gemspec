@@ -6,8 +6,8 @@ require 'validic/version'
 Gem::Specification.new do |spec|
   spec.name          = "validic"
   spec.version       = Validic::VERSION
-  spec.authors       = ["Julius Francisco"]
-  spec.email         = ["julius@motivationscience.com"]
+  spec.authors       = ["Julius Francisco & Jay Balanay"]
+  spec.email         = ["julius@motivationscience.com", "jay@motivationscience.com"]
   spec.description   = %q{API Wrapper for Validic}
   spec.summary       = spec.description
   spec.homepage      = "https://www.validic.com"
