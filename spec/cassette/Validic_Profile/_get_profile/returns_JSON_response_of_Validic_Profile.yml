@@ -143,4 +143,43 @@ http_interactions:
         pYbxQ67F6nI24r2Jl1Bh1WnoEP4AczD3tnA5R/5dvGBvj33/AlauU6KNAAAA
     http_version: 
   recorded_at: Wed, 15 May 2013 14:43:14 GMT
+- request:
+    method: get
+    uri: http://api.validic.dev/v1/profile.json?access_token=DEMO_KEY
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby Gem by Validic 0.0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Ua-Compatible:
+      - IE=Edge
+      Etag:
+      - ! '"28ad293e792f30b94f228e0a4dfffd4e"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - ce2c796175b6166e814f25376f4d9d11
+      X-Runtime:
+      - '1.249275'
+      Connection:
+      - close
+    body:
+      encoding: US-ASCII
+      string: ! '{"profile":{"_id":"51945d546a7e0cb3db00002c","gender":"M","location":null,"birth_year":"1985","weight":176,"height":"5''5\"","applications":[]}}'
+    http_version: 
+  recorded_at: Thu, 16 May 2013 06:06:11 GMT
 recorded_with: VCR 2.4.0

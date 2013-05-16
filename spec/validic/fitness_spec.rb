@@ -5,9 +5,9 @@ describe Validic::Fitness do
 
   let(:client) { Validic::Client.new }
 
-  context "#get_fitness" do
+  context "#get_fitnesses" do
     before do
-      @fitness = client.get_fitness({})
+      @fitness = client.get_fitnesses({})
     end
 
     it "returns JSON response of Validic::Fitness", vcr: true do
@@ -24,26 +24,24 @@ describe Validic::Fitness do
   end
 
   context "#create_fitness" do
-    it "should allow to create a new fitness entry" do
+    it "should create new fitness record" do
       @new_fitness = client.create_fitness({timestamp: "2013-03-10 07:12:16 -05:00",
                                             primary_type: "Running",
                                             intensity: "medium",
                                             start_time: "2013-03-09 13:55:36 -05:00",
                                             total_distance: 5149.9,
-                                            duration: 1959,
+                                            duration: 1959.90,
                                             source: "Sample App"})
+
       @new_fitness.fitness.timestamp.should eq "2013-03-10 07:12:16 -05:00"
-      @new_fitness.fitness.primary_type.should eq "Running"
+      @new_fitness.fitness.type.should eq "Running"
       @new_fitness.fitness.intensity.should eq "medium"
       @new_fitness.fitness.start_time.should eq "2013-03-09 13:55:36 -05:00"
       @new_fitness.fitness.total_distance.should eq 5149.9
-      @new_fitness.fitness.duration.should eq 1959
+      @new_fitness.fitness.duration.should eq 1959.90
       @new_fitness.fitness.source.should eq "Sample App"
     end
-    
+  
   end
 
 end
-
-
-

@@ -15,20 +15,32 @@ describe Validic::Profile do
     end
   end
 
-  context "#update_profile" do
-    it "should allow to update profile" do
-      @updated_profile = client.update_profile({gender: "F",
-                                               location: "TX",
-                                               birth_year: "1985",
-                                               height: "167.75",
-                                               weight: 69,
-                                               first_name: "Demo",
-                                               last_name: "User"})
-      @updated_profile.profile.gender.should eq 'F'
-      @updated_profile.profile.location.should eq 'TX'
-      @updated_profile.profile.height.should eq "167.75"
-      @updated_profile.profile.weight.should eq 69
-    end
-  end
+  # context "#update_profile" do
+  #   before do
+  #     @updated_profile = client.update_profile({gender: "M",
+  #                                               location: "TX",
+  #                                               birth_year: "1985",
+  #                                               height: 168.75,
+  #                                               weight: 69,
+  #                                               first_name: "Demo",
+  #                                               last_name: "User"})
+  #   end
+
+  #   it "should return gender" do
+  #     @updated_profile.profile.gender.should eq 'M'
+  #   end
+
+  #   it "should return location" do
+  #     @updated_profile.profile.location.should eq 'TX'
+  #   end
+
+  #   it "should return height" do
+  #     @updated_profile.profile.height.should eq "168.75"
+  #   end
+
+  #   it "should return weight" do
+  #     @updated_profile.profile.weight.should eq 69
+  #   end
+  # end
 
 end

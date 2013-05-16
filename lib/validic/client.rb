@@ -5,6 +5,13 @@ require 'validic/activity'
 require 'validic/user'
 require 'validic/profile'
 require 'validic/fitness'
+require 'validic/weight'
+require 'validic/nutrition'
+require 'validic/sleep'
+require 'validic/diabetes'
+require 'validic/general_measurement'
+require 'validic/routine'
+require 'validic/tobacco_cessation'
 
 module Validic
   class Client
@@ -15,6 +22,13 @@ module Validic
     include User
     include Profile
     include Fitness
+    include Weight
+    include Nutrition
+    include Sleep
+    include Diabetes
+    include GeneralMeasurement
+    include Routine
+    include TobaccoCessation
 
     attr_reader :api_url, :api_version, :access_token
 
@@ -34,7 +48,7 @@ module Validic
     # @return [Faraday::Connection]
     def connection
       params = {}
-      @connection = Faraday.new(url: api_url, params: params, headers: default_headers) do |faraday|
+      @connection = Faraday.new(url: api_url, params: params, headers: default_headers, ssl: {verify: false}) do |faraday|
         faraday.use FaradayMiddleware::Mashify
         faraday.use FaradayMiddleware::ParseJson, content_type: /\bjson$/
         faraday.use FaradayMiddleware::FollowRedirects
