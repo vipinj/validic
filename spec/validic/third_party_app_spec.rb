@@ -19,4 +19,14 @@ describe Validic::ThirdPartyApp do
     end
   end
 
+  context "#get_synced_apps" do
+    before do
+      @synced_app_response = client.get_synced_apps({auth_token: "Sample User Authentication Token"})
+    end
+
+    it "returns JSON response of Validic::ThirdPartyApp", vcr: true do
+      @synced_app_response.should_not be_nil
+    end
+  end
+
 end
