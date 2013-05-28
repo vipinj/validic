@@ -8,6 +8,9 @@ module Validic
     # 
     # @return [Hashie::Mash] with list of Profile
     def get_profile(options={})
+      options = {
+        access_token: options[:access_token]
+      }
       response = get("/#{Validic.api_version}/profile.json", options)
       response if response
     end

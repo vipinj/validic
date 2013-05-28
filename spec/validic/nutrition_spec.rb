@@ -25,7 +25,8 @@ describe Validic::Nutrition do
 
   context "#create_nutrition" do
     it "should create new nutrition record" do
-      @new_nutrition = client.create_nutrition({calories: 850,
+      @new_nutrition = client.create_nutrition({access_token: "DEMO_KEY",
+                                                calories: 850,
                                                 carbohydrates: 351,
                                                 fat: 52,
                                                 fiber: 35,
@@ -51,7 +52,7 @@ describe Validic::Nutrition do
 
   context "#get_nutritions by organization" do
     before do
-      @nutrition = client.get_nutritions({org_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
+      @nutrition = client.get_nutritions({organization_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
     end
 
     it "returns JSON response of Validic::Nutrition", vcr: true do

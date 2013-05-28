@@ -8,15 +8,15 @@ module Validic
     # 
     # @return [Hashie::Mash] with list of Nutrition
     def get_nutritions(options={})
-      org_id = options[:org_id]
+      organization_id = options[:organization_id]
       options = {
         start_date: options[:start_date],
         end_date: options[:end_date],
         access_token: options[:access_token]
       }
 
-      if options[:access_token] && org_id
-        response = get("/#{Validic.api_version}/organizations/#{org_id}/nutrition.json", options)
+      if options[:access_token] && organization_id
+        response = get("/#{Validic.api_version}/organizations/#{organization_id}/nutrition.json", options)
       else
         response = get("/#{Validic.api_version}/nutrition.json", options)
       end
@@ -29,6 +29,7 @@ module Validic
     # @return success
     def create_nutrition(options={})
       options = {
+        access_token: options[:access_token],
         nutrition: {
           calories: options[:calories],
           carbohydrates: options[:carbohydrates],

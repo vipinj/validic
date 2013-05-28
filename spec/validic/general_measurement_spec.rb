@@ -25,7 +25,8 @@ describe Validic::GeneralMeasurement do
 
   context "#create_general_measurement" do
     it "should create new general_measurement record" do
-      @new_general_measurement = client.create_general_measurement({timestamp: "2013-05-16 07:12:16 -05:00",
+      @new_general_measurement = client.create_general_measurement({access_token: "DEMO_KEY",
+                                                                    timestamp: "2013-05-16 07:12:16 -05:00",
                                                                     blood_calcium: 7.6,
                                                                     blood_chromium: 1.75,
                                                                     blood_folic_acid: 4.4,
@@ -81,7 +82,7 @@ describe Validic::GeneralMeasurement do
 
   context "#get_general_measurements by organization" do
     before do
-      @general_measurement = client.get_general_measurements({org_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
+      @general_measurement = client.get_general_measurements({organization_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
     end
 
     it "returns JSON response of Validic::GeneralMeasurement", vcr: true do

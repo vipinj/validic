@@ -21,7 +21,7 @@ describe Validic::User do
 
   context "#user_provisioning" do
     it "should create a new user under an organization" do
-      @new_user = client.user_provision({org_id: "51964ba56a7e0c2417000029",
+      @new_user = client.user_provision({organization_id: "51964ba56a7e0c2417000029",
                                          access_token: "ENTERPRISE_KEY",
                                          uid: "123asdfg",
                                          height: 167,

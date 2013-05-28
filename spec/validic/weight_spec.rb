@@ -25,7 +25,8 @@ describe Validic::Weight do
 
   context "#create_weight" do
     it "should create new weight record" do
-      @new_weight = client.create_weight({timestamp: "2013-05-16 07:12:16 -05:00",
+      @new_weight = client.create_weight({access_token: "DEMO_KEY",
+                                          timestamp: "2013-05-16 07:12:16 -05:00",
                                           bmi: 133.26,
                                           fat_percent: 130.5,
                                           mass_weight: 139.45,
@@ -48,7 +49,7 @@ describe Validic::Weight do
 
   context "#get_weights by organization" do
     before do
-      @weight = client.get_weights({org_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
+      @weight = client.get_weights({organization_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
     end
 
     it "returns JSON response of Validic::Weight", vcr: true do

@@ -5,12 +5,14 @@ module Validic
 
     ##
     # Get List of Third Party Apps available base on `access_token` and organization_id
-    # params[:org_id] required parameter
+    #
+    # params[:organization_id] required parameter
     # params[:access_token] required parameter
+    #
     # @return [Hashie::Mash] with list of Organization
     def get_apps(options={})
       options = {
-        org_id: options[:org_id],
+        organization_id: options[:organization_id],
         access_token: options[:access_token]
       }
       response = get("/#{Validic.api_version}/apps.json", options)

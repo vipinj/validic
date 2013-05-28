@@ -25,7 +25,7 @@ describe Validic::Activity do
 
   context "#get_activities via organization" do
     before do
-      @activities_response = client.get_activities({org_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
+      @activities_response = client.get_activities({organization_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
     end
 
     it "returns JSON response of Validic::Activity", vcr: true do

@@ -25,7 +25,8 @@ describe Validic::Diabetes do
 
   context "#create_diabetes" do
     it "should create new diabetes record" do
-      @new_diabetes = client.create_diabetes({c_peptide: 1,
+      @new_diabetes = client.create_diabetes({access_token: "DEMO_KEY",
+                                              c_peptide: 1,
                                               fasting_plasma_glucose_test: 50,
                                               hba1c: 100,
                                               insulin: 350,
@@ -49,7 +50,7 @@ describe Validic::Diabetes do
 
   context "#get_diabetes by organization" do
     before do
-      @org_diabetes = client.get_diabetes({org_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
+      @org_diabetes = client.get_diabetes({organization_id: "519e24e16a7e0cc7ef00002b", access_token: "ENTERPRISE_KEY"})
     end
 
     it "returns JSON response of Validic::Diabetes", vcr: true do

@@ -8,15 +8,15 @@ module Validic
     # 
     # @return [Hashie::Mash] with list of GeneralMeasurement
     def get_general_measurements(options={})
-      org_id = options[:org_id]
+      organization_id = options[:organization_id]
       options = {
         start_date: options[:start_date],
         end_date: options[:end_date],
         access_token: options[:access_token]
       }
 
-      if options[:access_token] && org_id
-        response = get("/#{Validic.api_version}/organizations/#{org_id}/biometrics.json", options)
+      if options[:access_token] && organization_id
+        response = get("/#{Validic.api_version}/organizations/#{organization_id}/biometrics.json", options)
       else
         response = get("/#{Validic.api_version}/biometrics.json", options)
       end
@@ -29,6 +29,7 @@ module Validic
     # @return success
     def create_general_measurement(options={})
       options = {
+        access_token: options[:access_token],
         general_measurement: {
           blood_calcium: options[:blood_calcium],
           blood_chromium: options[:blood_chromium],

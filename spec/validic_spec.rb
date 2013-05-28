@@ -8,7 +8,8 @@ describe Validic do
   context "configure defaults" do
 
     it "uses default API URL" do
-      client.api_url.should eq 'https://api.validic.com'
+      # client.api_url.should eq 'https://api.validic.com'
+      client.api_url.should eq 'http://api.validic.dev' # Development URL for local testing
     end
 
     it "uses default API VERSION" do

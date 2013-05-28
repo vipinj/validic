@@ -48,8 +48,8 @@ Or install it yourself as:
     client.get_activities
 
     # => Get Organization Activities
-    client.get_activites({org_id: "YOUR_ORG_ID", access_token:
-                          "YOUR_ACCESS_TOKEN"})
+    client.get_activites({organization_id: "YOUR_organization_id",
+                          access_token: "YOUR_ACCESS_TOKEN"})
 ```
 
 ## Contributing

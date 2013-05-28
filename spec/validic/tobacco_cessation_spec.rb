@@ -25,7 +25,8 @@ describe Validic::TobaccoCessation do
 
   context "#create_tobacco_cessation" do
     it "should create new tobacco_cessation record" do
-      @new_tobacco_cessation = client.create_tobacco_cessation({timestamp: "2013-05-01 07:12:16 -05:00",
+      @new_tobacco_cessation = client.create_tobacco_cessation({access_token: "DEMO_KEY",
+                                                                timestamp: "2013-05-01 07:12:16 -05:00",
                                                                 cigarettes_allowed: 10,
                                                                 cigarettes_smoked: 11,
                                                                 cravings: 15,
@@ -42,7 +43,7 @@ describe Validic::TobaccoCessation do
 
   context "#get_tobacco_cessations by organization" do
     before do
-      @tobacco_cessation = client.get_tobacco_cessations({org_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
+      @tobacco_cessation = client.get_tobacco_cessations({organization_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
     end
 
     it "returns JSON response of Validic::TobaccoCessation", vcr: true do

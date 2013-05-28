@@ -7,7 +7,7 @@ describe Validic::Organization do
 
   context "#get_organization" do
     before do
-      @organization_response = client.get_organization({org_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
+      @organization_response = client.get_organization({organization_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
     end
 
     it "returns JSON response of Validic::Organization", vcr: true do

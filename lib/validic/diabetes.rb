@@ -8,15 +8,15 @@ module Validic
     # 
     # @return [Hashie::Mash] with list of Diabetes
     def get_diabetes(options={})
-      org_id = options[:org_id]
+      organization_id = options[:organization_id]
       options = {
         start_date: options[:start_date],
         end_date: options[:end_date],
         access_token: options[:access_token]
       }
 
-      if options[:access_token] && org_id
-        response = get("/#{Validic.api_version}/organizations/#{org_id}/diabetes.json", options)
+      if options[:access_token] && organization_id
+        response = get("/#{Validic.api_version}/organizations/#{organization_id}/diabetes.json", options)
       else
         response = get("/#{Validic.api_version}/diabetes.json", options)
       end
@@ -26,10 +26,21 @@ module Validic
 
     ##
     # Create Diabetes base on `access_token`
-    # 
+    #
+    # @params[:c_peptide]
+    # @params[:fasting_plasma_glucose_test]
+    # @params[:hba1c]
+    # @params[:insulin]
+    # @params[:oral_glucose_tolerance_test]
+    # @params[:random_plasma_glucose_test]
+    # @params[:triglyceride]
+    # @params[:timestamp]
+    # @params[:source]
+    #
     # @return success
     def create_diabetes(options={})
       options = {
+        access_token: options[:access_token],
         diabetes: {
           c_peptide: options[:c_peptide],
           fasting_plasma_glucose_test: options[:fasting_plasma_glucose_test],
