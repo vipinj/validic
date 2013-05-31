@@ -7,7 +7,7 @@ describe Validic::ThirdPartyApp do
 
   context "#get_apps" do
     before do
-      @app_response = client.get_apps({})
+      @app_response = client.get_apps({organization_id: "519e24df6a7e0cc7ef000001", authentication_token: "mqwpDx8RYcmSFBJDmy3J"})
     end
 
     it "returns JSON response of Validic::ThirdPartyApp", vcr: true do
@@ -21,7 +21,7 @@ describe Validic::ThirdPartyApp do
 
   context "#get_synced_apps" do
     before do
-      @synced_app_response = client.get_synced_apps({auth_token: "Sample User Authentication Token"})
+      @synced_app_response = client.get_synced_apps({authentication_token: "mqwpDx8RYcmSFBJDmy3J"})
     end
 
     it "returns JSON response of Validic::ThirdPartyApp", vcr: true do

@@ -11,23 +11,24 @@ module Validic
     #
     # @return [Hashie::Mash] with list of Organization
     def get_apps(options={})
+      organization_id = options[:organization_id]
       options = {
-        organization_id: options[:organization_id],
-        access_token: options[:access_token]
+        access_token: options[:access_token],
+        authentication_token: options[:authentication_token]
       }
-      response = get("/#{Validic.api_version}/apps.json", options)
+      response = get("/#{Validic.api_version}/organizations/#{organization_id}/apps.json", options)
       response if response
     end
 
     ##
-    # Get User List of Third Party Synced Apps available base on `user_access_token`
+    # Get User List of Third Party Synced Apps available base on `authentication_token`
     # 
     # params[:auth_token] User authentication parameter
     #
     # @return [Hashie::Mash] with list of Organization
     def get_synced_apps(options={})
       options = {
-        auth_token: options[:user_access_token]
+        authentication_token: options[:user_access_token]
       }
       response = get("/#{Validic.api_version}/sync_apps.json", options)
       response if response
