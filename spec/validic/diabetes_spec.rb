@@ -67,4 +67,22 @@ describe Validic::Diabetes do
     end
   end
 
+  context "#get_diabetes by user" do
+    before do
+      @user_diabetes = client.get_diabetes({user_id: "519e24e16a7e0cc7ef00002c"})
+    end
+
+    it "returns JSON response of Validic::Diabetes", vcr: true do
+      @user_diabetes.should_not be_nil
+    end
+
+    it "status 200" do
+      @user_diabetes.summary.status.should == 200 
+    end
+
+    it "has summary node" do
+      @user_diabetes.summary.should_not be_nil
+    end
+  end
+
 end

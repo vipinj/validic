@@ -47,7 +47,25 @@ describe Validic::Fitness do
 
   context "#get_fitnesses by organization" do
     before do
-      @fitness = client.get_fitnesses({organization_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
+      @fitness = client.get_fitnesses({organization_id: "519e24e16a7e0cc7ef00002b", access_token: "ENTERPRISE_KEY"})
+    end
+
+    it "returns JSON response of Validic::Fitness", vcr: true do
+      @fitness.should_not be_nil
+    end
+
+    it "status 200" do
+      @fitness.summary.status.should == 200 
+    end
+
+    it "has summary node" do
+      @fitness.summary.should_not be_nil
+    end
+  end
+
+  context "#get_fitnesses by user" do
+    before do
+      @fitness = client.get_fitnesses({user_id: "519e24e16a7e0cc7ef00002c"})
     end
 
     it "returns JSON response of Validic::Fitness", vcr: true do

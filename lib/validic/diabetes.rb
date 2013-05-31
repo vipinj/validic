@@ -8,6 +8,8 @@ module Validic
     # Default data fetched is from yesterday
     #
     # @params :organization_id - for organization specific
+    # @params :user_id - for user specific
+    #
     # @params :start_date - optional
     # @params :end_date - optional
     # @params :access_token - override for default access_token
@@ -15,14 +17,17 @@ module Validic
     # @return [Hashie::Mash] with list of Diabetes
     def get_diabetes(options={})
       organization_id = options[:organization_id]
+      user_id = options[:user_id]
       options = {
         start_date: options[:start_date],
         end_date: options[:end_date],
         access_token: options[:access_token]
       }
 
-      if options[:access_token] && organization_id
+      if organization_id
         response = get("/#{Validic.api_version}/organizations/#{organization_id}/diabetes.json", options)
+      elsif user_id
+        response = get("/#{Validic.api_version}/users/#{user_id}/diabetes.json", options)
       else
         response = get("/#{Validic.api_version}/diabetes.json", options)
       end

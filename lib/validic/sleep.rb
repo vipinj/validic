@@ -8,6 +8,8 @@ module Validic
     # Default data fetched is from yesterday
     #
     # @params :organization_id - for organization specific
+    # @params :user_id - for user specific
+    #
     # @params :start_date - optional
     # @params :end_date - optional
     # @params :access_token - override for default access_token
@@ -15,6 +17,7 @@ module Validic
     # @return [Hashie::Mash] with list of Sleep
     def get_sleeps(options={})
       organization_id = options[:organization_id]
+      user_id = options[:user_id]
       options = {
         start_date: options[:start_date],
         end_date: options[:end_date],
@@ -23,6 +26,8 @@ module Validic
 
       if organization_id
         response = get("/#{Validic.api_version}/organizations/#{organization_id}/sleep.json", options)
+      elsif user_id
+        response = get("/#{Validic.api_version}/users/#{user_id}/sleep.json", options)
       else
         response = get("/#{Validic.api_version}/sleep.json", options)
       end

@@ -49,7 +49,7 @@ describe Validic::Sleep do
 
   context "#get_sleeps by organization" do
     before do
-      @sleep = client.get_sleeps({organization_id: "51945d536a7e0cb3db000029", access_token: "ENTERPRISE_KEY"})
+      @sleep = client.get_sleeps({organization_id: "519e24e16a7e0cc7ef00002b", access_token: "ENTERPRISE_KEY"})
     end
 
     it "returns JSON response of Validic::Sleep", vcr: true do
@@ -65,4 +65,21 @@ describe Validic::Sleep do
     end
   end
 
+  context "#get_sleeps by user" do
+    before do
+      @sleep = client.get_sleeps({user_id: "519e24e16a7e0cc7ef00002c"})
+    end
+
+    it "returns JSON response of Validic::Sleep", vcr: true do
+      @sleep.should_not be_nil
+    end
+
+    it "status 200" do
+      @sleep.summary.status.should == 200 
+    end
+
+    it "has summary node" do
+      @sleep.summary.should_not be_nil
+    end
+  end
 end
