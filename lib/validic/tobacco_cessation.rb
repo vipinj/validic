@@ -5,6 +5,12 @@ module Validic
 
     ##
     # Get TobaccoCessation Activities base on `access_token`
+    # Default data fetched is from yesterday
+    #
+    # @params :organization_id - for organization specific
+    # @params :start_date - optional
+    # @params :end_date - optional
+    # @params :access_token - override for default access_token
     # 
     # @return [Hashie::Mash] with list of TobaccoCessation
     def get_tobacco_cessations(options={})
@@ -15,7 +21,7 @@ module Validic
         access_token: options[:access_token]
       }
 
-      if options[:access_token] && organization_id
+      if organization_id
         response = get("/#{Validic.api_version}/organizations/#{organization_id}/tobacco_cessation.json", options)
       else
         response = get("/#{Validic.api_version}/tobacco_cessation.json", options)
@@ -24,8 +30,18 @@ module Validic
     end
 
     ##
-    # Create TobaccoCessation base on `access_token`
+    # Create TobaccoCessation base on `access_token` and `authentication_token`
+    #
+    # @params :access_token - *required if not specified on your initializer / organization access_token
+    # @params :authentication_token - *required / authentication_token of a specific user
     # 
+    # @params :cigarettes_allowed
+    # @params :cigarettes_smoked
+    # @params :cravings
+    # @params :last_smoked
+    # @params :timestamp
+    # @params :source
+    #
     # @return success
     def create_tobacco_cessation(options={})
       options = {

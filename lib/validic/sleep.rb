@@ -5,6 +5,12 @@ module Validic
 
     ##
     # Get Sleep Activities base on `access_token`
+    # Default data fetched is from yesterday
+    #
+    # @params :organization_id - for organization specific
+    # @params :start_date - optional
+    # @params :end_date - optional
+    # @params :access_token - override for default access_token
     # 
     # @return [Hashie::Mash] with list of Sleep
     def get_sleeps(options={})
@@ -15,7 +21,7 @@ module Validic
         access_token: options[:access_token]
       }
 
-      if options[:access_token] && organization_id
+      if organization_id
         response = get("/#{Validic.api_version}/organizations/#{organization_id}/sleep.json", options)
       else
         response = get("/#{Validic.api_version}/sleep.json", options)
@@ -24,8 +30,20 @@ module Validic
     end
 
     ##
-    # Create Sleep base on `access_token`
+    # Create Sleep base on `access_token` and `authentication_token`
+    #
+    # @params :access_token - *required if not specified on your initializer / organization access_token
+    # @params :authentication_token - *required / authentication_token of a specific user
     # 
+    # @params :total_sleep
+    # @params :awake
+    # @params :deep
+    # @params :light
+    # @params :rem
+    # @params :times_woken
+    # @params :timestamp
+    # @params :source
+    #
     # @return success
     def create_sleep(options={})
       options = {

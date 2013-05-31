@@ -25,7 +25,8 @@ describe Validic::Nutrition do
 
   context "#create_nutrition" do
     it "should create new nutrition record" do
-      @new_nutrition = client.create_nutrition({access_token: "DEMO_KEY",
+      @new_nutrition = client.create_nutrition({authentication_token: "mqwpDx8RYcmSFBJDmy3J",
+                                                access_token: "DEMO_KEY",
                                                 calories: 850,
                                                 carbohydrates: 351,
                                                 fat: 52,

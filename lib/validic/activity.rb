@@ -5,10 +5,12 @@ module Validic
 
     ##
     # Get Activity base on `access_token`
+    # Default data fetched is from yesterday
     #
-    # @params :organization_id - required
+    # @params :organization_id - for organization specific fitness
     # @params :start_date - optional
     # @params :end_date - optional
+    # @params :access_token - override for default access_token
     # 
     # @return [Hashie::Mash] with list of Activity
     def get_activities(options={})
@@ -19,7 +21,7 @@ module Validic
         end_date: options[:end_date]
       }
 
-      if options[:access_token] && organization_id
+      if organization_id
         response = get("/#{Validic.api_version}/organizations/#{organization_id}/fitness.json", options)
       else
         response = get("/#{Validic.api_version}/fitness.json", options)

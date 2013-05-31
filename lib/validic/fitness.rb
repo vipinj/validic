@@ -4,8 +4,14 @@ module Validic
   module Fitness
 
     ##
-    # Get Fitness Activities base on `access_token` and `organization_id`
-    # 
+    # Get Fitness Activities base on `access_token`
+    # Default data fetched is from yesterday
+    #
+    # @params :organization_id - for organization specific
+    # @params :start_date - optional
+    # @params :end_date - optional
+    # @params :access_token - override for default access_token
+    #
     # @return [Hashie::Mash] with list of Fitness
     def get_fitnesses(options={})
       organization_id = options[:organization_id]
@@ -24,7 +30,18 @@ module Validic
     end
 
     ##
-    # Create Fitness base on `access_token`
+    # Create Fitness base on `access_token` and `authentication_token`
+    #
+    # @params :access_token - *required if not specified on your initializer / organization access_token
+    # @params :authentication_token - *required / authentication_token of a specific user
+    #
+    # @params :timestamp
+    # @params :primary_type
+    # @params :intensity
+    # @params :start_time
+    # @params :total_distance
+    # @params :duration
+    # @params :source
     # 
     # @return success
     def create_fitness(options={})

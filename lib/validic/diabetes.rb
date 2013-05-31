@@ -5,7 +5,13 @@ module Validic
 
     ##
     # Get User Diabetes Activities base on `access_token`
-    # 
+    # Default data fetched is from yesterday
+    #
+    # @params :organization_id - for organization specific
+    # @params :start_date - optional
+    # @params :end_date - optional
+    # @params :access_token - override for default access_token
+    #
     # @return [Hashie::Mash] with list of Diabetes
     def get_diabetes(options={})
       organization_id = options[:organization_id]
@@ -25,21 +31,25 @@ module Validic
     end
 
     ##
-    # Create Diabetes base on `access_token`
+    # Create Diabetes base on `access_token` and `authentication_token`
     #
-    # @params[:c_peptide]
-    # @params[:fasting_plasma_glucose_test]
-    # @params[:hba1c]
-    # @params[:insulin]
-    # @params[:oral_glucose_tolerance_test]
-    # @params[:random_plasma_glucose_test]
-    # @params[:triglyceride]
-    # @params[:timestamp]
-    # @params[:source]
+    # @params :access_token - *required if not specified on your initializer / organization access_token
+    # @params :authentication_token - *required / authentication_token of a specific user
+    #
+    # @params :c_peptide
+    # @params :fasting_plasma_glucose_test
+    # @params :hba1c
+    # @params :insulin
+    # @params :oral_glucose_tolerance_test
+    # @params :random_plasma_glucose_test
+    # @params :triglyceride
+    # @params :timestamp
+    # @params :source
     #
     # @return success
     def create_diabetes(options={})
       options = {
+        authentication_token: options[:authentication_token],
         access_token: options[:access_token],
         diabetes: {
           c_peptide: options[:c_peptide],

@@ -25,7 +25,8 @@ describe Validic::Weight do
 
   context "#create_weight" do
     it "should create new weight record" do
-      @new_weight = client.create_weight({access_token: "DEMO_KEY",
+      @new_weight = client.create_weight({authentication_token: "mqwpDx8RYcmSFBJDmy3J",
+                                          access_token: "DEMO_KEY",
                                           timestamp: "2013-05-16 07:12:16 -05:00",
                                           bmi: 133.26,
                                           fat_percent: 130.5,

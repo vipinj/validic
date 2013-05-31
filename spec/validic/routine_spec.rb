@@ -25,7 +25,8 @@ describe Validic::Routine do
 
   context "#create_routine" do
     it "should create new routine record" do
-      @new_routine = client.create_routine({access_token: "DEMO_KEY",
+      @new_routine = client.create_routine({authentication_token: "mqwpDx8RYcmSFBJDmy3J",
+                                            access_token: "DEMO_KEY",
                                             timestamp: "2013-05-16 07:12:16 -05:00",
                                             steps: 10000,
                                             stairs_climbed: 50,

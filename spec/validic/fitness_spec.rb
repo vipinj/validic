@@ -25,7 +25,8 @@ describe Validic::Fitness do
 
   context "#create_fitness" do
     it "should create new fitness record" do
-      @new_fitness = client.create_fitness({access_token: "DEMO_KEY",
+      @new_fitness = client.create_fitness({authentication_token: "mqwpDx8RYcmSFBJDmy3J",
+                                            access_token: "DEMO_KEY",
                                             timestamp: "2013-03-10 07:12:16 -05:00",
                                             primary_type: "Running",
                                             intensity: "medium",

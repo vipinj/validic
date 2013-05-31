@@ -25,7 +25,8 @@ describe Validic::GeneralMeasurement do
 
   context "#create_general_measurement" do
     it "should create new general_measurement record" do
-      @new_general_measurement = client.create_general_measurement({access_token: "DEMO_KEY",
+      @new_general_measurement = client.create_general_measurement({authentication_token: "mqwpDx8RYcmSFBJDmy3J",
+                                                                    access_token: "DEMO_KEY",
                                                                     timestamp: "2013-05-16 07:12:16 -05:00",
                                                                     blood_calcium: 7.6,
                                                                     blood_chromium: 1.75,

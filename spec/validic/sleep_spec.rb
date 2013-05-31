@@ -25,7 +25,8 @@ describe Validic::Sleep do
 
   context "#create_sleep" do
     it "should create new sleep record" do
-      @new_sleep = client.create_sleep({access_token: "DEMO_KEY",
+      @new_sleep = client.create_sleep({authentication_token: "mqwpDx8RYcmSFBJDmy3J",
+                                        access_token: "DEMO_KEY",
                                         total_sleep: 210,
                                         awake: 10,
                                         deep: 120,

@@ -25,7 +25,8 @@ describe Validic::Diabetes do
 
   context "#create_diabetes" do
     it "should create new diabetes record" do
-      @new_diabetes = client.create_diabetes({access_token: "DEMO_KEY",
+      @new_diabetes = client.create_diabetes({authentication_token: "mqwpDx8RYcmSFBJDmy3J",
+                                              access_token: "DEMO_KEY",
                                               c_peptide: 1,
                                               fasting_plasma_glucose_test: 50,
                                               hba1c: 100,

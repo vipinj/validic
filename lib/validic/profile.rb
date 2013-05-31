@@ -5,7 +5,8 @@ module Validic
 
     ##
     # Get Profile base on `access_token`
-    # 
+    #
+    # @params :access_token - override for default access_token
     # @return [Hashie::Mash] with list of Profile
     def get_profile(options={})
       options = {
