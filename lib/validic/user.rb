@@ -45,5 +45,27 @@ module Validic
       response = post("/#{Validic.api_version}/organizations/#{organization_id}/users.json", options)
       response if response
     end
+
+    ##
+    #
+    # PUT request for suspending a user
+    #
+    # @params[:organization_id] -- String
+    # @params[:access_token] -- String -- organization's access_token
+    # @params[:user_id] -- String -- user's ID to suspend
+    # @params[:suspend] -- Boolean -- (1/0)
+    #
+    # @return user object
+    def user_suspend(options={})
+      organization_id = options[:organization_id]
+      user_id = options[:user_id]
+      options = {
+        suspend: options[:suspend],
+        access_token: options[:access_token]
+      }
+
+      response = put("/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}.json", options)
+      response
+    end
   end
 end

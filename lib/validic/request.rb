@@ -13,13 +13,17 @@ module Validic
       request(:post, path, options)
     end
 
+    def put(path, options)
+      request(:put, path, options)
+    end
+
     def request(method, path, options)
       options[:access_token] = options[:access_token].nil? ? Validic.access_token : options[:access_token]
       response = connection.send(method) do |request|
         case method
         when :get
           request.url(path, options)
-        when :post
+        when :post, :put
           request.path = path
           request.body = MultiJson.encode(options) unless options.empty?
         end
