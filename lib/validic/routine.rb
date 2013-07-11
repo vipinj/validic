@@ -13,6 +13,8 @@ module Validic
     # @params :start_date - optional
     # @params :end_date - optional
     # @params :access_token - override for default access_token
+    # @params :source - optional - data per source (e.g 'fitbit')
+    # @params :expanded - optional - will show the raw data
     # 
     # @return [Hashie::Mash] with list of Routine
     def get_routines(options={})
@@ -21,7 +23,9 @@ module Validic
       options = {
         start_date: options[:start_date],
         end_date: options[:end_date],
-        access_token: options[:access_token]
+        access_token: options[:access_token],
+        source: options[:source],
+        expanded: options[:expanded]
       }
 
       if organization_id
