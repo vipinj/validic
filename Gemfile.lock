@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    validic (0.1.9)
+    validic (0.2.0)
       activesupport
       faraday (~> 0.8)
       faraday_middleware (~> 0.9)

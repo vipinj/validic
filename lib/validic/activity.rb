@@ -35,5 +35,39 @@ module Validic
       response if response
     end
 
+    ##
+    # Get the latest Activities base on 'access_token'
+    # for organization or for a specific user
+    #
+    # @activity_type - mandatory - specify what type of activity to fetch
+    # List of activity_types
+    # [ fitness, routine, weight, nutrition, sleep, diabetes, biometrics, tobacco_cessation ]
+    #
+    # @params :organization_id - optional - supply only this to get all user's activities belonging to organization
+    # @params :user_id - optional - supply only this to get the user's latest activities
+    def get_latest_activities(options={})
+      activity_type = options[:activity_type]
+      organization_id = options[:organization_id]
+      user_id = options[:user_id]
+      options = {
+        access_token: options[:access_token]
+      }
+
+      if activity_type.blank?
+        response = "Invalid api request. params[:activity_type] can't be blank."
+      else
+        if organization_id && user_id
+          response = get("/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{activity_type}/latest", options)
+        elsif organization_id && user_id.blank?
+          response = get("/#{Validic.api_version}/organizations/#{organization_id}/#{activity_type}/latest", options)
+        elsif user_id && organization_id.blank?
+          response = get("/#{Validic.api_version}/users/#{user_id}/#{activity_type}/latest", options)
+        else
+          response = get("/#{Validic.api_version}/#{activity_type}/latest", options)
+        end
+      end
+      response if response
+    end
+
   end
 end

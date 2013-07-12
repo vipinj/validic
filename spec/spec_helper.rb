@@ -37,7 +37,7 @@ RSpec.configure do |c|
       # config.api_url        = 'https://api.validic.com'
       config.api_url        = 'http://api.validic.dev' #development config
       config.api_version    = 'v1'
-      config.access_token   = 'DEMO_KEY'
+      config.access_token   = '9c03ad2bcb022425944e4686d398ef8398f537c2f7c113495ffa7bc9cfa49286'
     end
   end
 end
