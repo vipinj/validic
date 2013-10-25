@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 module Validic
-  module GeneralMeasurement
+  module Biometric
 
     ##
     # Get GeneralMeasurement Activities base on `access_token`
@@ -17,7 +17,7 @@ module Validic
     # @params :expanded - optional - will show the raw data
     # 
     # @return [Hashie::Mash] with list of GeneralMeasurement
-    def get_general_measurements(options={})
+    def get_biometrics(options={})
       organization_id = options[:organization_id]
       user_id = options[:user_id]
       options = {
@@ -75,7 +75,7 @@ module Validic
     # @params :source
     # 
     # @return success
-    def create_general_measurement(options={})
+    def create_biometric(options={})
       options = {
         access_token: options[:access_token],
         general_measurement: {

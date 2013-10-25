@@ -10,7 +10,7 @@ require 'validic/weight'
 require 'validic/nutrition'
 require 'validic/sleep'
 require 'validic/diabetes'
-require 'validic/general_measurement'
+require 'validic/biometric'
 require 'validic/routine'
 require 'validic/tobacco_cessation'
 require 'validic/third_party_app'
@@ -29,7 +29,7 @@ module Validic
     include Nutrition
     include Sleep
     include Diabetes
-    include GeneralMeasurement
+    include Biometric
     include Routine
     include TobaccoCessation
     include ThirdPartyApp
