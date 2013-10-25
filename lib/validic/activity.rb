@@ -13,6 +13,9 @@ module Validic
     # @params :start_date - optional
     # @params :end_date - optional
     # @params :access_token - override for default access_token
+    # @params :page
+    # @params :limit
+    # @params :offset
     # 
     # @return [Hashie::Mash] with list of Activity
     def get_activities(options={})
@@ -21,7 +24,11 @@ module Validic
       options = {
         access_token: options[:access_token],
         start_date: options[:start_date],
-        end_date: options[:end_date]
+        end_date: options[:end_date],
+        limit: options[:limit],
+        page: options[:page],
+        offset: options[:offset],
+        expanded: options[:expanded]
       }
 
       if organization_id

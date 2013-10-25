@@ -25,7 +25,10 @@ module Validic
         end_date: options[:end_date],
         access_token: options[:access_token],
         source: options[:source],
-        expanded: options[:expanded]
+        expanded: options[:expanded],
+        limit: options[:limit],
+        page: options[:page],
+        offset: options[:offset]
       }
 
       if organization_id
