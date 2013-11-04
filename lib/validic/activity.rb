@@ -21,8 +21,8 @@ module Validic
     def get_activities(options={})
       organization_id = options[:organization_id]
       user_id = options[:user_id]
+      access_token = options[:access_token],
       options = {
-        access_token: options[:access_token],
         activity_type = options[:activity_type],
         start_date: options[:start_date],
         end_date: options[:end_date],
