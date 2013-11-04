@@ -19,9 +19,9 @@ module Validic
     # 
     # @return [Hashie::Mash] with list of Activity
     def get_activities(options={})
+      activity_type = options[:activity_type]
       organization_id = options[:organization_id]
       user_id = options[:user_id]
-      activity_type = options[:activity_type]
       options = {
         access_token = options[:access_token],
         start_date: options[:start_date],
@@ -32,14 +32,17 @@ module Validic
         expanded: options[:expanded]
       }
 
-      if organization_id
-        response = get("/#{Validic.api_version}/organizations/#{organization_id}/#{activity_type}.json", options)
-      elsif user_id
-        response = get("/#{Validic.api_version}/users/#{user_id}/#{activity_type}.json", options)
+      if activity_type.blank?
+        response = "Invalid api request. params[:activity_type] can't be blank."
       else
+       if organization_id
+        response = get("/#{Validic.api_version}/organizations/#{organization_id}/#{activity_type}.json", options)
+       elsif user_id
+        response = get("/#{Validic.api_version}/users/#{user_id}/#{activity_type}.json", options)
+       else
         response = get("/#{Validic.api_version}/#{activity_type}.json", options)
-      end
-      
+       end
+      end 
       response if response
     end
 
