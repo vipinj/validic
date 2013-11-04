@@ -23,6 +23,7 @@ module Validic
       user_id = options[:user_id]
       options = {
         access_token: options[:access_token],
+        activity_type = options[:activity_type]
         start_date: options[:start_date],
         end_date: options[:end_date],
         limit: options[:limit],
@@ -32,11 +33,11 @@ module Validic
       }
 
       if organization_id
-        response = get("/#{Validic.api_version}/organizations/#{organization_id}/fitness.json", options)
+        response = get("/#{Validic.api_version}/organizations/#{organization_id}/#{activity_type}.json", options)
       elsif user_id
-        response = get("/#{Validic.api_version}/users/#{user_id}/fitness.json", options)
+        response = get("/#{Validic.api_version}/users/#{user_id}/#{activity_type}.json", options)
       else
-        response = get("/#{Validic.api_version}/fitness.json", options)
+        response = get("/#{Validic.api_version}/#{activity_type}.json", options)
       end
       
       response if response
