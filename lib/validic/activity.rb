@@ -23,7 +23,7 @@ module Validic
       user_id = options[:user_id]
       options = {
         access_token: options[:access_token],
-        activity_type = options[:activity_type]
+        activity_type = options[:activity_type],
         start_date: options[:start_date],
         end_date: options[:end_date],
         limit: options[:limit],
