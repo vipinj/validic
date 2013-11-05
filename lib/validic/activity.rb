@@ -29,6 +29,7 @@ module Validic
         limit: options[:limit],
         page: options[:page],
         offset: options[:offset],
+        source: options[:source],
         expanded: options[:expanded]
       }
 
@@ -62,6 +63,8 @@ module Validic
       user_id = options[:user_id]
       options = {
         access_token: options[:access_token]
+        source: options[:source],
+        expanded: options[:expanded]        
       }
 
       if activity_type.blank?
