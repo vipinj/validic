@@ -62,7 +62,7 @@ module Validic
       organization_id = options[:organization_id]
       user_id = options[:user_id]
       options = {
-        access_token: options[:access_token]
+        access_token: options[:access_token],
         source: options[:source],
         expanded: options[:expanded]        
       }
