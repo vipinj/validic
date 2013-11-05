@@ -7,7 +7,7 @@ describe Validic::Activity do
 
   context "#get_activities" do
     before do
-      @activities_response = client.get_activities({})
+      @activities_response = client.get_activities({ activity_type: "routine" })
     end
 
     it "returns JSON response of Validic::Activity", vcr: true do
@@ -25,7 +25,7 @@ describe Validic::Activity do
 
   context "#get_activities via organization" do
     before do
-      @activities_response = client.get_activities({organization_id: "519e24e16a7e0cc7ef00002b", access_token: "ENTERPRISE_KEY"})
+      @activities_response = client.get_activities({organization_id: "519e24e16a7e0cc7ef00002b", activity_type: "routine", access_token: "ENTERPRISE_KEY"})
     end
 
     it "returns JSON response of Validic::Activity", vcr: true do
@@ -43,7 +43,7 @@ describe Validic::Activity do
 
   context "#get_activities of a user" do
     before do
-      @activities_response = client.get_activities({user_id: "519e24e16a7e0cc7ef00002c"})
+      @activities_response = client.get_activities({user_id: "519e24e16a7e0cc7ef00002c", activity_type: "routine"})
     end
 
     it "returns JSON response of Validic::Activity", vcr: true do
