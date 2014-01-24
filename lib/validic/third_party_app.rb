@@ -10,14 +10,9 @@ module Validic
     # params[:access_token] required parameter
     #
     # @return [Hashie::Mash] with list of Organization
-    def get_apps(options={})
-      organization_id = options[:organization_id]
-      options = {
-        access_token: options[:access_token],
-        authentication_token: options[:authentication_token]
-      }
-      response = get("/#{Validic.api_version}/organizations/#{organization_id}/apps.json", options)
-      response if response
+    def get_apps(params={})
+      params = extract_params(params)
+      get_endpoint(:apps, params)
     end
 
     ##

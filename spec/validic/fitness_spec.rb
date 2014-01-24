@@ -25,6 +25,7 @@ describe Validic::Fitness do
 
   context "#create_fitness" do
     it "should create new fitness record" do
+      pending
       @new_fitness = client.create_fitness({authentication_token: "mqwpDx8RYcmSFBJDmy3J",
                                             access_token: "DEMO_KEY",
                                             timestamp: "2013-03-10 07:12:16 -05:00",
@@ -47,7 +48,7 @@ describe Validic::Fitness do
 
   context "#get_fitnesses by organization" do
     before do
-      @fitness = client.get_fitnesses({organization_id: "519e24e16a7e0cc7ef00002b", access_token: "ENTERPRISE_KEY"})
+      @fitness = client.get_fitnesses({organization_id: "51aca5a06dedda916400002b", access_token: "ENTERPRISE_KEY"})
     end
 
     it "returns JSON response of Validic::Fitness", vcr: true do
@@ -65,7 +66,7 @@ describe Validic::Fitness do
 
   context "#get_fitnesses by user" do
     before do
-      @fitness = client.get_fitnesses({user_id: "519e24e16a7e0cc7ef00002c"})
+      @fitness = client.get_fitnesses({user_id: "52967e076dedda5d4300000b"})
     end
 
     it "returns JSON response of Validic::Fitness", vcr: true do

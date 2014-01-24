@@ -17,28 +17,12 @@ module Validic
     # @params :expanded - optional - will show the raw data
     # 
     # @return [Hashie::Mash] with list of Weight
-    def get_weights(options={})
-      organization_id = options[:organization_id]
-      user_id = options[:user_id]
-      options = {
-        start_date: options[:start_date],
-        end_date: options[:end_date],
-        access_token: options[:access_token],
-        source: options[:source],
-        expanded: options[:expanded],
-        limit: options[:limit],
-        page: options[:page],
-        offset: options[:offset]
-      }
-
-      if organization_id
-        response = get("/#{Validic.api_version}/organizations/#{organization_id}/weight.json", options)
-      elsif user_id
-        response = get("/#{Validic.api_version}/users/#{user_id}/weight.json", options)
-      else
-        response = get("/#{Validic.api_version}/weight.json", options)
-      end
+    def get_weight(params={})
+      params = extract_params(params)
+      get_endpoint(:weight, params)
     end
+
+    alias :get_weights :get_weight
 
     ##
     # Create Weight base on `access_token` and `authentication_token`

@@ -7,7 +7,7 @@ module Validic
     # Get GeneralMeasurement Activities base on `access_token`
     # Default data fetched is from yesterday
     #
-    # @params :organization_id - for organization specific
+    # @params :org_id - for organization specific
     # @params :user_id - for user specific
     #
     # @params :start_date - optional
@@ -17,28 +17,9 @@ module Validic
     # @params :expanded - optional - will show the raw data
     # 
     # @return [Hashie::Mash] with list of GeneralMeasurement
-    def get_biometrics(options={})
-      organization_id = options[:organization_id]
-      user_id = options[:user_id]
-      options = {
-        start_date: options[:start_date],
-        end_date: options[:end_date],
-        access_token: options[:access_token],
-        source: options[:source],
-        expanded: options[:expanded],
-        limit: options[:limit],
-        page: options[:page],
-        offset: options[:offset]
-      }
-
-      if organization_id
-        response = get("/#{Validic.api_version}/organizations/#{organization_id}/biometrics.json", options)
-      elsif user_id
-        response = get("/#{Validic.api_version}/users/#{user_id}/biometrics.json", options)
-      else
-        response = get("/#{Validic.api_version}/biometrics.json", options)
-      end
-      response if response
+    def get_biometrics(params={})
+      params = extract_params(params)
+      get_endpoint(:biometrics, params)
     end
 
     ##

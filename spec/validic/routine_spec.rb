@@ -25,6 +25,7 @@ describe Validic::Routine do
 
   context "#create_routine" do
     it "should create new routine record" do
+      pending
       @new_routine = client.create_routine({authentication_token: "mqwpDx8RYcmSFBJDmy3J",
                                             access_token: "DEMO_KEY",
                                             timestamp: "2013-05-16 07:12:16 -05:00",
@@ -45,7 +46,7 @@ describe Validic::Routine do
 
   context "#get_routines by organization" do
     before do
-      @routine = client.get_routines({organization_id: "519e24e16a7e0cc7ef00002b", access_token: "ENTERPRISE_KEY"})
+      @routine = client.get_routines({organization_id: "51aca5a06dedda916400002b", access_token: "ENTERPRISE_KEY"})
     end
 
     it "returns JSON response of Validic::Routine", vcr: true do
@@ -63,7 +64,7 @@ describe Validic::Routine do
 
   context "#get_routines by user" do
     before do
-      @routine = client.get_routines({user_id: "519e24e16a7e0cc7ef00002c"})
+      @routine = client.get_routines({user_id: "52967e076dedda5d4300000b"})
     end
 
     it "returns JSON response of Validic::Routine", vcr: true do

@@ -24,7 +24,8 @@ describe Validic::Diabetes do
   end
 
   context "#create_diabetes" do
-    it "should create new diabetes record" do
+    it "should create new diabetes record", vcr: true do
+      pending
       @new_diabetes = client.create_diabetes({authentication_token: "mqwpDx8RYcmSFBJDmy3J",
                                               access_token: "DEMO_KEY",
                                               c_peptide: 1,
@@ -51,7 +52,7 @@ describe Validic::Diabetes do
 
   context "#get_diabetes by organization" do
     before do
-      @org_diabetes = client.get_diabetes({organization_id: "519e24e16a7e0cc7ef00002b", access_token: "ENTERPRISE_KEY"})
+      @org_diabetes = client.get_diabetes({organization_id: "51aca5a06dedda916400002b", access_token: "ENTERPRISE_KEY"})
     end
 
     it "returns JSON response of Validic::Diabetes", vcr: true do
@@ -69,7 +70,7 @@ describe Validic::Diabetes do
 
   context "#get_diabetes by user" do
     before do
-      @user_diabetes = client.get_diabetes({user_id: "519e24e16a7e0cc7ef00002c"})
+      @user_diabetes = client.get_diabetes({user_id: "52967e076dedda5d4300000b"})
     end
 
     it "returns JSON response of Validic::Diabetes", vcr: true do

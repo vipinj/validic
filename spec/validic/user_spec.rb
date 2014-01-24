@@ -11,17 +11,20 @@ describe Validic::User do
     end
 
     it "returns JSON response of Validic::User", vcr: true do
+      pending
       @me.should_not be_nil
     end
 
     it "should return the user id" do
+      pending
       @me.user._id.should_not be_nil
     end
   end
 
   context "#user_provisioning" do
     it "should create a new user under an organization" do
-      @new_user = client.user_provision(organization_id: "51964ba56a7e0c2417000029",
+      pending
+      @new_user = client.user_provision(organization_id: "51aca5a06dedda916400002b",
                                         access_token: "ENTERPRISE_KEY",
                                         uid: "123asdfg",
                                         height: 167,
@@ -38,8 +41,9 @@ describe Validic::User do
 
   context "#user_suspend" do
     it "should suspend a user" do
-      @suspend_user = client.user_suspend(organization_id: "51c30eab6a7e0c1797000002",
-                                          user_id: "51c32e4d6a7e0c89cf000005",
+      pending
+      @suspend_user = client.user_suspend(organization_id: "51aca5a06dedda916400002b",
+                                          user_id: "52967e076dedda5d4300000b",
                                           access_token: "9c03ad2bcb022425944e4686d398ef8398f537c2f7c113495ffa7bc9cfa49286",
                                           suspend: 1)
       @suspend_user.message.should eq "The user has been suspended successfully"

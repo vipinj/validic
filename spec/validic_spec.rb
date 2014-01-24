@@ -8,8 +8,7 @@ describe Validic do
   context "configure defaults" do
 
     it "uses default API URL" do
-      # client.api_url.should eq 'https://api.validic.com'
-      client.api_url.should eq 'http://api.validic.dev' # Development URL for local testing
+      client.api_url.should eq 'https://api.validic.com'
     end
 
     it "uses default API VERSION" do
@@ -19,20 +18,22 @@ describe Validic do
   end
 
   context "handles custom configuration" do
-    let(:new_client) { Validic::Client.new(api_url: 'https://api.validic.net', api_version: 'v2')}#, access_token: 'MYTOKEN')}
+    let(:new_client) { Validic::Client
+                       .new(api_url: 'https://api.validic.net',
+                            api_version: 'v2',
+                           organization_id: '1234567') }
 
     it "::Client API_URL configuration" do
       new_client.api_url.should eq 'https://api.validic.net'
     end
 
-    # it "::Client ACCESS_TOKEN configuration" do
-    #   new_client.access_token.should eq 'MYTOKEN'
-    # end
-
     it "::Client API_VERSION configuration" do
       new_client.api_version.should eq 'v2'
     end
 
+    it "::Client Organization ID configuration" do
+      new_client.organization_id.should eq '1234567'
+    end
   end
 
 end

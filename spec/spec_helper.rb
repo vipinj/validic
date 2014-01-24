@@ -34,10 +34,11 @@ RSpec.configure do |c|
   #
   c.before(:each) do
     Validic.configure do |config|
-      # config.api_url        = 'https://api.validic.com'
-      config.api_url        = 'http://api.validic.dev' #development config
-      config.api_version    = 'v1'
-      config.access_token   = '9c03ad2bcb022425944e4686d398ef8398f537c2f7c113495ffa7bc9cfa49286'
+      # This is using ACME Corp Credentials as per Documentation
+      config.api_url          = 'https://api.validic.com'
+      config.api_version      = 'v1'
+      config.access_token     = 'ef617d9d3bb39b4112f60dc65ee40061165c1ab4375e3ea63896f63a7390c4db'
+      config.organization_id  = '51aca5a06dedda916400002b'
     end
   end
 end

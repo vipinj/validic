@@ -8,13 +8,9 @@ module Validic
     # 
     # @params :access_token
     # @return [Hashie::Mash] with list of Organization
-    def get_organization(options={})
-      organization_id = options[:organization_id]
-      options = {
-        access_token: options[:access_token]
-      }
-      response = get("/#{Validic.api_version}/organizations/#{organization_id}.json", options)
-      response if response
+    def get_organization(params={})
+      params = extract_params(params)
+      get("/#{Validic.api_version}/organizations/#{Validic.organization_id}.json", params)
     end
 
     ##

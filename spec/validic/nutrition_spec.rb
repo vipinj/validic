@@ -25,6 +25,7 @@ describe Validic::Nutrition do
 
   context "#create_nutrition" do
     it "should create new nutrition record" do
+      pending
       @new_nutrition = client.create_nutrition({authentication_token: "mqwpDx8RYcmSFBJDmy3J",
                                                 access_token: "DEMO_KEY",
                                                 calories: 850,
@@ -53,7 +54,7 @@ describe Validic::Nutrition do
 
   context "#get_nutritions by organization" do
     before do
-      @nutrition = client.get_nutritions({organization_id: "519e24e16a7e0cc7ef00002b", access_token: "ENTERPRISE_KEY"})
+      @nutrition = client.get_nutritions({organization_id: "51aca5a06dedda916400002b", access_token: "ENTERPRISE_KEY"})
     end
 
     it "returns JSON response of Validic::Nutrition", vcr: true do
@@ -71,7 +72,7 @@ describe Validic::Nutrition do
 
   context "#get_nutritions by user" do
     before do
-      @nutrition = client.get_nutritions({user_id: "519e24e16a7e0cc7ef00002c"})
+      @nutrition = client.get_nutritions({user_id: "52967e076dedda5d4300000b"})
     end
 
     it "returns JSON response of Validic::Nutrition", vcr: true do

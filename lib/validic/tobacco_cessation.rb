@@ -17,28 +17,9 @@ module Validic
     # @params :expanded - optional - will show the raw data
     # 
     # @return [Hashie::Mash] with list of TobaccoCessation
-    def get_tobacco_cessations(options={})
-      organization_id = options[:organization_id]
-      user_id = options[:user_id]
-      options = {
-        start_date: options[:start_date],
-        end_date: options[:end_date],
-        access_token: options[:access_token],
-        source: options[:source],
-        expanded: options[:expanded],
-        limit: options[:limit],
-        page: options[:page],
-        offset: options[:offset]
-      }
-
-      if organization_id
-        response = get("/#{Validic.api_version}/organizations/#{organization_id}/tobacco_cessation.json", options)
-      elsif user_id
-        response = get("/#{Validic.api_version}/users/#{user_id}/tobacco_cessation.json", options)
-      else
-        response = get("/#{Validic.api_version}/tobacco_cessation.json", options)
-      end
-      response if response
+    def get_tobacco_cessations(params={})
+      params = extract_params(params)
+      get_endpoint(:tobacco_cessation, params)
     end
 
     ##

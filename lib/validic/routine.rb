@@ -17,29 +17,12 @@ module Validic
     # @params :expanded - optional - will show the raw data
     # 
     # @return [Hashie::Mash] with list of Routine
-    def get_routines(options={})
-      organization_id = options[:organization_id]
-      user_id = options[:user_id]
-      options = {
-        start_date: options[:start_date],
-        end_date: options[:end_date],
-        access_token: options[:access_token],
-        source: options[:source],
-        expanded: options[:expanded],
-        limit: options[:limit],
-        page: options[:page],
-        offset: options[:offset]
-      }
-
-      if organization_id
-        response = get("/#{Validic.api_version}/organizations/#{organization_id}/routine.json", options)
-      elsif user_id
-        response = get("/#{Validic.api_version}/users/#{user_id}/routine.json", options)
-      else
-        response = get("/#{Validic.api_version}/routine.json", options)
-      end
-      response if response
+    def get_routine(params={})
+      params = extract_params(params)
+      get_endpoint(:routine, params)
     end
+
+    alias :get_routines :get_routine
 
     ##
     # Create Routine base on `access_token` and `authentication_token`

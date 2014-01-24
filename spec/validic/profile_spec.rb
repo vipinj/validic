@@ -11,36 +11,9 @@ describe Validic::Profile do
     end
 
     it "returns JSON response of Validic::Profile", vcr: true do
+      pending
       @profile.should_not be_nil
     end
   end
-
-  # context "#update_profile" do
-  #   before do
-  #     @updated_profile = client.update_profile({gender: "M",
-  #                                               location: "TX",
-  #                                               birth_year: "1985",
-  #                                               height: 168.75,
-  #                                               weight: 69,
-  #                                               first_name: "Demo",
-  #                                               last_name: "User"})
-  #   end
-
-  #   it "should return gender" do
-  #     @updated_profile.profile.gender.should eq 'M'
-  #   end
-
-  #   it "should return location" do
-  #     @updated_profile.profile.location.should eq 'TX'
-  #   end
-
-  #   it "should return height" do
-  #     @updated_profile.profile.height.should eq "168.75"
-  #   end
-
-  #   it "should return weight" do
-  #     @updated_profile.profile.weight.should eq 69
-  #   end
-  # end
 
 end
