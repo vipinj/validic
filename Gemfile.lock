@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    validic (0.2.4)
+    validic (0.3.1)
       activesupport
       faraday_middleware (~> 0.9.0)
       hashie (~> 2.0.3)
@@ -65,9 +65,9 @@ GEM
       atomic
     tzinfo (0.3.38)
     vcr (2.8.0)
-    webmock (1.17.1)
+    webmock (1.8.11)
       addressable (>= 2.2.7)
-      crack (>= 0.3.2)
+      crack (>= 0.1.7)
     yard (0.8.7.3)
 
 PLATFORMS
@@ -82,6 +82,6 @@ DEPENDENCIES
   simplecov
   simplecov-rcov
   validic!
-  vcr
-  webmock
+  vcr (~> 2.8.0)
+  webmock (~> 1.8.0)
   yard
