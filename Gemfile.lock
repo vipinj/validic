@@ -75,7 +75,7 @@ PLATFORMS
 
 DEPENDENCIES
   api_matchers
-  bundler (~> 1.3.5)
+  bundler
   rake
   rspec
   shoulda
