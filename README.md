@@ -24,14 +24,14 @@ Or install it yourself as:
 ```ruby
     require 'validic'
 
-    # If your using Rails 3+
+    # If you're using Rails 3+
     # config/initializers/validic.rb
     Validic.configure do |config|
       config.api_url        = 'https://api.validic.com'
       config.api_version    = 'v1'
     end
 
-    # If your using plain RUBY
+    # If you're using plain RUBY
     # Create Validic::Client Object
     options = {
       api_url: 'https://api.validic.com',
@@ -44,11 +44,11 @@ Or install it yourself as:
     # Validic::Client Object
     client = Validic::Client.new
 
-    # => Get Account Activities
-    client.get_activities
+    # => Get Account Fitness
+    client.get_fitness
 
-    # => Get Organization Activities
-    client.get_activites({organization_id: "YOUR_organization_id",
+    # => Get Organization Fitness
+    client.get_fitness({organization_id: "YOUR_organization_id",
                           access_token: "YOUR_ACCESS_TOKEN"})
 ```
 
