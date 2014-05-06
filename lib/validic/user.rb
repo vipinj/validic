@@ -4,6 +4,22 @@ module Validic
   module User
 
     ##
+    # Get Users base on `access_token` and organization_id
+    # 
+    # @params :status - optional (active or inactive) default :all
+    # @params :access_token - optional
+    # @params :start_date - optional
+    # @params :end_date - optional
+    # @params :offset - optional
+    # @params :limit - optional
+    #
+    # @return [Hashie::Mash] with list of Organization
+    def get_users(params={})
+      params = extract_params(params)
+      get_endpoint(:users, params)
+    end
+
+    ##
     # Get User id base on `access_token`
     # 
     # @return id

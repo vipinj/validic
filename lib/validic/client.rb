@@ -32,7 +32,7 @@ module Validic
     include TobaccoCessation
     include ThirdPartyApp
 
-    attr_reader :api_url,
+    attr_accessor :api_url,
       :api_version,
       :access_token,
       :organization_id
@@ -42,10 +42,12 @@ module Validic
     #
     # @params options[Hash]
     def initialize(options={})
-      @api_url        = options[:api_url]       || Validic.api_url
-      @api_version    = options[:api_version]   || Validic.api_version || 'v1'
-      @access_token   = options[:access_token]  || Validic.access_token
-      @organization_id = options[:organization_id] || Validic.organization_id
+      @api_url        = options[:api_url].nil? ? Validic.api_url : options[:api_url]
+      @api_version    = options[:api_version].nil? ? 'v1' : options[:api_version]
+      @access_token   = options[:access_token].nil? ? Validic.access_token : options[:access_token]
+      @organization_id = options[:organization_id].nil? ? Validic.organization_id : options[:organization_id]
+
+      reload_config
     end
 
     ##
@@ -54,7 +56,7 @@ module Validic
     # @return [Faraday::Connection]
     def connection
       params = {}
-      @connection = Faraday.new(url: api_url, params: params, headers: default_headers, ssl: {verify: true}) do |faraday|
+      @connection = Faraday.new(url: @api_url, params: params, headers: default_headers, ssl: {verify: true}) do |faraday|
         faraday.use FaradayMiddleware::Mashify
         faraday.use FaradayMiddleware::ParseJson, content_type: /\bjson$/
         faraday.use FaradayMiddleware::FollowRedirects
@@ -83,8 +85,10 @@ module Validic
 
       url = "/#{Validic.api_version}/organizations/#{Validic.organization_id}/#{type.to_s}.json"
 
-      if Validic.user_id
+      if Validic.user_id && type != :users
         url = "/#{Validic.api_version}/organizations/#{Validic.organization_id}/users/#{Validic.user_id}/#{type.to_s}.json"
+      elsif Validic.user_id && type == :users
+        url = "/#{Validic.api_version}/organizations/#{Validic.organization_id}/users/#{Validic.user_id}.json"
       end
 
       get(url, params)
@@ -109,6 +113,13 @@ module Validic
         content_type: 'application/json',
         user_agent: "Ruby Gem by Validic #{Validic::VERSION}"
       }
+    end
+
+    def reload_config
+      Validic.api_url = api_url
+      Validic.api_version = api_version
+      Validic.access_token = access_token
+      Validic.organization_id = organization_id
     end
 
   end
