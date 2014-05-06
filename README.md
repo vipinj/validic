@@ -5,6 +5,9 @@ Ruby API Wrapper for [Validic](http://www.validic.com)
 ## Build Status
 [![Codeship Status for Validic/validic](https://www.codeship.io/projects/cc4ff330-9f72-0130-3cf3-0e5a3e2104f7/status?branch=master)](https://www.codeship.io/projects/3456)
 
+
+## Stable Version: 0.3.2
+
 ## Installation
 
 Add this line to your application's Gemfile:
