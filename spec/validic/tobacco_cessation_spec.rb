@@ -26,7 +26,7 @@ describe Validic::TobaccoCessation do
   context "#create_tobacco_cessation" do
     it "should create new tobacco_cessation record" do
       pending
-      @new_tobacco_cessation = client.create_tobacco_cessation({authentication_token: "mqwpDx8RYcmSFBJDmy3J",
+      @new_tobacco_cessation = client.create_tobacco_cessation({authentication_token: ENV['TEST_USER_AUTHENTICATION_TOKEN'],
                                                                 access_token: "DEMO_KEY",
                                                                 timestamp: "2013-05-01 07:12:16 -05:00",
                                                                 cigarettes_allowed: 10,
@@ -63,7 +63,7 @@ describe Validic::TobaccoCessation do
 
   context "#get_tobacco_cessations by user" do
     before do
-      @tobacco_cessation = client.get_tobacco_cessations({user_id: "52967e076dedda5d4300000b"})
+      @tobacco_cessation = client.get_tobacco_cessations({user_id: ENV['TEST_USER_ID']})
     end
 
     it "returns JSON response of Validic::TobaccoCessation", vcr: true do

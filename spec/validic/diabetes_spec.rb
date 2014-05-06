@@ -26,7 +26,7 @@ describe Validic::Diabetes do
   context "#create_diabetes" do
     it "should create new diabetes record", vcr: true do
       pending
-      @new_diabetes = client.create_diabetes({authentication_token: "mqwpDx8RYcmSFBJDmy3J",
+      @new_diabetes = client.create_diabetes({authentication_token: ENV['TEST_USER_AUTHENTICATION_TOKEN'],
                                               access_token: "DEMO_KEY",
                                               c_peptide: 1,
                                               fasting_plasma_glucose_test: 50,
@@ -70,7 +70,7 @@ describe Validic::Diabetes do
 
   context "#get_diabetes by user" do
     before do
-      @user_diabetes = client.get_diabetes({user_id: "52967e076dedda5d4300000b"})
+      @user_diabetes = client.get_diabetes({user_id: ENV['TEST_USER_ID']})
     end
 
     it "returns JSON response of Validic::Diabetes", vcr: true do

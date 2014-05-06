@@ -10,7 +10,7 @@ describe Validic::Biometric do
       @user_biometrics = client
         .get_biometrics({
           start_date: '2014-01-01',
-          user_id: '52967e076dedda5d4300000b'
+          user_id: ENV['TEST_USER_ID']
         })
     end
 

@@ -15,7 +15,7 @@ describe Validic::Nutrition do
     end
 
     it "status 200" do
-      @nutrition.summary.status.should == 200 
+      @nutrition.summary.status.should == 200
     end
 
     it "has summary node" do
@@ -26,7 +26,7 @@ describe Validic::Nutrition do
   context "#create_nutrition" do
     it "should create new nutrition record" do
       pending
-      @new_nutrition = client.create_nutrition({authentication_token: "mqwpDx8RYcmSFBJDmy3J",
+      @new_nutrition = client.create_nutrition({authentication_token: ENV['TEST_USER_AUTHENTICATION_TOKEN'],
                                                 access_token: "DEMO_KEY",
                                                 calories: 850,
                                                 carbohydrates: 351,
@@ -62,7 +62,7 @@ describe Validic::Nutrition do
     end
 
     it "status 200" do
-      @nutrition.summary.status.should == 200 
+      @nutrition.summary.status.should == 200
     end
 
     it "has summary node" do
@@ -72,7 +72,7 @@ describe Validic::Nutrition do
 
   context "#get_nutritions by user" do
     before do
-      @nutrition = client.get_nutritions({user_id: "52967e076dedda5d4300000b"})
+      @nutrition = client.get_nutritions({user_id: ENV['TEST_USER_ID']})
     end
 
     it "returns JSON response of Validic::Nutrition", vcr: true do
@@ -80,7 +80,7 @@ describe Validic::Nutrition do
     end
 
     it "status 200" do
-      @nutrition.summary.status.should == 200 
+      @nutrition.summary.status.should == 200
     end
 
     it "has summary node" do

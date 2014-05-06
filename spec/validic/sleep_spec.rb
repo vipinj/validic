@@ -26,7 +26,7 @@ describe Validic::Sleep do
   context "#create_sleep" do
     it "should create new sleep record" do
       pending
-      @new_sleep = client.create_sleep({authentication_token: "mqwpDx8RYcmSFBJDmy3J",
+      @new_sleep = client.create_sleep({authentication_token: ENV['TEST_USER_AUTHENTICATION_TOKEN'],
                                         access_token: "DEMO_KEY",
                                         total_sleep: 210,
                                         awake: 10,
@@ -68,7 +68,7 @@ describe Validic::Sleep do
 
   context "#get_sleeps by user" do
     before do
-      @sleep = client.get_sleeps({user_id: "52967e076dedda5d4300000b"})
+      @sleep = client.get_sleeps({user_id: ENV['TEST_USER_ID']})
     end
 
     it "returns JSON response of Validic::Sleep", vcr: true do

@@ -26,7 +26,7 @@ describe Validic::Weight do
   context "#create_weight" do
     it "should create new weight record" do
       pending
-      @new_weight = client.create_weight({authentication_token: "mqwpDx8RYcmSFBJDmy3J",
+      @new_weight = client.create_weight({authentication_token: ENV['TEST_USER_AUTHENTICATION_TOKEN'],
                                           access_token: "DEMO_KEY",
                                           timestamp: "2013-05-16 07:12:16 -05:00",
                                           bmi: 133.26,
@@ -69,7 +69,7 @@ describe Validic::Weight do
 
   context "#get_weights by user" do
     before do
-      @weight = client.get_weights({user_id: "52967e076dedda5d4300000b"})
+      @weight = client.get_weights({user_id: ENV['TEST_USER_ID']})
     end
 
     it "returns JSON response of Validic::Weight", vcr: true do
