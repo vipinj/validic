@@ -68,4 +68,14 @@ describe Validic::User do
     end
   end
 
+  context "#user_delete" do
+    it "should delete a user" do
+      pending
+      @delete_user = client.user_delete(organization_id: "51aca5a06dedda916400002b",
+                                        uid: ENV['TEST_USER_ID'],
+                                        access_token: "9c03ad2bcb022425944e4686d398ef8398f537c2f7c113495ffa7bc9cfa49286")
+      @delete_user.status.should eq 200
+    end
+  end
+
 end

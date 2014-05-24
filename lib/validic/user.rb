@@ -5,7 +5,7 @@ module Validic
 
     ##
     # Get Users base on `access_token` and organization_id
-    # 
+    #
     # @params :status - optional (active or inactive) default :all
     # @params :access_token - optional
     # @params :start_date - optional
@@ -21,7 +21,7 @@ module Validic
 
     ##
     # Get User id base on `access_token`
-    # 
+    #
     # @return id
     def me(options={})
       options = {
@@ -81,6 +81,22 @@ module Validic
       }
 
       response = put("/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}.json", options)
+      response
+    end
+
+    ##
+    #
+    # DELETE request for deleting a user
+    #
+    # @params[:organization_id] -- String
+    # @params[:access_token] -- String -- organization's access_token
+    # @params[:uid] -- String -- user's ID to suspend
+    #
+    # @return [Hashie::Mash] with response
+    def user_delete(options={})
+      organization_id = options[:organization_id]
+
+      response = delete("/#{Validic.api_version}/organizations/#{organization_id}/users.json", options)
       response
     end
   end

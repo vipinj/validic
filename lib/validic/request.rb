@@ -23,11 +23,15 @@ module Validic
       request(:put, path, options)
     end
 
+    def delete(path, options)
+      request(:delete, path, options)
+    end
+
     def request(method, path, options)
       options[:access_token] = options[:access_token].nil? ? Validic.access_token : options[:access_token]
       response = connection.send(method) do |request|
         case method
-        when :get
+        when :get, :delete
           request.url(path, options)
         when :post, :put
           request.path = path
