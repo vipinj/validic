@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>This is a post about partner apps</title>
+    <title>Partner Apps</title>
     <meta name="description" content="This is page is a work in progress to help showcase the many uses of the Validic gem.
 ">
 
@@ -57,8 +57,8 @@
         <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">This is a post about partner apps</h1>
-    <p class="post-meta">Jan 5, 2015</p>
+    <h1 class="post-title">Partner Apps</h1>
+    <p class="post-meta">Jan 5, 2015 • Anthony Ross</p>
   </header>
 
   <article class="post-content">
@@ -76,13 +76,13 @@
 
 <h1 id="credentials">Credentials</h1>
 
-<p>The first step in connecting to Validic is to to have your organization credentials.  If you don’t have those please contact <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#118;&#097;&#108;&#105;&#100;&#105;&#099;&#046;&#099;&#111;&#109;">&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#118;&#097;&#108;&#105;&#100;&#105;&#099;&#046;&#099;&#111;&#109;</a></p>
+<p>The first step in connecting to Validic is to to have your organization credentials.  If you don’t have those please contact <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#118;&#097;&#108;&#105;&#100;&#105;&#099;&#046;&#099;&#111;&#109;">&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#118;&#097;&#108;&#105;&#100;&#105;&#099;&#046;&#099;&#111;&#109;</a>.</p>
 
 <p>If you’re using a rails app we recommend storing your organization credentials into environment variables using something like <a href="https://github.com/bkeepers/dotenv">dotenv-rails.</a></p>
 
 <h1 id="gem-initializer--set-up">Gem Initializer &amp; Set up</h1>
 
-<p>We recommend setting up an initializer for the gem so your calls automatically contain your organizaton’s credentials.  In rails that would look like this:</p>
+<p>We recommend setting up an initializer for the gem so your calls automatically contain your organization’s credentials.  In rails that would look like this(<code>config/initializers/validic.rb</code>)</p>
 
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Validic</span><span class="o">.</span><span class="n">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
   <span class="n">config</span><span class="o">.</span><span class="n">api_url</span>        <span class="o">=</span> <span class="s1">&#39;https://api.validic.com&#39;</span>
@@ -96,7 +96,64 @@
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">VALIDIC_ORG_ID</span><span class="o">=</span><span class="no">YOUR_ORG_ID_HERE</span>
 <span class="no">VALIDIC_ACCESS_TOKEN</span><span class="o">=</span><span class="no">YOUR_ACCESS_TOKEN_HERE</span></code></pre></div>
 
-<h1 id="first-steps">First Steps</h1>
+<h1 id="first-steps---user-provisioning">First Steps - User Provisioning</h1>
+
+<p>In order to send your users data you must provision users in Validic.  We recommend that you provision users once they authorize you to share their data in our marketplace.  Provisioning users looks like this:</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">client</span> <span class="o">=</span> <span class="no">Validic</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">user_provision</span><span class="p">(</span><span class="ss">organization_id</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;VALIDIC_ORG_ID&#39;</span><span class="o">]</span><span class="p">,</span> <span class="ss">uid</span><span class="p">:</span> <span class="s1">&#39;YourUniqueIDAsAString&#39;</span><span class="p">)</span></code></pre></div>
+
+<p>That response will look like this:</p>
+
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&quot;code&quot;</span><span class="p">:</span> <span class="mi">201</span><span class="p">,</span>
+  <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Ok&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;_id&quot;</span><span class="p">:</span> <span class="s2">&quot;{USER_ID}&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;access_token&quot;</span><span class="p">:</span> <span class="s2">&quot;{USER_ACCESS_TOKEN}&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>You need to store the <code>_id</code> and <code>access_token</code> in your database as we’ll use that information in the forthcoming POST calls. The entire provision user method might look like this:</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="k">def</span> <span class="nf">provision_validic</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="no">Validic</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span>
+    <span class="nb">self</span><span class="o">.</span><span class="n">uid</span> <span class="o">=</span> <span class="no">SecureRandom</span><span class="o">.</span><span class="n">urlsafe_base64</span> <span class="c1">#random string</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">user_provision</span><span class="p">(</span><span class="ss">organization_id</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;VALIDIC_ORG_ID&#39;</span><span class="o">]</span><span class="p">,</span>
+                                 <span class="ss">uid</span><span class="p">:</span> <span class="n">uid</span><span class="p">)</span>
+    <span class="nb">self</span><span class="o">.</span><span class="n">_id</span> <span class="o">=</span> <span class="n">resp</span><span class="o">[</span><span class="s2">&quot;user&quot;</span><span class="o">][</span><span class="s2">&quot;_id&quot;</span><span class="o">]</span>
+    <span class="nb">self</span><span class="o">.</span><span class="n">access_token</span> <span class="o">=</span> <span class="n">resp</span><span class="o">[</span><span class="s2">&quot;user&quot;</span><span class="o">][</span><span class="s2">&quot;access_token&quot;</span><span class="o">]</span>
+    <span class="nb">self</span><span class="o">.</span><span class="n">save</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span> <span class="c1">#find the user who just authorized</span>
+<span class="n">user</span><span class="o">.</span><span class="n">provision_validic</span> <span class="c1">#provision in Validic</span></code></pre></div>
+
+<h1 id="posting-data-to-validic">Posting Data to Validic</h1>
+
+<p>We’re going to assume that once a user has authorized their data be shared with Validic you want to immediately send all new data of that users to Validic.  For instance, let’s say we have an Activity class that once new data has been validated and saved on your server, it should also be pushed to Validic.  You can use a <code>after_save</code> hook in rails to do just that:</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Activity</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">validates</span> <span class="ss">:steps</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+  <span class="n">belongs_to</span> <span class="ss">:user</span>
+  <span class="n">after_save</span> <span class="ss">:push_to_validic</span>
+
+  <span class="k">def</span> <span class="nf">push_to_validic</span>
+    <span class="c1">#you can do some check here to make sure user has authorized sending data to Validic</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="no">Validic</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">post_to_validic</span><span class="p">(</span><span class="s2">&quot;routine&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="ss">routine</span><span class="p">:</span> <span class="p">{</span>
+        <span class="ss">timestamp</span><span class="p">:</span> <span class="no">DateTime</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">utc</span><span class="o">.</span><span class="n">to_s</span><span class="p">(</span><span class="ss">:iso8601</span><span class="p">),</span>
+        <span class="ss">steps</span><span class="p">:</span> <span class="nb">self</span><span class="o">.</span><span class="n">steps</span><span class="p">,</span>
+        <span class="ss">activity_id</span><span class="p">:</span> <span class="nb">self</span><span class="o">.</span><span class="n">unique_activity_id</span><span class="p">,</span>
+        <span class="ss">extras</span><span class="p">:</span> <span class="s2">&quot;{ </span><span class="se">\&quot;</span><span class="s2">points</span><span class="se">\&quot;</span><span class="s2">: 10}&quot;</span>
+      <span class="p">}</span>
+    <span class="p">})</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+<p>If a new activity is created here, it will send information to Validic using the generic <code>post_to_validic</code> method which takes the object we’re posting (in this case ‘routine’) and sends in hash of fields.</p>
 
 
   </article>
@@ -116,7 +173,7 @@
       <div class="footer-col  footer-col-1">
         <ul class="contact-list">
           <li>Validic Gem Github Page</li>
-          <li><a href="mailto:your-email@domain.com">your-email@domain.com</a></li>
+          <li><a href="mailto:support@validic.com">support@validic.com</a></li>
         </ul>
       </div>
 
