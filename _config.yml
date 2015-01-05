@@ -1,0 +1,13 @@
+# Site settings
+title: Validic Gem Github Page
+email: support@validic.com
+description: > # this means to ignore newlines until "baseurl:"
+  This is page is a work in progress to help showcase the many uses of the Validic
+  gem.
+baseurl: "/validic" # the subpath of your site, e.g. /blog/
+url: "http://yourdomain.com" # the base hostname & protocol for your site
+twitter_username: validic
+github_username:  validic
+
+# Build settings
+markdown: kramdown
