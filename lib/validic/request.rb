@@ -7,7 +7,6 @@ module Validic
 
     def extract_params(params)
       Validic.organization_id = params.delete(:organization_id) if params[:organization_id]
-      Validic.user_id = params.delete(:user_id) if params[:user_id]
       params
     end
 

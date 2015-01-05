@@ -85,10 +85,10 @@ module Validic
 
       url = "/#{Validic.api_version}/organizations/#{Validic.organization_id}/#{type.to_s}.json"
 
-      if Validic.user_id && type != :users
-        url = "/#{Validic.api_version}/organizations/#{Validic.organization_id}/users/#{Validic.user_id}/#{type.to_s}.json"
-      elsif Validic.user_id && type == :users
-        url = "/#{Validic.api_version}/organizations/#{Validic.organization_id}/users/#{Validic.user_id}.json"
+      if params[:user_id] && type != :users
+        url = "/#{Validic.api_version}/organizations/#{Validic.organization_id}/users/#{params[:user_id]}/#{type.to_s}.json"
+      elsif params[:user_id] && type == :users
+        url = "/#{Validic.api_version}/organizations/#{Validic.organization_id}/users/#{params[:user_id]}.json"
       end
 
       get(url, params)
