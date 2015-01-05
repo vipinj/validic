@@ -77,8 +77,8 @@ class User < ActiveRecord::Base
     self.uid = SecureRandom.urlsafe_base64 #random string
     resp = client.user_provision(organization_id: ENV['VALIDIC_ORG_ID'],
                                  uid: uid)
-    self._id = resp["user"]["_id"]
-    self.access_token = resp["user"]["access_token"]
+    self._id = resp.user._id
+    self.access_token = resp.user.access_token
     self.save
   end
 end
