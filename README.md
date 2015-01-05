@@ -17,8 +17,8 @@ following functionality:
 - Provision new Validic users
 - Update or Suspend users
 - Delete users
-- Users based on authentication tokens
-- Me call for id from authentication token
+- Get users from organization credentials
+- Find user id from authentication token
 - Refresh user authentication token **Not yet implemented**
 
 ### Apps ###
@@ -67,7 +67,7 @@ require 'validic'
 Validic.configure do |config|
   config.api_url          = 'https://api.validic.com'
   config.api_version      = 'v1'
-  config.access_token     = 'ORGANIZATION_ACCESS_TOKEN'
+  config.access_token     = 'ORGANIZATION_ACCESS_TOKEN',
   config.organization_id  = 'ORGANIZATION_ID'
 end
 
@@ -79,7 +79,7 @@ validic = Validic::Client.new
 options = {
   api_url:         'https://api.validic.com',
   api_version:     'v1',
-  access_token:    'ORGANIZATION_ACCESS_TOKEN'
+  access_token:    'ORGANIZATION_ACCESS_TOKEN',
   organization_id: 'ORGANIZATION_ID'
 }
 validic = Validic::Client.new options
@@ -91,7 +91,7 @@ Now you can use the wrapper's helper methods to interface with the Validic API.
 validic.get_organization
 ```
 
-The wrapper returns the JSON response as a Hashie::Mash instance for easy
+The wrapper returns the JSON response as a [Hashie::Mash](https://github.com/intridea/hashie#mash) instance for easy
 manipulation.
 ```ruby
 # Get an array of apps for my current organization
@@ -114,7 +114,7 @@ require 'validic'
 options = {
   api_url:         'https://api.validic.com',
   api_version:     'v1',
-  access_token:    'ORGANIZATION_ACCESS_TOKEN'
+  access_token:    'ORGANIZATION_ACCESS_TOKEN',
   organization_id: 'ORGANIZATION_ID'
 }
 validic = Validic::Client.new options
