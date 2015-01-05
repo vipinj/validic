@@ -143,6 +143,7 @@
   <span class="k">def</span> <span class="nf">push_to_validic</span>
     <span class="c1">#you can do some check here to make sure user has authorized sending data to Validic</span>
     <span class="n">client</span> <span class="o">=</span> <span class="no">Validic</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span>
+    <span class="no">Validic</span><span class="o">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="nb">self</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">_id</span> <span class="c1"># we have this _id from the provision call above</span>
     <span class="n">client</span><span class="o">.</span><span class="n">post_to_validic</span><span class="p">(</span><span class="s2">&quot;routine&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="ss">routine</span><span class="p">:</span> <span class="p">{</span>
         <span class="ss">timestamp</span><span class="p">:</span> <span class="no">DateTime</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">utc</span><span class="o">.</span><span class="n">to_s</span><span class="p">(</span><span class="ss">:iso8601</span><span class="p">),</span>
         <span class="ss">steps</span><span class="p">:</span> <span class="nb">self</span><span class="o">.</span><span class="n">steps</span><span class="p">,</span>

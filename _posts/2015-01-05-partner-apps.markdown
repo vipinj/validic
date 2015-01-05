@@ -100,6 +100,7 @@ class Activity < ActiveRecord::Base
   def push_to_validic
     #you can do some check here to make sure user has authorized sending data to Validic
     client = Validic::Client.new
+    Validic.user_id = self.user._id # we have this _id from the provision call above
     client.post_to_validic("routine", { routine: {
         timestamp: DateTime.now.utc.to_s(:iso8601),
         steps: self.steps,
