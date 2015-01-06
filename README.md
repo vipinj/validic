@@ -190,32 +190,32 @@ validic.get_sleep
 validic.get_tobacco_cessations
 
 ###
-#   Connect method
+#   Connect methods
 ###
 
 # Get an array of fitness records
-validic.create_fitness('VALIDIC_USER_ID', 'ACTIVITY_ID')
+validic.create_fitness('VALIDIC_USER_ID', 'ACTIVITY_ID', options)
 
 # Get an array of routine records
-validic.create_routine('VALIDIC_USER_ID', 'ACTIVITY_ID')
+validic.create_routine('VALIDIC_USER_ID', 'ACTIVITY_ID', options)
 
 # Get an array of nutrition records
-validic.create_nutrition('VALIDIC_USER_ID', 'ENTRY_ID')
+validic.create_nutrition('VALIDIC_USER_ID', 'ENTRY_ID', options)
 
 # Get an array of weight records
-validic.create_weight('VALIDIC_USER_ID', 'DATA_ID')
+validic.create_weight('VALIDIC_USER_ID', 'DATA_ID', options)
 
 # Get an array of diabetes records
-validic.create_diabetes('VALIDIC_USER_ID', 'ACTIVITY_ID')
+validic.create_diabetes('VALIDIC_USER_ID', 'ACTIVITY_ID', options)
 
 # Get an array of biometrics records
-validic.create_biometrics('VALIDIC_USER_ID', 'ACTIVITY_ID')
+validic.create_biometrics('VALIDIC_USER_ID', 'ACTIVITY_ID', options)
 
 # Get an array of sleep records
-validic.create_sleep('VALIDIC_USER_ID', 'ACTIVITY_ID')
+validic.create_sleep('VALIDIC_USER_ID', 'ACTIVITY_ID', options)
 
 # Get an array of tobacco cessation records
-validic.create_tobacco_cessation('VALIDIC_USER_ID', 'ACTIVITY_ID')
+validic.create_tobacco_cessation('VALIDIC_USER_ID', 'ACTIVITY_ID', options)
 
 ###
 #   Latest method
