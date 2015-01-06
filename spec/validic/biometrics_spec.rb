@@ -1,6 +1,5 @@
 # encoding: utf-8
 require 'spec_helper'
-require 'pry'
 
 describe Validic::Biometric do
 

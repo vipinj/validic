@@ -98,10 +98,11 @@ module Validic
     ##
     # Generic POST to Validic
     def post_to_validic(type, params={})
-      organization_id = params[:organization_id] || Validic.organization_id
+      user_id = params.delete(:user_id)
+      organization_id = params.delete(:organization_id)
 
-      if params[:user_id]
-        url = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{params[:user_id]}/#{type.to_s}.json"
+      if user_id
+        url = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}.json"
       else
         url = "/#{Validic.api_version}/organizations/#{organization_id}/#{type.to_s}.json"
       end

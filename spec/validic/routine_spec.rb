@@ -15,7 +15,7 @@ describe Validic::Routine do
     end
 
     it "status 200" do
-      @routine.summary.status.should == 200 
+      @routine.summary.status.should == 200
     end
 
     it "has summary node" do
@@ -24,23 +24,12 @@ describe Validic::Routine do
   end
 
   context "#create_routine" do
-    it "should create new routine record" do
-      pending
-      @new_routine = client.create_routine({authentication_token: ENV['TEST_USER_AUTHENTICATION_TOKEN'],
-                                            access_token: "DEMO_KEY",
-                                            timestamp: "2013-05-16 07:12:16 -05:00",
-                                            steps: 10000,
-                                            stairs_climbed: 50,
-                                            calories_burned: 2500,
-                                            calories_consumed: 3000,
-                                            source: "Sample App"})
+    it "should create new routine record", vcr: true do
+      @new_routine = client.create_routine(ENV['PARTNER_USER_ID'], organization_id: ENV['PARTNER_ORG_ID'], access_token: ENV['PARTNER_ACCESS_TOKEN'], activity_id: 'routine_1337', timestamp: "2015-01-06T16:14:17+00:00")
       @new_routine.should_not be_nil
-      @new_routine.routine.timestamp.should eq "2013-05-16 07:12:16 -05:00"
-      @new_routine.routine.steps.should eq 10000.0
-      @new_routine.routine.stairs_climbed.should eq 50.0
-      @new_routine.routine.calories_burned.should eq 2500.0
-      @new_routine.routine.calories_consumed.should eq 3000.0
-      @new_routine.routine.source.should eq "Sample App"
+      @new_routine.routine.timestamp.should eq "2015-01-06T16:14:17+00:00"
+      @new_routine.routine.activity_id.should eq 'routine_1337'
+      @new_routine.routine.source.should eq "healthy_yet"
     end
   end
 
@@ -54,7 +43,7 @@ describe Validic::Routine do
     end
 
     it "status 200" do
-      @routine.summary.status.should == 200 
+      @routine.summary.status.should == 200
     end
 
     it "has summary node" do
@@ -72,7 +61,7 @@ describe Validic::Routine do
     end
 
     it "status 200" do
-      @routine.summary.status.should == 200 
+      @routine.summary.status.should == 200
     end
 
     it "has summary node" do
