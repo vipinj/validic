@@ -15,10 +15,9 @@ module Validic
     # @params :access_token - override for default access_token
     # @params :source - optional - data per source (e.g 'fitbit')
     # @params :expanded - optional - will show the raw data
-    # 
+    #
     # @return [Hashie::Mash] with list of Weight
     def get_weight(params={})
-      params = extract_params(params)
       get_endpoint(:weight, params)
     end
 
@@ -29,7 +28,7 @@ module Validic
     #
     # @params :access_token - *required if not specified on your initializer / organization access_token
     # @params :authentication_token - *required / authentication_token of a specific user
-    # 
+    #
     # @params :timestamp
     # @params :weight
     # @params :bmi

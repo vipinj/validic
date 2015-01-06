@@ -15,10 +15,9 @@ module Validic
     # @params :access_token - override for default access_token
     # @params :source - optional - data per source (e.g 'fitbit')
     # @params :expanded - optional - will show the raw data
-    # 
+    #
     # @return [Hashie::Mash] with list of Routine
     def get_routine(params={})
-      params = extract_params(params)
       get_endpoint(:routine, params)
     end
 
@@ -29,7 +28,7 @@ module Validic
     #
     # @params :access_token - *required if not specified on your initializer / organization access_token
     # @params :authentication_token - *required / authentication_token of a specific user
-    # 
+    #
     # @params :steps
     # @params :stairs_climbed
     # @params :calories_burned

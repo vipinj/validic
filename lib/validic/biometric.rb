@@ -15,10 +15,9 @@ module Validic
     # @params :access_token - override for default access_token
     # @params :source - optional - data per source (e.g 'fitbit')
     # @params :expanded - optional - will show the raw data
-    # 
+    #
     # @return [Hashie::Mash] with list of GeneralMeasurement
     def get_biometrics(params={})
-      params = extract_params(params)
       get_endpoint(:biometrics, params)
     end
 
@@ -54,7 +53,7 @@ module Validic
     # @params :white_cell_count
     # @params :timestamp
     # @params :source
-    # 
+    #
     # @return success
     def create_biometric(options={})
       options = {

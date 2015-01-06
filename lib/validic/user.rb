@@ -15,7 +15,6 @@ module Validic
     #
     # @return [Hashie::Mash] with list of Organization
     def get_users(params={})
-      params = extract_params(params)
       get_endpoint(:users, params)
     end
 

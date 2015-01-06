@@ -18,7 +18,6 @@ module Validic
     #
     # @return [Hashie::Mash] with list of Fitness
     def get_fitness(params={})
-      params = extract_params(params)
       get_endpoint(:fitness, params)
     end
 
@@ -37,7 +36,7 @@ module Validic
     # @params :total_distance
     # @params :duration
     # @params :source
-    # 
+    #
     # @return success
     def create_fitness(options={})
       options = {

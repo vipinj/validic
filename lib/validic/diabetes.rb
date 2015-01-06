@@ -18,7 +18,6 @@ module Validic
     #
     # @return [Hashie::Mash] with list of Diabetes
     def get_diabetes(params={})
-      params = extract_params(params)
       get_endpoint(:diabetes, params)
     end
 

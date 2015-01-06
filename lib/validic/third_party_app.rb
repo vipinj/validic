@@ -11,13 +11,12 @@ module Validic
     #
     # @return [Hashie::Mash] with list of Organization
     def get_apps(params={})
-      params = extract_params(params)
       get_endpoint(:apps, params)
     end
 
     ##
     # Get User List of Third Party Synced Apps available base on `authentication_token`
-    # 
+    #
     # params[:auth_token] User authentication parameter
     #
     # @return [Hashie::Mash] with list of Organization

@@ -82,13 +82,14 @@ module Validic
     ##
     # Generic Pull of Validic Objects
     def get_endpoint(type, params={})
-
-      url = "/#{Validic.api_version}/organizations/#{Validic.organization_id}/#{type.to_s}.json"
+      organization_id = params[:organization_id] || Validic.organization_id
 
       if params[:user_id] && type != :users
-        url = "/#{Validic.api_version}/organizations/#{Validic.organization_id}/users/#{params[:user_id]}/#{type.to_s}.json"
+        url = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{params[:user_id]}/#{type.to_s}.json"
       elsif params[:user_id] && type == :users
-        url = "/#{Validic.api_version}/organizations/#{Validic.organization_id}/users/#{params[:user_id]}.json"
+        url = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{params[:user_id]}.json"
+      else
+        url = "/#{Validic.api_version}/organizations/#{organization_id}/#{type.to_s}.json"
       end
 
       get(url, params)
@@ -97,11 +98,14 @@ module Validic
     ##
     # Generic POST to Validic
     def post_to_validic(type, params={})
-      url = "/#{Validic.api_version}/organizations/#{Validic.organization_id}/#{type.to_s}.json"
+      organization_id = params[:organization_id] || Validic.organization_id
 
-      if Validic.user_id
-        url = "/#{Validic.api_version}/organizations/#{Validic.organization_id}/users/#{Validic.user_id}/#{type.to_s}.json"
+      if params[:user_id]
+        url = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{params[:user_id]}/#{type.to_s}.json"
+      else
+        url = "/#{Validic.api_version}/organizations/#{organization_id}/#{type.to_s}.json"
       end
+
       post(url, params)
     end
 
