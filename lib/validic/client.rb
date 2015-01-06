@@ -66,14 +66,14 @@ module Validic
 
     ##
     # Pull the latest endpoint
-    def latest(type, org_id=nil, user_id=nil, params={})
-      organization_id = org_id.nil? ? Validic.organization_id : org_id
-      user_id = org_id.nil? ? Validic.user_id : org_id
-
-      url = "/#{Validic.api_version}/organizations/#{organization_id}/#{type.to_s}/latest.json"
+    def latest(type, params={})
+      organization_id = params[:organization_id] || Validic.organization_id
+      user_id = params[:user_id]
 
       if user_id
         url = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}/latest.json"
+      else
+        url = "/#{Validic.api_version}/organizations/#{organization_id}/#{type.to_s}/latest.json"
       end
 
       get(url, params)
