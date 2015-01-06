@@ -64,25 +64,80 @@
   <article class="post-content">
     <h2 id="getting-started">Getting started</h2>
 
-<p>The purpose of this post is two fold - 1.)  set up  Partner Application in Validic and 2.) use the <a href="https://github.com/validic/validic">Validic Ruby Gem</a>.</p>
+<p>The purpose of this post is two fold - 1.)  register yourself as a Partner Application in Validic and 2.) use the <a href="https://github.com/validic/validic">Validic Ruby Gem</a>.</p>
+
+<h1 id="why-validic-connect">Why Validic Connect</h1>
+<p>Validic Connect was developed for app developers by app developers.  Registering your app with Validic will allow existing Validic users to see your app in our marketplace exposing your app to the millions of users we have.  Typically an organization like Fitbit already has an API that we are able to integrate into Validic.</p>
+
+<p>Validic Connect does not require you have a standard API but instead allows you to POST data to Validic on behalf of users that request it.  We’ve written libraries in numerous languages to make this process as easy as possible.</p>
+
+<h1 id="registration-and-obtaining-your-credentials">Registration and Obtaining your Credentials</h1>
+
+<p>In order to get started your application must be registered with us. To apply please go <a href="https://validic.com/labs">here</a> and click on ‘request developer account’.</p>
+
+<p>Registration requires:</p>
+
+<ol>
+  <li>Your company name</li>
+  <li>Your app name</li>
+  <li>Authorization URL
+    <ul>
+      <li>our marketplace will need a link to your app so users can connect to it, see below for more information</li>
+    </ul>
+  </li>
+  <li>Link to your data sharing Terms and Conditions</li>
+  <li>Link to your privacy policy</li>
+  <li>Your support email address</li>
+  <li>Application icon
+    <ul>
+      <li>jpg, jpeg, png, gif in 200 x 200 no more than 30kb</li>
+    </ul>
+  </li>
+  <li>Which of our objects you plan to implement with
+    <ul>
+      <li>fitness, routine, nutrition, weight, sleep, diabetes, biometrics, tobacco_cessation</li>
+    </ul>
+  </li>
+  <li>Short description of your application</li>
+  <li>Long description of your application</li>
+</ol>
+
+<p>Once approved, you will receive back from us 3 things:</p>
+
+<ol>
+  <li>Authorization Signature</li>
+  <li>Organization ID</li>
+  <li>Organization Access Token</li>
+</ol>
+
+<p>Authorization URL:</p>
+
+<p>The Authorization URL is a defined resource in your application where Validic will redirect users who make authorization requests from third-party applications. Once received, your application must process this request, but you are free to define how your application will handle the authorization request. Typically, this would be a user login or sign up in your application.</p>
+
+<p>The authorization request is a 302 Redirect to your provided Authorization URL that includes a signature and sync_url. You must temporarily retain these information, such as storing in a session, for a later callback.</p>
+
+<p>So all that means is your authorization page should be RESTful and look something like this:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">https://yourdomain.com/validic/your_authorization_url?signature<span class="o">={</span>VALIDIC_AUTH_SIGNATURE<span class="o">}</span><span class="p">&amp;</span><span class="nv">sync_url</span><span class="o">={</span>VALIDIC_SYNC_PATH<span class="o">}</span></code></pre></div>
+
+<p>Once your application has processed the authorization (such as the user has successfully logged in), you must then make a POST request to the provided sync_url with the signature and your user’s uid. For more information about the user uid.</p>
+
+<p>Once registered you may proceed below.</p>
 
 <h1 id="install-the-gem">Install the gem</h1>
 
-<p>You can add the gem to your Gemfile</p>
+<p>Now that you have your organizations partner app credentials you can begin to use our libraries.</p>
+
+<p>In ruby, you can add the gem to your Gemfile</p>
 
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">gem</span> <span class="s1">&#39;validic&#39;</span></code></pre></div>
 
 <p>then run <code>bundle install</code></p>
 
-<h1 id="credentials">Credentials</h1>
+<h1 id="set-up-your-application">Set Up Your Application</h1>
 
-<p>The first step in connecting to Validic is to to have your organization credentials.  If you don’t have those please contact <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#118;&#097;&#108;&#105;&#100;&#105;&#099;&#046;&#099;&#111;&#109;">&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#118;&#097;&#108;&#105;&#100;&#105;&#099;&#046;&#099;&#111;&#109;</a>.</p>
-
-<p>If you’re using a rails app we recommend storing your organization credentials into environment variables using something like <a href="https://github.com/bkeepers/dotenv">dotenv-rails.</a></p>
-
-<h1 id="gem-initializer--set-up">Gem Initializer &amp; Set up</h1>
-
-<p>We recommend setting up an initializer for the gem so your calls automatically contain your organization’s credentials.  In rails that would look like this(<code>config/initializers/validic.rb</code>)</p>
+<p>If you’re using a rails app we recommend storing your organization credentials into environment variables using something like <a href="https://github.com/bkeepers/dotenv">dotenv-rails.</a>
+We also recommend setting up an initializer for the gem so your calls automatically contain your organization’s credentials.  In rails that would look like this(<code>config/initializers/validic.rb</code>)</p>
 
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Validic</span><span class="o">.</span><span class="n">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
   <span class="n">config</span><span class="o">.</span><span class="n">api_url</span>        <span class="o">=</span> <span class="s1">&#39;https://api.validic.com&#39;</span>
@@ -98,10 +153,10 @@
 
 <h1 id="first-steps---user-provisioning">First Steps - User Provisioning</h1>
 
-<p>In order to send your users data you must provision users in Validic.  We recommend that you provision users once they authorize you to share their data in our marketplace.  Provisioning users looks like this:</p>
+<p>In order to send your users data you must provision users in Validic.  We recommend that you provision users once they authorize you to share their data in our marketplace.  The only required field for provisioning users is a unique ID that you have that must be a string. We don’t recommend using your database record ID but instead.  Provisioning users looks like this:</p>
 
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">client</span> <span class="o">=</span> <span class="no">Validic</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">user_provision</span><span class="p">(</span><span class="ss">organization_id</span><span class="p">:</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">&#39;VALIDIC_ORG_ID&#39;</span><span class="o">]</span><span class="p">,</span> <span class="ss">uid</span><span class="p">:</span> <span class="s1">&#39;YourUniqueIDAsAString&#39;</span><span class="p">)</span></code></pre></div>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">provision_user</span><span class="p">(</span><span class="s1">&#39;YourUniqueIDAsAString&#39;</span><span class="p">)</span></code></pre></div>
 
 <p>That response will look like this:</p>
 

@@ -8,11 +8,64 @@ categories: validic partner
 
 ##Getting started
 
-The purpose of this post is two fold - 1.)  set up  Partner Application in Validic and 2.) use the [Validic Ruby Gem](https://github.com/validic/validic).
+The purpose of this post is two fold - 1.)  register yourself as a Partner Application in Validic and 2.) use the [Validic Ruby Gem](https://github.com/validic/validic).
+
+#Why Validic Connect
+Validic Connect was developed for app developers by app developers.  Registering your app with Validic will allow existing Validic users to see your app in our marketplace exposing your app to the millions of users we have.  Typically an organization like Fitbit already has an API that we are able to integrate into Validic.
+
+Validic Connect does not require you have a standard API but instead allows you to POST data to Validic on behalf of users that request it.  We've written libraries in numerous languages to make this process as easy as possible.
+
+
+#Registration and Obtaining your Credentials
+
+In order to get started your application must be registered with us. To apply please go [here](https://validic.com/labs) and click on 'request developer account'.
+
+Registration requires:
+
+1. Your company name
+2. Your app name
+3. Authorization URL
+  * our marketplace will need a link to your app so users can connect to it, see below for more information
+4. Link to your data sharing Terms and Conditions
+5. Link to your privacy policy
+6. Your support email address
+7. Application icon
+  * jpg, jpeg, png, gif in 200 x 200 no more than 30kb
+8. Which of our objects you plan to implement with
+  * fitness, routine, nutrition, weight, sleep, diabetes, biometrics, tobacco_cessation
+9. Short description of your application
+10. Long description of your application
+
+Once approved, you will receive back from us 3 things:
+
+1. Authorization Signature
+2. Organization ID
+3. Organization Access Token
+
+
+Authorization URL:
+
+The Authorization URL is a defined resource in your application where Validic will redirect users who make authorization requests from third-party applications. Once received, your application must process this request, but you are free to define how your application will handle the authorization request. Typically, this would be a user login or sign up in your application.
+
+The authorization request is a 302 Redirect to your provided Authorization URL that includes a signature and sync_url. You must temporarily retain these information, such as storing in a session, for a later callback.
+
+So all that means is your authorization page should be RESTful and look something like this:
+
+{% highlight bash %}
+
+https://yourdomain.com/validic/your_authorization_url?signature={VALIDIC_AUTH_SIGNATURE}&sync_url={VALIDIC_SYNC_PATH}
+
+{% endhighlight %}
+
+Once your application has processed the authorization (such as the user has successfully logged in), you must then make a POST request to the provided sync_url with the signature and your user's uid. For more information about the user uid.
+
+Once registered you may proceed below.
 
 #Install the gem
 
-You can add the gem to your Gemfile
+Now that you have your organizations partner app credentials you can begin to use our libraries.
+
+In ruby, you can add the gem to your Gemfile
 
 {% highlight ruby %}
 gem 'validic'
@@ -20,15 +73,12 @@ gem 'validic'
 
 then run `bundle install`
 
-#Credentials
 
-The first step in connecting to Validic is to to have your organization credentials.  If you don't have those please contact [support@validic.com](mailto:support@validic.com).
+
+#Set Up Your Application
 
 If you're using a rails app we recommend storing your organization credentials into environment variables using something like [dotenv-rails.](https://github.com/bkeepers/dotenv)
-
-#Gem Initializer & Set up
-
-We recommend setting up an initializer for the gem so your calls automatically contain your organization's credentials.  In rails that would look like this(`config/initializers/validic.rb`)
+We also recommend setting up an initializer for the gem so your calls automatically contain your organization's credentials.  In rails that would look like this(`config/initializers/validic.rb`)
 
 {% highlight ruby %}
 Validic.configure do |config|
@@ -48,11 +98,11 @@ VALIDIC_ACCESS_TOKEN=YOUR_ACCESS_TOKEN_HERE
 
 #First Steps - User Provisioning
 
-In order to send your users data you must provision users in Validic.  We recommend that you provision users once they authorize you to share their data in our marketplace.  Provisioning users looks like this:
+In order to send your users data you must provision users in Validic.  We recommend that you provision users once they authorize you to share their data in our marketplace.  The only required field for provisioning users is a unique ID that you have that must be a string. We don't recommend using your database record ID but instead.  Provisioning users looks like this:
 
 {% highlight ruby %}
 client = Validic::Client.new
-response = client.user_provision(organization_id: ENV['VALIDIC_ORG_ID'], uid: 'YourUniqueIDAsAString')
+response = client.provision_user('YourUniqueIDAsAString')
 {% endhighlight %}
 
 That response will look like this:
