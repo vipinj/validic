@@ -158,7 +158,7 @@ validic.user_delete(organization_id: 'ORGANIZATION_ID',
 #   Profile methods
 ###
 
-# Get a user profile (WIP)
+# Get a user profile
 validic.get_profile(authentication_token: 'USER_AUTHENTICATION_TOKEN')
 
 ###

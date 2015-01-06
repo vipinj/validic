@@ -25,28 +25,11 @@ describe Validic::Diabetes do
 
   context "#create_diabetes" do
     it "should create new diabetes record", vcr: true do
-      pending
-      @new_diabetes = client.create_diabetes({authentication_token: ENV['TEST_USER_AUTHENTICATION_TOKEN'],
-                                              access_token: "DEMO_KEY",
-                                              c_peptide: 1,
-                                              fasting_plasma_glucose_test: 50,
-                                              hba1c: 100,
-                                              insulin: 350,
-                                              oral_glucose_tolerance_test: 100,
-                                              random_plasma_glucose_test: 200,
-                                              triglyceride: 100,
-                                              timestamp: "2013-05-16 07:12:16 -05:00",
-                                              source: "Sample App"})
+      @new_diabetes = client.create_diabetes(ENV['PARTNER_USER_ID'], organization_id: ENV['PARTNER_ORG_ID'], access_token: ENV['PARTNER_ACCESS_TOKEN'], activity_id: 'diabetes_1', timestamp: "2015-01-06T16:14:17+00:00")
       @new_diabetes.should_not be_nil
-      @new_diabetes.diabetes.timestamp.should eq "2013-05-16 07:12:16 -05:00"
-      @new_diabetes.diabetes.c_peptide.should eq 1.0
-      @new_diabetes.diabetes.fasting_plasma_glucose_test.should eq 50.0
-      @new_diabetes.diabetes.hba1c.should eq 100.0
-      @new_diabetes.diabetes.insulin.should eq 350.0
-      @new_diabetes.diabetes.oral_glucose_tolerance_test.should eq 100.0
-      @new_diabetes.diabetes.random_plasma_glucose_test.should eq 200.0
-      @new_diabetes.diabetes.triglyceride 100.0
-      @new_diabetes.diabetes.source.should eq "Sample App"
+      @new_diabetes.diabetes.timestamp.should eq "2015-01-06T16:14:17+00:00"
+      @new_diabetes.diabetes.activity_id.should eq 'diabetes_1'
+      @new_diabetes.diabetes.source.should eq "healthy_yet"
     end
   end
 
@@ -60,7 +43,7 @@ describe Validic::Diabetes do
     end
 
     it "status 200" do
-      @org_diabetes.summary.status.should == 200 
+      @org_diabetes.summary.status.should == 200
     end
 
     it "has summary node" do
@@ -78,7 +61,7 @@ describe Validic::Diabetes do
     end
 
     it "status 200" do
-      @user_diabetes.summary.status.should == 200 
+      @user_diabetes.summary.status.should == 200
     end
 
     it "has summary node" do

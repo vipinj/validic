@@ -24,31 +24,12 @@ describe Validic::Nutrition do
   end
 
   context "#create_nutrition" do
-    it "should create new nutrition record" do
-      pending
-      @new_nutrition = client.create_nutrition({authentication_token: ENV['TEST_USER_AUTHENTICATION_TOKEN'],
-                                                access_token: "DEMO_KEY",
-                                                calories: 850,
-                                                carbohydrates: 351,
-                                                fat: 52,
-                                                fiber: 35,
-                                                protein: 54,
-                                                sodium: 855,
-                                                water: 36,
-                                                timestamp: "2013-05-16 07:12:16 -05:00",
-                                                meal: "Dinner",
-                                                source: "Sample App"})
+    it "should create new nutrition record", vcr: true do
+      @new_nutrition = client.create_nutrition(ENV['PARTNER_USER_ID'], 'nutrition_1', organization_id: ENV['PARTNER_ORG_ID'], access_token: ENV['PARTNER_ACCESS_TOKEN'], timestamp: "2015-01-06T16:14:17+00:00")
       @new_nutrition.should_not be_nil
-      @new_nutrition.nutrition.timestamp.should eq "2013-05-16 07:12:16 -05:00"
-      @new_nutrition.nutrition.calories.should eq 850.0
-      @new_nutrition.nutrition.carbohydrates.should eq 351.0
-      @new_nutrition.nutrition.fat.should eq 52.0
-      @new_nutrition.nutrition.fiber.should eq 35.0
-      @new_nutrition.nutrition.protein.should eq 54.0
-      @new_nutrition.nutrition.sodium.should eq 855.0
-      @new_nutrition.nutrition.water.should eq 36.0
-      @new_nutrition.nutrition.meal.should eq "Dinner"
-      @new_nutrition.nutrition.source.should eq "Sample App"
+      @new_nutrition.nutrition.timestamp.should eq "2015-01-06T16:14:17+00:00"
+      @new_nutrition.nutrition.activity_id.should eq 'nutrition_1'
+      @new_nutrition.nutrition.source.should eq "healthy_yet"
     end
   end
 

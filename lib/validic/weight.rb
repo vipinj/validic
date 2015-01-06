@@ -38,21 +38,25 @@ module Validic
     # @params :source
     #
     # @return success
-    def create_weight(options={})
+    def create_weight(user_id, data_id, options={})
       options = {
-        access_token: options[:access_token],
+        user_id: user_id,
+        access_token: options[:access_token] || Validic.access_token,
+        organization_id: options[:organization_id] || Validic.organization_id,
         weight: {
+          data_id: data_id,
           timestamp: options[:timestamp],
-          weight: options[:weight],
-          bmi: options[:bmi],
+          utc_offset: options[:utc_offset],
+          weight: options[:weight] || 0,
+          height: options[:height],
+          free_mass: options[:free_mass],
           fat_percent: options[:fat_percent],
           mass_weight: options[:mass_weight],
-          free_mass: options[:free_mass],
-          source: options[:source]
+          bmi: options[:bmi]
         }
       }
 
-      response = post("/#{Validic.api_version}/weight.json", options)
+      response = post_to_validic('weight', options)
       response if response
     end
 

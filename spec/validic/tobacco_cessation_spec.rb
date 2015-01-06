@@ -15,7 +15,7 @@ describe Validic::TobaccoCessation do
     end
 
     it "status 200" do
-      @tobacco_cessation.summary.status.should == 200 
+      @tobacco_cessation.summary.status.should == 200
     end
 
     it "has summary node" do
@@ -24,22 +24,11 @@ describe Validic::TobaccoCessation do
   end
 
   context "#create_tobacco_cessation" do
-    it "should create new tobacco_cessation record" do
-      pending
-      @new_tobacco_cessation = client.create_tobacco_cessation({authentication_token: ENV['TEST_USER_AUTHENTICATION_TOKEN'],
-                                                                access_token: "DEMO_KEY",
-                                                                timestamp: "2013-05-01 07:12:16 -05:00",
-                                                                cigarettes_allowed: 10,
-                                                                cigarettes_smoked: 11,
-                                                                cravings: 15,
-                                                                last_smoked: "2013-05-16 07:12:16 -05:00",
-                                                                source: "Sample App"})
+    it "should create new tobacco_cessation record", vcr: true do
+      @new_tobacco_cessation = client.create_tobacco_cessation(ENV['PARTNER_USER_ID'], organization_id: ENV['PARTNER_ORG_ID'], access_token: ENV['PARTNER_ACCESS_TOKEN'], timestamp: "2015-01-06T16:14:17+00:00")
       @new_tobacco_cessation.should_not be_nil
-      @new_tobacco_cessation.tobacco_cessation.timestamp.should eq "2013-05-01 07:12:16 -05:00"
-      @new_tobacco_cessation.tobacco_cessation.cigarettes_allowed.should eq 10.0
-      @new_tobacco_cessation.tobacco_cessation.cigarettes_smoked.should eq 11.0
-      @new_tobacco_cessation.tobacco_cessation.cravings.should eq 15.0
-      @new_tobacco_cessation.tobacco_cessation.last_smoked.should eq "2013-05-16 07:12:16 -05:00"
+      @new_tobacco_cessation.tobacco_cessation.timestamp.should eq "2015-01-06T16:14:17+00:00"
+      @new_tobacco_cessation.tobacco_cessation.source.should eq "healthy_yet"
     end
   end
 
@@ -53,7 +42,7 @@ describe Validic::TobaccoCessation do
     end
 
     it "status 200" do
-      @tobacco_cessation.summary.status.should == 200 
+      @tobacco_cessation.summary.status.should == 200
     end
 
     it "has summary node" do
@@ -71,7 +60,7 @@ describe Validic::TobaccoCessation do
     end
 
     it "status 200" do
-      @tobacco_cessation.summary.status.should == 200 
+      @tobacco_cessation.summary.status.should == 200
     end
 
     it "has summary node" do

@@ -26,55 +26,50 @@ describe Validic::User do
 
   context "#me" do
     before do
-      @me = client.me({})
+      @me = client.me(ENV['TEST_USER_AUTHENTICATION_TOKEN'])
     end
 
     it "returns JSON response of Validic::User", vcr: true do
-      pending
       @me.should_not be_nil
     end
 
     it "should return the user id" do
-      pending
-      @me.user._id.should_not be_nil
+      @me.me._id.should_not be_nil
     end
   end
 
   context "#user_provisioning" do
-    it "should create a new user under an organization" do
-      pending
+    it "should create a new user under an organization", vcr: true do
       @new_user = client.user_provision(organization_id: "51aca5a06dedda916400002b",
                                         uid: "123asdfg",
-                                        height: 167,
-                                        weight: 69,
+                                        height: 167.0,
+                                        weight: 69.0,
                                         location: "TX",
                                         gender: "M")
-      @new_user.users.access_token.should_not be_nil
-      @new_user.users.profile.height.should eq "167"
-      @new_user.users.profile.weight.should eq 69
-      @new_user.users.profile.location.should eq 'TX'
-      @new_user.users.profile.gender.should eq 'M'
+      @new_user.user.access_token.should_not be_nil
+      @new_user.user.profile.height.should eq 167.0
+      @new_user.user.profile.weight.should eq 69.0
+      @new_user.user.profile.location.should eq 'TX'
+      @new_user.user.profile.gender.should eq 'M'
     end
   end
 
   context "#user_suspend" do
-    it "should suspend a user" do
-      pending
+    it "should suspend a user", vcr: true do
       @suspend_user = client.user_suspend(organization_id: "51aca5a06dedda916400002b",
-                                          user_id: ENV['TEST_USER_ID'],
-                                          access_token: "9c03ad2bcb022425944e4686d398ef8398f537c2f7c113495ffa7bc9cfa49286",
+                                          user_id: '54ac31ef84626b2faf0000ba',
+                                          access_token: ENV['TEST_ORG_TOKEN'],
                                           suspend: 1)
       @suspend_user.message.should eq "The user has been suspended successfully"
     end
   end
 
   context "#user_delete" do
-    it "should delete a user" do
-      pending
+    it "should delete a user", vcr: true do
       @delete_user = client.user_delete(organization_id: "51aca5a06dedda916400002b",
-                                        uid: ENV['TEST_USER_ID'],
-                                        access_token: "9c03ad2bcb022425944e4686d398ef8398f537c2f7c113495ffa7bc9cfa49286")
-      @delete_user.status.should eq 200
+                                        uid: "123asdfg",
+                                        access_token: ENV['TEST_ORG_TOKEN'])
+      @delete_user.code.should eq 200
     end
   end
 

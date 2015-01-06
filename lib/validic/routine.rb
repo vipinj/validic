@@ -40,6 +40,8 @@ module Validic
     def create_routine(user_id, options={})
       options = {
         user_id: user_id,
+        access_token: options[:access_token] || Validic.access_token,
+        organization_id: options[:organization_id] || Validic.organization_id,
         routine: {
           activity_id: options[:activity_id],
           timestamp: options[:timestamp],
@@ -50,8 +52,6 @@ module Validic
           elevation: options[:elevation],
           calories_burned: options[:calories_burned]
         },
-        access_token: options[:access_token] || Validic.access_token,
-        organization_id: options[:organization_id] || Validic.organization_id
       }
 
       response = post_to_validic('routine', options )

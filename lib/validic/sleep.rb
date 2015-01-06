@@ -39,22 +39,25 @@ module Validic
     # @params :source
     #
     # @return success
-    def create_sleep(options={})
+    def create_sleep(user_id, activity_id, options={})
       options = {
-        access_token: options[:access_token],
+        user_id: user_id,
+        access_token: options[:access_token] || Validic.access_token,
+        organization_id: options[:organization_id] || Validic.organization_id,
         sleep: {
+          activity_id: activity_id,
+          timestamp: options[:timestamp],
+          utc_offset: options[:utc_offset],
           total_sleep: options[:total_sleep],
           awake: options[:awake],
           deep: options[:deep],
           light: options[:light],
           rem: options[:rem],
-          times_woken: options[:times_woken],
-          timestamp: options[:timestamp],
-          source: options[:source]
+          times_woken: options[:times_woken]
         }
       }
 
-      response = post("/#{Validic.api_version}/sleep.json", options)
+      response = post_to_validic('sleep', options)
       response if response
     end
 

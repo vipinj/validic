@@ -22,11 +22,8 @@ module Validic
     # Get User id base on `access_token`
     #
     # @return id
-    def me(options={})
-      options = {
-        access_token: options[:access_token]
-      }
-      response = get("/#{Validic.api_version}/me.json", options)
+    def me(authentication_token)
+      response = get("/#{Validic.api_version}/me.json", authentication_token: authentication_token)
       response if response
     end
 

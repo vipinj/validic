@@ -35,20 +35,22 @@ module Validic
     # @params :source
     #
     # @return success
-    def create_tobacco_cessation(options={})
+    def create_tobacco_cessation(user_id, options={})
       options = {
-        access_token: options[:access_token],
+        user_id: user_id,
+        access_token: options[:access_token] || Validic.access_token,
+        organization_id: options[:organization_id] || Validic.organization_id,
         tobacco_cessation: {
-          cigarettes_allowed: options[:cigarettes_allowed],
-          cigarettes_smoked: options[:cigarettes_smoked],
-          cravings: options[:cravings],
-          last_smoked: options[:last_smoked],
           timestamp: options[:timestamp],
-          source: options[:source]
+          utc_offset: options[:utc_offset],
+          cigarettes_allowed: options[:cigarettes_allowed] || 0,
+          cigarettes_smoked: options[:cigarettes_smoked] || 0,
+          cravings: options[:cravings] || 0,
+          last_smoked: options[:last_smoked] || DateTime.now.utc.to_s(:iso8601)
         }
       }
 
-      response = post("/#{Validic.api_version}/tobacco_cessation.json", options)
+      response = post_to_validic('tobacco_cessation', options)
       response if response
     end
 

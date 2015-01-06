@@ -39,24 +39,27 @@ module Validic
     # @params :source
     #
     # @return success
-    def create_nutrition(options={})
+    def create_nutrition(user_id, entry_id, options={})
       options = {
-        access_token: options[:access_token],
+        user_id: user_id,
+        access_token: options[:access_token] || Validic.access_token,
+        organization_id: options[:organization_id] || Validic.organization_id,
         nutrition: {
-          calories: options[:calories],
+          entry_id: entry_id,
+          timestamp: options[:timestamp],
+          utc_offset: options[:utc_offset],
+          calories: options[:calories] || 0,
           carbohydrates: options[:carbohydrates],
           fat: options[:fat],
           fiber: options[:fiber],
           protein: options[:protein],
           sodium: options[:sodium],
           water: options[:water],
-          timestamp: options[:timestamp],
           meal: options[:meal],
-          source: options[:source]
         }
       }
 
-      response = post("/#{Validic.api_version}/nutrition.json", options)
+      response = post_to_validic('nutrition', options)
       response if response
     end
 

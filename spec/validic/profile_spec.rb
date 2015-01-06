@@ -7,11 +7,10 @@ describe Validic::Profile do
 
   context "#get_profile" do
     before do
-      @profile = client.get_profile({})
+      @profile = client.get_profile(ENV['TEST_USER_AUTHENTICATION_TOKEN'])
     end
 
     it "returns JSON response of Validic::Profile", vcr: true do
-      pending
       @profile.should_not be_nil
     end
   end
