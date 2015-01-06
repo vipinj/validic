@@ -20,11 +20,8 @@ module Validic
     # params[:auth_token] User authentication parameter
     #
     # @return [Hashie::Mash] with list of Organization
-    def get_synced_apps(options={})
-      options = {
-        authentication_token: options[:authentication_token]
-      }
-      response = get("/#{Validic.api_version}/sync_apps.json", options)
+    def get_synced_apps(authentication_token)
+      response = get("/#{Validic.api_version}/sync_apps.json", authentication_token: authentication_token)
       response if response
     end
   end

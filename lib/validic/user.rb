@@ -40,12 +40,12 @@ module Validic
     # @params[:birth_year] -- info for user -- String
     #
     # @return user object
-    def user_provision(options={})
-      organization_id = options[:organization_id]
+    def provision_user(uid, options={})
+      organization_id = options[:organization_id] || Validic.organization_id
       options = {
-        access_token: options[:access_token],
+        access_token: options[:access_token] || Validic.access_token,
         user: {
-          uid: options[:uid],
+          uid: uid,
           profile: {
             height: options[:height],
             gender: options[:gender],
@@ -68,12 +68,11 @@ module Validic
     # @params[:suspend] -- Boolean -- (1/0)
     #
     # @return user object
-    def user_suspend(options={})
-      organization_id = options[:organization_id]
-      user_id = options[:user_id]
+    def suspend_user(user_id, options={})
+      organization_id = options[:organization_id] || Validic.organization_id
       options = {
-        suspend: options[:suspend],
-        access_token: options[:access_token]
+        suspend: options[:suspend] || 1,
+        access_token: options[:access_token] || Validic.access_token
       }
 
       response = put("/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}.json", options)
@@ -89,10 +88,13 @@ module Validic
     # @params[:uid] -- String -- user's ID to suspend
     #
     # @return [Hashie::Mash] with response
-    def user_delete(options={})
-      organization_id = options[:organization_id]
+    def delete_user(user_id, options={})
+      organization_id = options[:organization_id] || Validic.organization_id
+      options = {
+        access_token: options[:access_token] || Validic.access_token
+      }
 
-      response = delete("/#{Validic.api_version}/organizations/#{organization_id}/users.json", options)
+      response = delete("/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}.json", options)
       response
     end
   end

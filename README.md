@@ -9,41 +9,40 @@ Ruby API Wrapper for [Validic](http://www.validic.com). It includes the
 following functionality:
 
 ### Organization ###
-- General information on organization
-- Summary object of response
 - Organization metadata
 
 ### Users ###
 - Provision new Validic users
-- Update or Suspend users
-- Delete users
+- Update, Suspend, or Delete users
 - Get users from organization credentials
 - Find user id from authentication token
 - Refresh user authentication token **Not yet implemented**
+
+### Profiles ###
+- Get profile information from user authentication token
+- Create and modify profiles **Not yet implemented**
 
 ### Apps ###
 - List available third party apps
 - List synced apps for a particular user
 
-### Profiles ###
-- Get profile information from authentication token
-- Create new profiles **Not yet implemented**
-
 ### Activities ###
 - Fitness, Routine, Nutrition, Sleep, Weight, Diabetes, Biometrics, Tobacco
   Cessation
 - Get activities scoped to user or organization
-- Create activities **In progress**
 - Activities from specific sources
 - Specified time ranges
-- Expanded data
+
+### Connect ###
+- Create activities as a Validic Connect partner
+- Post extra data
 
 ### Latest Endpoint ###
-- Latest data recorded, regardless of when the activity occurred
-- Between designated start and end points
+- Get latest data recorded, regardless of when the activity occurred
+- Scope to organization or user level
+- Specify start and end points
 
 ## Installation
-
 Add this line to your application's Gemfile:
 
     gem 'validic'
@@ -126,40 +125,31 @@ validic = Validic::Client.new options
 # Get current organization
 validic.get_organization
 
-# Get organization by organization_id and access_token
-validic.get_organization(organization_id: 'ORGANIZATION_ID',
-                         access_token: 'ORGANIZATION_ACCESS_TOKEN')
-
 ###
 #   User methods
 ###
 
 # Get users from organization credentials
-validic.get_users(organization_id: 'ORGANIZATION_ID',
-                  access_token: 'ORGANIZATION_ACCESS_TOKEN')
+validic.get_users
 
-# Get user id from authentication token (WIP)
-validic.me(authentication_token: 'USER_AUTHENTICATION_TOKEN')
+# Get user id from authentication token
+validic.me('USER_AUTHENTICATION_TOKEN')
 
 # Provision new users
-validic.user_provision(organization_id: 'ORGANIZATION_ID',
-                       uid: 'UNIQUE_USER_ID')
+validic.provision_user('UNIQUE_USER_ID')
 
 # Suspend a user
-validic.user_suspend(organization_id: 'ORGANIZATION_ID',
-                     user_id: 'VALIDIC_USER_ID',
-                     suspend: 1)
+validic.suspend_user('VALIDIC_USER_ID')
 
 # Delete a user
-validic.user_delete(organization_id: 'ORGANIZATION_ID',
-                    uid: 'UNIQUE_USER_ID'
+validic.delete_user('VALIDIC_USER_ID')
 
 ###
 #   Profile methods
 ###
 
 # Get a user profile
-validic.get_profile(authentication_token: 'USER_AUTHENTICATION_TOKEN')
+validic.get_profile('USER_AUTHENTICATION_TOKEN')
 
 ###
 #   Apps methods
@@ -169,7 +159,7 @@ validic.get_profile(authentication_token: 'USER_AUTHENTICATION_TOKEN')
 validic.get_apps
 
 # Get a list of apps a user is synced to
-validic.get_synced_apps(authentication_token: 'USER_AUTHENTICATION_TOKEN')
+validic.get_synced_apps('USER_AUTHENTICATION_TOKEN')
 
 ###
 #   Activity methods
@@ -198,6 +188,34 @@ validic.get_sleep
 
 # Get an array of tobacco cessation records
 validic.get_tobacco_cessations
+
+###
+#   Connect method
+###
+
+# Get an array of fitness records
+validic.create_fitness('VALIDIC_USER_ID', 'ACTIVITY_ID')
+
+# Get an array of routine records
+validic.create_routine('VALIDIC_USER_ID', 'ACTIVITY_ID')
+
+# Get an array of nutrition records
+validic.create_nutrition('VALIDIC_USER_ID', 'ENTRY_ID')
+
+# Get an array of weight records
+validic.create_weight('VALIDIC_USER_ID', 'DATA_ID')
+
+# Get an array of diabetes records
+validic.create_diabetes('VALIDIC_USER_ID', 'ACTIVITY_ID')
+
+# Get an array of biometrics records
+validic.create_biometrics('VALIDIC_USER_ID', 'ACTIVITY_ID')
+
+# Get an array of sleep records
+validic.create_sleep('VALIDIC_USER_ID', 'ACTIVITY_ID')
+
+# Get an array of tobacco cessation records
+validic.create_tobacco_cessation('VALIDIC_USER_ID', 'ACTIVITY_ID')
 
 ###
 #   Latest method
