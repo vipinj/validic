@@ -39,7 +39,7 @@ RSpec.configure do |c|
       config.api_url          = 'https://api.validic.com'
       config.api_version      = 'v1'
       config.access_token     = ENV['TEST_ORG_TOKEN']
-      config.organization_id  = '51aca5a06dedda916400002b'
+      config.organization_id  = ENV['TEST_ORG_ID']
     end
   end
 end

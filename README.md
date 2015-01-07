@@ -184,6 +184,8 @@ validic.get_synced_apps('USER_AUTHENTICATION_TOKEN')
 #   Activity methods
 ###
 
+# You can also filter the results of the following methods by passing an options hash
+
 # Get an array of fitness records
 validic.get_fitness
 
@@ -215,33 +217,40 @@ validic.get_tobacco_cessations
 # Connect helper methods are only available for apps registered with
 # Validic Connect
 
-# Get an array of fitness records
+# Create a fitness record
 validic.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
 
-# Get an array of routine records
+# Create a routine record
 validic.create_routine('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
 
-# Get an array of nutrition records
+# Create a nutrition record
 validic.create_nutrition('VALIDIC_USER_ID', 'UNIQUE_ENTRY_ID', options)
 
-# Get an array of weight records
+# Create a weight record
 validic.create_weight('VALIDIC_USER_ID', 'UNIQUE_DATA_ID', options)
 
-# Get an array of diabetes records
+# Create a diabetes record
 validic.create_diabetes('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
 
-# Get an array of biometrics records
-validic.create_biometrics('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+# Biometrics
+validic.create_biometric('VALIDIC_USER_ID', 'UNIQUE_DATA_ID', options)
+validic.update_biometric('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+validic.delete_biometric('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 
-# Get an array of sleep records
+# Create a sleep record
 validic.create_sleep('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
 
-# Get an array of tobacco cessation records
+# Create a tobacco cessation record
 validic.create_tobacco_cessation('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+
+# You can also create data with your own custom extras as JSON
+validic.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', extras: "{\"stars\": 3}")
 
 ###
 #   Latest Records
 ###
+
+# You can also pass an options hash to filter latest results
 
 # Pull latest records for specified type
 validic.latest('routine')

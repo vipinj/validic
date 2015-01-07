@@ -38,7 +38,7 @@ module Validic
     # @params :source
     #
     # @return success
-    def create_diabetes(user_id, options={})
+    def create_diabetes(user_id, activity_id, options={})
       options = {
         user_id: user_id,
         access_token: options[:access_token] || Validic.access_token,
@@ -58,7 +58,7 @@ module Validic
         }
       }
 
-      response = post_to_validic('diabetes', options )
+      response = post_to_validic('diabetes', options)
       response if response
     end
 

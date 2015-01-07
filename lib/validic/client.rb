@@ -110,6 +110,28 @@ module Validic
       post(url, params)
     end
 
+    ##
+    # Generic PUT to Validic Connect
+    def put_to_validic(type, params={})
+      user_id = params.delete(:user_id)
+      organization_id = params.delete(:organization_id)
+      activity_id = params.delete(:activity_id)
+      url = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}/#{activity_id}.json"
+
+      put(url, params)
+    end
+
+    ##
+    # Generic DELETE to Validic Connect
+    def delete_to_validic(type, params={})
+      user_id = params.delete(:user_id)
+      organization_id = params.delete(:organization_id)
+      activity_id = params.delete(:activity_id)
+      url = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}/#{activity_id}.json"
+
+      delete(url, params)
+    end
+
     private
 
     def default_headers
