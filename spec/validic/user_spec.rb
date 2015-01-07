@@ -40,13 +40,13 @@ describe Validic::User do
 
   context "#provision_user" do
     it "should only need a uid parameter", vcr: true do
-      @new_user = client.provision_user('validic_1')
+      @new_user = client.provision_user("validic_gem_1")
       @new_user.user.access_token.should_not be_nil
     end
 
     it "should create a new user under an organization", vcr: true do
-      @new_user = client.provision_user("validic_22",
-                                        organization_id: "51aca5a06dedda916400002b",
+      @new_user = client.provision_user("test_201",
+                                        organization_id: ENV['TEST_ORG_ID'],
                                         height: 167.0,
                                         weight: 69.0,
                                         location: "TX",
@@ -59,29 +59,74 @@ describe Validic::User do
     end
   end
 
+  context "#update_user" do
+    it "should update a user", vcr: true do
+      @update_user = client.update_user("54ad592068c6522e4400002a",
+                                        uid: "updated_uid",
+                                        gender: "M",
+                                        location: "TX",
+                                        country: "USA",
+                                        birth_year: 1987,
+                                        height: 72.0,
+                                        weight: 200.0)
+
+      @update_user.code.should eq 200
+    end
+  end
+
   context "#suspend_user" do
     it "should only need a user id parameter", vcr: true do
-      @suspend_user = client.suspend_user('54ac54cc84626b623b00010a')
+      @suspend_user = client.suspend_user("54ad592068c6522e4400002a")
       @suspend_user.message.should eq "The user has been suspended successfully"
     end
 
     it "should suspend a user", vcr: true do
-      @suspend_user = client.suspend_user("54ac577084626b40e90000f8",
-                                          organization_id: "51aca5a06dedda916400002b",
+      @suspend_user = client.suspend_user("54ad5bc368c6521f8a000023",
+                                          organization_id: ENV['TEST_ORG_ID'],
                                           access_token: ENV['TEST_ORG_TOKEN'])
       @suspend_user.message.should eq "The user has been suspended successfully"
     end
   end
 
+  context "#unsuspend_user" do
+    it "should only need a user id parameter", vcr: true do
+      @unsuspend_user = client.unsuspend_user("54ad592068c6522e4400002a")
+      @unsuspend_user.message.should eq "The user has been unsuspended successfully"
+    end
+
+    it "should unsuspend a user", vcr: true do
+      @unsuspend_user = client.unsuspend_user("54ad5bc368c6521f8a000023",
+                                          organization_id: ENV['TEST_ORG_ID'],
+                                          access_token: ENV['TEST_ORG_TOKEN'])
+      @unsuspend_user.message.should eq "The user has been unsuspended successfully"
+    end
+  end
+
+  context "#refresh_token" do
+    it "should only need a user id parameter", vcr: true do
+      @refresh_token = client.refresh_token("54ad592068c6522e4400002a")
+      @refresh_token.code.should eq 200
+      @refresh_token.user.authentication_token.should_not be_nil
+    end
+
+    it "should work with organization id and access token options", vcr: true do
+      @refresh_token = client.refresh_token("54ad5bc368c6521f8a000023",
+                                            organization_id: ENV['TEST_ORG_ID'],
+                                            access_token: ENV['TEST_ORG_TOKEN'])
+      @refresh_token.code.should eq 200
+      @refresh_token.user.authentication_token.should_not be_nil
+    end
+  end
+
   context "#delete_user" do
     it "should only need a user id parameter", vcr: true do
-      @delete_user = client.delete_user("54ac54cc84626b623b00010a")
+      @delete_user = client.delete_user("54ad592068c6522e4400002a")
       @delete_user.code.should eq 200
     end
 
     it "should delete a user by user id", vcr: true do
-      @delete_user = client.delete_user("54ac577084626b40e90000f8",
-                                        organization_id: "51aca5a06dedda916400002b",
+      @delete_user = client.delete_user("54ad5bc368c6521f8a000023",
+                                        organization_id: ENV['TEST_ORG_ID'],
                                         access_token: ENV['TEST_ORG_TOKEN'])
       @delete_user.code.should eq 200
     end

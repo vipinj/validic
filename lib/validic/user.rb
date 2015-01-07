@@ -59,23 +59,95 @@ module Validic
     end
 
     ##
+    # PUT User info for updating based on `access_token`
+    #
+    # @params[:organization_id] -- organization_id -- String
+    # @params[:access_token] -- organization's access_token -- String
+    # @params[:uid] -- uid for the new user -- String
+    # @params[:height] -- info for user -- Integer
+    # @params[:weight] -- info for user -- String
+    # @params[:location] -- info for user -- String
+    # @params[:gender] -- info for user -- String
+    # @params[:birth_year] -- info for user -- String
+    #
+    # @return user object
+    def update_user(user_id, options={})
+      organization_id = options[:organization_id] || Validic.organization_id
+      options = {
+        access_token: options[:access_token] || Validic.access_token,
+        user: {
+          uid: options[:uid],
+          profile: {
+            gender: options[:gender],
+            location: options[:location],
+            country: options[:country],
+            birth_year: options[:birth_year],
+            height: options[:height],
+            weight: options[:weight]
+          }
+        }
+      }
+
+      response = put("/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}.json", options)
+      response if response
+    end
+
+    ##
     #
     # PUT request for suspending a user
     #
     # @params[:organization_id] -- String
     # @params[:access_token] -- String -- organization's access_token
     # @params[:user_id] -- String -- user's ID to suspend
-    # @params[:suspend] -- Boolean -- (1/0)
     #
     # @return user object
     def suspend_user(user_id, options={})
       organization_id = options[:organization_id] || Validic.organization_id
       options = {
-        suspend: options[:suspend] || 1,
+        suspend: 1,
         access_token: options[:access_token] || Validic.access_token
       }
 
       response = put("/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}.json", options)
+      response
+    end
+
+    ##
+    #
+    # PUT request for unsuspending a user
+    #
+    # @params[:organization_id] -- String
+    # @params[:access_token] -- String -- organization's access_token
+    # @params[:user_id] -- String -- user's ID to suspend
+    #
+    # @return user object
+    def unsuspend_user(user_id, options={})
+      organization_id = options[:organization_id] || Validic.organization_id
+      options = {
+        suspend: 0,
+        access_token: options[:access_token] || Validic.access_token
+      }
+
+      response = put("/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}.json", options)
+      response
+    end
+
+    ##
+    #
+    # GET request to refresh a user authentication token
+    #
+    # @params[:organization_id] -- String
+    # @params[:access_token] -- String -- organization's access_token
+    # @params[:user_id] -- String -- user's ID to suspend
+    #
+    # @return user object
+    def refresh_token(user_id, options={})
+      organization_id = options[:organization_id] || Validic.organization_id
+      options = {
+        access_token: options[:access_token] || Validic.access_token
+      }
+
+      response = get("/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/refresh_token.json", options)
       response
     end
 

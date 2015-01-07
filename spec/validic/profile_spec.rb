@@ -15,4 +15,17 @@ describe Validic::Profile do
     end
   end
 
+  context "#create_profile" do
+    it "adds a profile to an existing user", vcr: true do
+      @profile = client.create_profile(ENV['TEST_USER_AUTHENTICATION_TOKEN'],
+                                       gender: "F",
+                                       location: "CA",
+                                       country: "USA",
+                                       birth_year: "1987",
+                                       height: 60.0,
+                                       weight: 140)
+      @profile.should_not be_nil
+    end
+  end
+
 end

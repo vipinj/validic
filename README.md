@@ -8,6 +8,10 @@
 Ruby API Wrapper for [Validic](http://www.validic.com). It includes the
 following functionality:
 
+## Breaking Changes ##
+- Methods for user provisioning, suspending, and deleting have been renamed
+- Methods will now default to initialized values unless overridden in options
+
 ### Organization ###
 - Organization metadata
 
@@ -16,11 +20,11 @@ following functionality:
 - Update, Suspend, or Delete users
 - Get users from organization credentials
 - Find user id from authentication token
-- Refresh user authentication token **Not yet implemented**
+- Refresh user authentication token
 
 ### Profiles ###
 - Get profile information from user authentication token
-- Create and modify profiles **Not yet implemented**
+- Create and modify user profiles
 
 ### Apps ###
 - List available third party apps
@@ -104,6 +108,9 @@ validic.get_routine(start_date: '2015-01-01T00:00:00+00:00')
 
 ### More Examples ###
 
+You can override initialized organization id and access tokens for all helper
+methods by passing parameters in an options hash as a final parameter.
+
 Below are examples of all helper methods.
 
 ```ruby
@@ -138,8 +145,17 @@ validic.me('USER_AUTHENTICATION_TOKEN')
 # Provision new users
 validic.provision_user('UNIQUE_USER_ID')
 
+# Updating a user
+validic.provision_user('VALIDIC_USER_ID', options)
+
 # Suspend a user
 validic.suspend_user('VALIDIC_USER_ID')
+
+# Unsuspend a user
+validic.unsuspend_user('VALIDIC_USER_ID')
+
+# Refresh authentication token
+validic.refresh_token('VALIDIC_USER_ID')
 
 # Delete a user
 validic.delete_user('VALIDIC_USER_ID')
@@ -150,6 +166,9 @@ validic.delete_user('VALIDIC_USER_ID')
 
 # Get a user profile
 validic.get_profile('USER_AUTHENTICATION_TOKEN')
+
+# Create a user profile
+validic.create_profile('USER_AUTHENTICATION_TOKEN', options)
 
 ###
 #   Apps methods
@@ -193,32 +212,35 @@ validic.get_tobacco_cessations
 #   Connect methods
 ###
 
+# Connect helper methods are only available for apps registered with
+# Validic Connect
+
 # Get an array of fitness records
-validic.create_fitness('VALIDIC_USER_ID', 'ACTIVITY_ID', options)
+validic.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
 
 # Get an array of routine records
-validic.create_routine('VALIDIC_USER_ID', 'ACTIVITY_ID', options)
+validic.create_routine('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
 
 # Get an array of nutrition records
-validic.create_nutrition('VALIDIC_USER_ID', 'ENTRY_ID', options)
+validic.create_nutrition('VALIDIC_USER_ID', 'UNIQUE_ENTRY_ID', options)
 
 # Get an array of weight records
-validic.create_weight('VALIDIC_USER_ID', 'DATA_ID', options)
+validic.create_weight('VALIDIC_USER_ID', 'UNIQUE_DATA_ID', options)
 
 # Get an array of diabetes records
-validic.create_diabetes('VALIDIC_USER_ID', 'ACTIVITY_ID', options)
+validic.create_diabetes('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
 
 # Get an array of biometrics records
-validic.create_biometrics('VALIDIC_USER_ID', 'ACTIVITY_ID', options)
+validic.create_biometrics('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
 
 # Get an array of sleep records
-validic.create_sleep('VALIDIC_USER_ID', 'ACTIVITY_ID', options)
+validic.create_sleep('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
 
 # Get an array of tobacco cessation records
-validic.create_tobacco_cessation('VALIDIC_USER_ID', 'ACTIVITY_ID', options)
+validic.create_tobacco_cessation('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
 
 ###
-#   Latest method
+#   Latest Records
 ###
 
 # Pull latest records for specified type
