@@ -102,7 +102,7 @@ VALIDIC_ACCESS_TOKEN=YOUR_ACCESS_TOKEN_HERE
 
 We've set up a fake partner application call HealthYet that now exists in our marketplace.  When a user clicks 'Connect' (as show in the screenshot below), they will land on your authorization page.
 
-![marketplace]({{ sit.url}}/assets/marketplace.jpg)
+![marketplace]({{ sit.url}}/validic/assets/marketplace.jpg)
 
 We set up the HealthYet authorization page in a two step process.  When a user clicks connect, they are redirected to the authorization URL we mentioned above.  For HealthYet that looks like:
 
@@ -116,7 +116,7 @@ Step 1 is we require the user login:
 
 Step 2 comes from Validic, we ask the user to explicitly make the connection between the customers organization (here: VMS Healthcare) and your application (the page below is provided by Validic):
 
-![auth]({{ sit.url}}/validic/validic/assets/auth.jpg)
+![auth]({{ sit.url}}/validic/assets/auth.jpg)
 
 #First Steps - User Provisioning
 
