@@ -6,8 +6,8 @@
 </description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 06 Jan 2015 17:21:25 -0500</pubDate>
-    <lastBuildDate>Tue, 06 Jan 2015 17:21:25 -0500</lastBuildDate>
+    <pubDate>Wed, 07 Jan 2015 12:10:03 -0500</pubDate>
+    <lastBuildDate>Wed, 07 Jan 2015 12:10:03 -0500</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -64,13 +64,15 @@
 
 &lt;p&gt;The Authorization URL is a defined resource in your application where Validic will redirect users who make authorization requests from third-party applications. Once received, your application must process this request, but you are free to define how your application will handle the authorization request. Typically, this would be a user login or sign up in your application.&lt;/p&gt;
 
+&lt;p&gt;We’ll showcase a good method for implementing this in your app in a later section.&lt;/p&gt;
+
 &lt;p&gt;The authorization request is a 302 Redirect to your provided Authorization URL that includes a signature and sync_url. You must temporarily retain these information, such as storing in a session, for a later callback.&lt;/p&gt;
 
 &lt;p&gt;So all that means is your authorization page should be RESTful and look something like this:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;https://yourdomain.com/validic/your_authorization_url?signature&lt;span class=&quot;o&quot;&gt;={&lt;/span&gt;VALIDIC_AUTH_SIGNATURE&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;sync_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;={&lt;/span&gt;VALIDIC_SYNC_PATH&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Once your application has processed the authorization (such as the user has successfully logged in), you must then make a POST request to the provided sync_url with the signature and your user’s uid. For more information about the user uid.&lt;/p&gt;
+&lt;p&gt;Once your application has processed the authorization (such as the user has successfully logged in), you must then make a POST request to the provided sync_url with the signature and your user’s uid. You’ll learn more about user’s UID in the User Provisioning section below.&lt;/p&gt;
 
 &lt;p&gt;Once registered you may proceed below.&lt;/p&gt;
 
@@ -101,9 +103,29 @@ We also recommend setting up an initializer for the gem so your calls automatica
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;VALIDIC_ORG_ID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;YOUR_ORG_ID_HERE&lt;/span&gt;
 &lt;span class=&quot;no&quot;&gt;VALIDIC_ACCESS_TOKEN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;YOUR_ACCESS_TOKEN_HERE&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
+&lt;h1 id=&quot;add-an-authorization-page&quot;&gt;Add an Authorization Page&lt;/h1&gt;
+
+&lt;p&gt;We’ve set up a fake partner application call HealthYet that now exists in our marketplace.  When a user clicks ‘Connect’ (as show in the screenshot below), they will land on your authorization page.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/marketplace.jpg&quot; alt=&quot;marketplace&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We set up the HealthYet authorization page in a two step process.  When a user clicks connect, they are redirected to the authorization URL we mentioned above.  For HealthYet that looks like:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;https://healthyyet.herokuapp.com/authorize?signature&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Mjg5MGVjMmIwODYzMzAyZTE1NzEwNDljZWJkMWE4MWFlYmQxODk1MWM3Nzg1YTAyNjRjNjBkMmU4ZTVlYzM4OS01NGFkNjU1ODU3ZmIzNWI4ZDUwMDZkYTktL2F1dGhvcml6ZXMvbmV3&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;sync_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;https://app.validic.com/authorization/new&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Step 1 is we require the user login:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/login.jpg&quot; alt=&quot;login&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Step 2 comes from Validic, we ask the user to explicitly make the connection between the customers organization (here: VMS Healthcare) and your application (the page below is provided by Validic):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/auth.jpg&quot; alt=&quot;auth&quot; /&gt;&lt;/p&gt;
+
 &lt;h1 id=&quot;first-steps---user-provisioning&quot;&gt;First Steps - User Provisioning&lt;/h1&gt;
 
-&lt;p&gt;In order to send your users data you must provision users in Validic.  We recommend that you provision users once they authorize you to share their data in our marketplace.  The only required field for provisioning users is a unique ID that you have that must be a string. We don’t recommend using your database record ID but instead.  Provisioning users looks like this:&lt;/p&gt;
+&lt;p&gt;In order to send your users data you must provision users in Validic.  Provisioning users is a critical step, you will be unable to post data without first provisioning.  In essence, provisioning users is simply creating a user in the Validic database.&lt;/p&gt;
+
+&lt;p&gt;We recommend that you provision users once they authorize you to share their data in our marketplace.  The only required field for provisioning users is a unique ID that you provide as a string.  Provisioning users looks like this:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;client&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Validic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;provision_user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;YourUniqueIDAsAString&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -119,7 +141,7 @@ We also recommend setting up an initializer for the gem so your calls automatica
   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;You need to store the &lt;code&gt;_id&lt;/code&gt; and &lt;code&gt;access_token&lt;/code&gt; in your database as we’ll use that information in the forthcoming POST calls. The entire provision user method might look like this:&lt;/p&gt;
+&lt;p&gt;You need to store the &lt;code&gt;_id&lt;/code&gt; and &lt;code&gt;access_token&lt;/code&gt; in your database (this information is unique to each user) as we’ll use that information in the forthcoming POST calls. The entire provision user method might look like this:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;provision_validic&lt;/span&gt;

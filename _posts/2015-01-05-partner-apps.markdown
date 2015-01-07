@@ -47,6 +47,8 @@ Authorization URL:
 
 The Authorization URL is a defined resource in your application where Validic will redirect users who make authorization requests from third-party applications. Once received, your application must process this request, but you are free to define how your application will handle the authorization request. Typically, this would be a user login or sign up in your application.
 
+We'll showcase a good method for implementing this in your app in a later section.
+
 The authorization request is a 302 Redirect to your provided Authorization URL that includes a signature and sync_url. You must temporarily retain these information, such as storing in a session, for a later callback.
 
 So all that means is your authorization page should be RESTful and look something like this:
@@ -57,7 +59,7 @@ https://yourdomain.com/validic/your_authorization_url?signature={VALIDIC_AUTH_SI
 
 {% endhighlight %}
 
-Once your application has processed the authorization (such as the user has successfully logged in), you must then make a POST request to the provided sync_url with the signature and your user's uid. For more information about the user uid.
+Once your application has processed the authorization (such as the user has successfully logged in), you must then make a POST request to the provided sync_url with the signature and your user's uid. You'll learn more about user's UID in the User Provisioning section below.
 
 Once registered you may proceed below.
 
@@ -72,7 +74,6 @@ gem 'validic'
 {% endhighlight %}
 
 then run `bundle install`
-
 
 
 #Set Up Your Application
@@ -96,9 +97,32 @@ VALIDIC_ORG_ID=YOUR_ORG_ID_HERE
 VALIDIC_ACCESS_TOKEN=YOUR_ACCESS_TOKEN_HERE
 {% endhighlight %}
 
+
+#Add an Authorization Page
+
+We've set up a fake partner application call HealthYet that now exists in our marketplace.  When a user clicks 'Connect' (as show in the screenshot below), they will land on your authorization page.
+
+![marketplace]({{ sit.url}}/assets/marketplace.jpg)
+
+We set up the HealthYet authorization page in a two step process.  When a user clicks connect, they are redirected to the authorization URL we mentioned above.  For HealthYet that looks like:
+
+{% highlight bash %}
+https://healthyyet.herokuapp.com/authorize?signature=Mjg5MGVjMmIwODYzMzAyZTE1NzEwNDljZWJkMWE4MWFlYmQxODk1MWM3Nzg1YTAyNjRjNjBkMmU4ZTVlYzM4OS01NGFkNjU1ODU3ZmIzNWI4ZDUwMDZkYTktL2F1dGhvcml6ZXMvbmV3&sync_url=https://app.validic.com/authorization/new
+{% endhighlight %}
+
+Step 1 is we require the user login:
+
+![login]({{ sit.url}}/assets/login.jpg)
+
+Step 2 comes from Validic, we ask the user to explicitly make the connection between the customers organization (here: VMS Healthcare) and your application (the page below is provided by Validic):
+
+![auth]({{ sit.url}}/assets/auth.jpg)
+
 #First Steps - User Provisioning
 
-In order to send your users data you must provision users in Validic.  We recommend that you provision users once they authorize you to share their data in our marketplace.  The only required field for provisioning users is a unique ID that you have that must be a string. We don't recommend using your database record ID but instead.  Provisioning users looks like this:
+In order to send your users data you must provision users in Validic.  Provisioning users is a critical step, you will be unable to post data without first provisioning.  In essence, provisioning users is simply creating a user in the Validic database.
+
+We recommend that you provision users once they authorize you to share their data in our marketplace.  The only required field for provisioning users is a unique ID that you provide as a string.  Provisioning users looks like this:
 
 {% highlight ruby %}
 client = Validic::Client.new
@@ -118,7 +142,7 @@ That response will look like this:
 }
 {% endhighlight %}
 
-You need to store the `_id` and `access_token` in your database as we'll use that information in the forthcoming POST calls. The entire provision user method might look like this:
+You need to store the `_id` and `access_token` in your database (this information is unique to each user) as we'll use that information in the forthcoming POST calls. The entire provision user method might look like this:
 
 {% highlight ruby %}
 class User < ActiveRecord::Base
