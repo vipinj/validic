@@ -112,11 +112,11 @@ https://healthyyet.herokuapp.com/authorize?signature=Mjg5MGVjMmIwODYzMzAyZTE1NzE
 
 Step 1 is we require the user login:
 
-![login]({{ sit.url}}/assets/login.jpg)
+![login]({{ sit.url}}/validic/assets/login.jpg)
 
 Step 2 comes from Validic, we ask the user to explicitly make the connection between the customers organization (here: VMS Healthcare) and your application (the page below is provided by Validic):
 
-![auth]({{ sit.url}}/assets/auth.jpg)
+![auth]({{ sit.url}}/validic/validic/assets/auth.jpg)
 
 #First Steps - User Provisioning
 
