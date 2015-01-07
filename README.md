@@ -229,8 +229,10 @@ validic.create_nutrition('VALIDIC_USER_ID', 'UNIQUE_ENTRY_ID', options)
 # Create a weight record
 validic.create_weight('VALIDIC_USER_ID', 'UNIQUE_DATA_ID', options)
 
-# Create a diabetes record
+# Diabetes
 validic.create_diabetes('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+validic.update_diabetes('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+validic.delete_diabetes('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 
 # Biometrics
 validic.create_biometric('VALIDIC_USER_ID', 'UNIQUE_DATA_ID', options)
