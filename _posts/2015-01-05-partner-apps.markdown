@@ -151,8 +151,7 @@ class User < ActiveRecord::Base
   def provision_validic
     client = Validic::Client.new
     self.uid = SecureRandom.urlsafe_base64 #random string
-    resp = client.user_provision(organization_id: ENV['VALIDIC_ORG_ID'],
-                                 uid: uid)
+    resp = client.user_provision(uid)
     self._id = resp.user._id
     self.access_token = resp.user.access_token
     self.save
@@ -189,4 +188,6 @@ end
 {% endhighlight %}
 
 If a new activity is created here, it will send information to Validic using the generic `post_to_validic` method which takes the object we're posting (in this case 'routine') and sends in hash of fields.
+
+Each object in Validic has different requirements for it to succesfully post to our system.  In addition to the minimum data, there is also optional data and you can see in the `post_to_validic` method above we're sending a field under `extras` to include something specific to HealthYet called `points`.  There are no limitations to the extras you can send.
 
