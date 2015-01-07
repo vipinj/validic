@@ -11,10 +11,11 @@ categories: validic partner
 The purpose of this post is two fold - 1.)  register yourself as a Partner Application in Validic and 2.) use the [Validic Ruby Gem](https://github.com/validic/validic).
 
 #Why Validic Connect
-Validic Connect was developed for app developers by app developers.  Registering your app with Validic will allow existing Validic users to see your app in our marketplace exposing your app to the millions of users we have.  Typically an organization like Fitbit already has an API that we are able to integrate into Validic.
+Validic Connect was developed for app developers by app developers.  Registering your app with Validic will allow existing Validic users to see your app in our marketplace exposing your app to the millions of users we have.
 
-Validic Connect does not require you have a standard API but instead allows you to POST data to Validic on behalf of users that request it.  We've written libraries in numerous languages to make this process as easy as possible.
+Typically an organization like Fitbit already has an API that we are able to integrate into Validic.  Validic Connect does not require you have a standard API but instead allows you to POST data to Validic on behalf of users that request it.  We've written libraries in numerous languages to make this process as easy as possible.
 
+---
 
 #Registration and Obtaining your Credentials
 
@@ -61,7 +62,8 @@ https://yourdomain.com/validic/your_authorization_url?signature={VALIDIC_AUTH_SI
 
 Once your application has processed the authorization (such as the user has successfully logged in), you must then make a POST request to the provided sync_url with the signature and your user's uid. You'll learn more about user's UID in the User Provisioning section below.
 
-Once registered you may proceed below.
+
+---
 
 #Install the gem
 
@@ -104,7 +106,7 @@ We've set up a fake partner application call HealthYet that now exists in our ma
 
 ![marketplace]({{ sit.url}}/validic/assets/marketplace.jpg)
 
-We set up the HealthYet authorization page in a two step process.  When a user clicks connect, they are redirected to the authorization URL we mentioned above.  For HealthYet that looks like:
+When a user clicks connect, they are redirected to the authorization URL we mentioned above.  For HealthYet that looks like this:
 
 {% highlight bash %}
 https://healthyyet.herokuapp.com/authorize?signature=Mjg5MGVjMmIwODYzMzAyZTE1NzEwNDljZWJkMWE4MWFlYmQxODk1MWM3Nzg1YTAyNjRjNjBkMmU4ZTVlYzM4OS01NGFkNjU1ODU3ZmIzNWI4ZDUwMDZkYTktL2F1dGhvcml6ZXMvbmV3&sync_url=https://app.validic.com/authorization/new
@@ -122,7 +124,7 @@ Step 2 comes from Validic, we ask the user to explicitly make the connection bet
 
 In order to send your users data you must provision users in Validic.  Provisioning users is a critical step, you will be unable to post data without first provisioning.  In essence, provisioning users is simply creating a user in the Validic database.
 
-We recommend that you provision users once they authorize you to share their data in our marketplace.  The only required field for provisioning users is a unique ID that you provide as a string.  Provisioning users looks like this:
+We recommend that you provision users once they authorize you to share their data (as show in the 'Add an Authorization Page').  The only required field for provisioning users is a unique ID that you provide as a string.  Provisioning users looks like this:
 
 {% highlight ruby %}
 client = Validic::Client.new

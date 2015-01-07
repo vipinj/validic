@@ -67,9 +67,11 @@
 <p>The purpose of this post is two fold - 1.)  register yourself as a Partner Application in Validic and 2.) use the <a href="https://github.com/validic/validic">Validic Ruby Gem</a>.</p>
 
 <h1 id="why-validic-connect">Why Validic Connect</h1>
-<p>Validic Connect was developed for app developers by app developers.  Registering your app with Validic will allow existing Validic users to see your app in our marketplace exposing your app to the millions of users we have.  Typically an organization like Fitbit already has an API that we are able to integrate into Validic.</p>
+<p>Validic Connect was developed for app developers by app developers.  Registering your app with Validic will allow existing Validic users to see your app in our marketplace exposing your app to the millions of users we have.</p>
 
-<p>Validic Connect does not require you have a standard API but instead allows you to POST data to Validic on behalf of users that request it.  We’ve written libraries in numerous languages to make this process as easy as possible.</p>
+<p>Typically an organization like Fitbit already has an API that we are able to integrate into Validic.  Validic Connect does not require you have a standard API but instead allows you to POST data to Validic on behalf of users that request it.  We’ve written libraries in numerous languages to make this process as easy as possible.</p>
+
+<hr />
 
 <h1 id="registration-and-obtaining-your-credentials">Registration and Obtaining your Credentials</h1>
 
@@ -124,7 +126,7 @@
 
 <p>Once your application has processed the authorization (such as the user has successfully logged in), you must then make a POST request to the provided sync_url with the signature and your user’s uid. You’ll learn more about user’s UID in the User Provisioning section below.</p>
 
-<p>Once registered you may proceed below.</p>
+<hr />
 
 <h1 id="install-the-gem">Install the gem</h1>
 
@@ -159,7 +161,7 @@ We also recommend setting up an initializer for the gem so your calls automatica
 
 <p><img src="/validic/assets/marketplace.jpg" alt="marketplace" /></p>
 
-<p>We set up the HealthYet authorization page in a two step process.  When a user clicks connect, they are redirected to the authorization URL we mentioned above.  For HealthYet that looks like:</p>
+<p>When a user clicks connect, they are redirected to the authorization URL we mentioned above.  For HealthYet that looks like this:</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">https://healthyyet.herokuapp.com/authorize?signature<span class="o">=</span>Mjg5MGVjMmIwODYzMzAyZTE1NzEwNDljZWJkMWE4MWFlYmQxODk1MWM3Nzg1YTAyNjRjNjBkMmU4ZTVlYzM4OS01NGFkNjU1ODU3ZmIzNWI4ZDUwMDZkYTktL2F1dGhvcml6ZXMvbmV3<span class="p">&amp;</span><span class="nv">sync_url</span><span class="o">=</span>https://app.validic.com/authorization/new</code></pre></div>
 
@@ -175,7 +177,7 @@ We also recommend setting up an initializer for the gem so your calls automatica
 
 <p>In order to send your users data you must provision users in Validic.  Provisioning users is a critical step, you will be unable to post data without first provisioning.  In essence, provisioning users is simply creating a user in the Validic database.</p>
 
-<p>We recommend that you provision users once they authorize you to share their data in our marketplace.  The only required field for provisioning users is a unique ID that you provide as a string.  Provisioning users looks like this:</p>
+<p>We recommend that you provision users once they authorize you to share their data (as show in the ‘Add an Authorization Page’).  The only required field for provisioning users is a unique ID that you provide as a string.  Provisioning users looks like this:</p>
 
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">client</span> <span class="o">=</span> <span class="no">Validic</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">provision_user</span><span class="p">(</span><span class="s1">&#39;YourUniqueIDAsAString&#39;</span><span class="p">)</span></code></pre></div>

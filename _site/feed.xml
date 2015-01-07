@@ -6,8 +6,8 @@
 </description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 07 Jan 2015 12:14:57 -0500</pubDate>
-    <lastBuildDate>Wed, 07 Jan 2015 12:14:57 -0500</lastBuildDate>
+    <pubDate>Wed, 07 Jan 2015 13:03:31 -0500</pubDate>
+    <lastBuildDate>Wed, 07 Jan 2015 13:03:31 -0500</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -17,9 +17,11 @@
 &lt;p&gt;The purpose of this post is two fold - 1.)  register yourself as a Partner Application in Validic and 2.) use the &lt;a href=&quot;https://github.com/validic/validic&quot;&gt;Validic Ruby Gem&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h1 id=&quot;why-validic-connect&quot;&gt;Why Validic Connect&lt;/h1&gt;
-&lt;p&gt;Validic Connect was developed for app developers by app developers.  Registering your app with Validic will allow existing Validic users to see your app in our marketplace exposing your app to the millions of users we have.  Typically an organization like Fitbit already has an API that we are able to integrate into Validic.&lt;/p&gt;
+&lt;p&gt;Validic Connect was developed for app developers by app developers.  Registering your app with Validic will allow existing Validic users to see your app in our marketplace exposing your app to the millions of users we have.&lt;/p&gt;
 
-&lt;p&gt;Validic Connect does not require you have a standard API but instead allows you to POST data to Validic on behalf of users that request it.  We’ve written libraries in numerous languages to make this process as easy as possible.&lt;/p&gt;
+&lt;p&gt;Typically an organization like Fitbit already has an API that we are able to integrate into Validic.  Validic Connect does not require you have a standard API but instead allows you to POST data to Validic on behalf of users that request it.  We’ve written libraries in numerous languages to make this process as easy as possible.&lt;/p&gt;
+
+&lt;hr /&gt;
 
 &lt;h1 id=&quot;registration-and-obtaining-your-credentials&quot;&gt;Registration and Obtaining your Credentials&lt;/h1&gt;
 
@@ -74,7 +76,7 @@
 
 &lt;p&gt;Once your application has processed the authorization (such as the user has successfully logged in), you must then make a POST request to the provided sync_url with the signature and your user’s uid. You’ll learn more about user’s UID in the User Provisioning section below.&lt;/p&gt;
 
-&lt;p&gt;Once registered you may proceed below.&lt;/p&gt;
+&lt;hr /&gt;
 
 &lt;h1 id=&quot;install-the-gem&quot;&gt;Install the gem&lt;/h1&gt;
 
@@ -109,7 +111,7 @@ We also recommend setting up an initializer for the gem so your calls automatica
 
 &lt;p&gt;&lt;img src=&quot;/validic/assets/marketplace.jpg&quot; alt=&quot;marketplace&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;We set up the HealthYet authorization page in a two step process.  When a user clicks connect, they are redirected to the authorization URL we mentioned above.  For HealthYet that looks like:&lt;/p&gt;
+&lt;p&gt;When a user clicks connect, they are redirected to the authorization URL we mentioned above.  For HealthYet that looks like this:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;https://healthyyet.herokuapp.com/authorize?signature&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Mjg5MGVjMmIwODYzMzAyZTE1NzEwNDljZWJkMWE4MWFlYmQxODk1MWM3Nzg1YTAyNjRjNjBkMmU4ZTVlYzM4OS01NGFkNjU1ODU3ZmIzNWI4ZDUwMDZkYTktL2F1dGhvcml6ZXMvbmV3&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;sync_url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;https://app.validic.com/authorization/new&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -125,7 +127,7 @@ We also recommend setting up an initializer for the gem so your calls automatica
 
 &lt;p&gt;In order to send your users data you must provision users in Validic.  Provisioning users is a critical step, you will be unable to post data without first provisioning.  In essence, provisioning users is simply creating a user in the Validic database.&lt;/p&gt;
 
-&lt;p&gt;We recommend that you provision users once they authorize you to share their data in our marketplace.  The only required field for provisioning users is a unique ID that you provide as a string.  Provisioning users looks like this:&lt;/p&gt;
+&lt;p&gt;We recommend that you provision users once they authorize you to share their data (as show in the ‘Add an Authorization Page’).  The only required field for provisioning users is a unique ID that you provide as a string.  Provisioning users looks like this:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;client&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Validic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;provision_user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;YourUniqueIDAsAString&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
