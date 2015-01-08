@@ -49,16 +49,16 @@ describe Validic::Biometric do
 
     context "#create_biometric" do
       it "should create new biometric record", vcr: true do
-        @new_biometric = @connect.create_biometric(ENV['PARTNER_USER_ID'], "biometric_1")
+        @new_biometric = @connect.create_biometric(ENV['PARTNER_USER_ID'], "biometric_2")
         @new_biometric.should_not be_nil
-        @new_biometric.biometrics.activity_id.should eq 'biometric_1'
+        @new_biometric.biometrics.activity_id.should eq 'biometric_2'
         @new_biometric.biometrics.source.should eq "healthy_yet"
       end
     end
 
     context "#update_biometric" do
       it "should update biometric record", vcr: true do
-        @update_biometric = @connect.update_biometric(ENV['PARTNER_USER_ID'], "54ad643484626b1710000176", blood_calcium: 10.0)
+        @update_biometric = @connect.update_biometric(ENV['PARTNER_USER_ID'], "54aeb32c68c652cd11000111", blood_calcium: 10.0)
         @update_biometric.should_not be_nil
         @update_biometric.biometrics.blood_calcium.should eq 10.0
         @update_biometric.biometrics.source.should eq "healthy_yet"
@@ -67,7 +67,7 @@ describe Validic::Biometric do
 
     context "#delete_biometric" do
       it "should delete biometric record", vcr: true do
-        @delete_biometric = @connect.delete_biometric(ENV['PARTNER_USER_ID'], "54ad643484626b1710000176")
+        @delete_biometric = @connect.delete_biometric(ENV['PARTNER_USER_ID'], "54aeb32c68c652cd11000111")
         @delete_biometric.code.should eq 200
       end
     end

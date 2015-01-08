@@ -4,6 +4,8 @@ require 'simplecov'
 require 'simplecov-rcov'
 require 'api_matchers'
 require 'pry'
+require 'dotenv'
+Dotenv.load
 
 class SimpleCov::Formatter::MergedFormatter
   def format(result)
@@ -22,7 +24,13 @@ VCR.configure do |c|
   c.cassette_library_dir = 'spec/cassette'
   c.hook_into :webmock
   c.configure_rspec_metadata!
-  c.default_cassette_options = { record: :new_episodes }
+  c.filter_sensitive_data('acme_id')    { ENV['TEST_ORG_ID'] }
+  c.filter_sensitive_data('acme_token') { ENV['TEST_ORG_TOKEN'] }
+  c.filter_sensitive_data('acme_user')  { ENV['TEST_USER_ID'] }
+  c.filter_sensitive_data('acme_auth')  { ENV['TEST_USER_AUTHENTICATION_TOKEN'] }
+  c.filter_sensitive_data('hy_id')      { ENV['PARTNER_ORG_ID'] }
+  c.filter_sensitive_data('hy-token')   { ENV['PARTNER_ACCESS_TOKEN'] }
+  c.filter_sensitive_data('hy-user')    { ENV['PARTNER_USER_ID'] }
 end
 
 RSpec.configure do |c|

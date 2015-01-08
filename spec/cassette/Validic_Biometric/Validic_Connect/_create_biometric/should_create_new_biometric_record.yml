@@ -1,0 +1,56 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.validic.com/v1/organizations/hy_id/users/hy-user/biometrics.json
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"hy-token","biometrics":{"data_id":"biometric_2","blood_calcium":null,"blood_chromium":null,"blood_folic_acid":null,"blood_magnesium":null,"blood_potassium":null,"blood_sodium":null,"blood_vitamin_b12":null,"blood_zinc":null,"creatine_kinase":null,"crp":null,"diastolic":null,"ferritin":null,"hdl":null,"hscrp":null,"il6":null,"ldl":null,"resting_heartrate":null,"systolic":null,"testosterone":null,"total_cholesterol":null,"tsh":null,"uric_acid":null,"vitamin_d":null,"white_cell_count":null,"timestamp":"2015-01-08T16:41:11+00:00","utc_offset":null,"extras":null}}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby Gem by Validic 0.3.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 08 Jan 2015 16:41:16 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 201 Created
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - _validic_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFVEkiJWNmODM1NWUwNzIwNGIwNjkxNjljYjg1MDFiNjMyNTVkBjsAVA%3D%3D--02a92f8007ab7a83f53e78bcc2fc92e55544e405;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - e4ff4691df743ccf0f481bfd4f76c73d
+      X-Runtime:
+      - '0.039764'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Request-Id, X-Runtime, X-Rack-Cache
+    body:
+      encoding: UTF-8
+      string: '{"code":201,"message":"Ok","biometrics":{"_id":"54aeb32c68c652cd11000111","blood_calcium":null,"blood_chromium":null,"blood_folic_acid":null,"blood_magnesium":null,"blood_potassium":null,"blood_sodium":null,"blood_vitamin_b12":null,"blood_zinc":null,"creatine_kinase":null,"crp":null,"diastolic":null,"extras":null,"ferritin":null,"hdl":null,"hscrp":null,"il6":null,"ldl":null,"resting_heartrate":null,"source":"healthy_yet","source_name":"Healthy
+        Yet","spo2":null,"systolic":null,"temperature":null,"testosterone":null,"timestamp":"2015-01-08T16:41:11+00:00","total_cholesterol":null,"tsh":null,"uric_acid":null,"utc_offset":null,"validated":false,"vitamin_d":null,"white_cell_count":null,"last_updated":"2015-01-08T16:41:16+00:00","activity_id":"biometric_2"}}'
+    http_version: 
+  recorded_at: Thu, 08 Jan 2015 16:41:12 GMT
+recorded_with: VCR 2.8.0

@@ -25,10 +25,10 @@ describe Validic::Routine do
 
   context "#create_routine" do
     it "should create new routine record", vcr: true do
-      @new_routine = client.create_routine(ENV['PARTNER_USER_ID'], organization_id: ENV['PARTNER_ORG_ID'], access_token: ENV['PARTNER_ACCESS_TOKEN'], activity_id: 'routine_1337', timestamp: "2015-01-06T16:14:17+00:00")
+      @new_routine = client.create_routine(ENV['PARTNER_USER_ID'], organization_id: ENV['PARTNER_ORG_ID'], access_token: ENV['PARTNER_ACCESS_TOKEN'], activity_id: 'routines_1337', timestamp: "2015-01-06T16:14:17+00:00")
       @new_routine.should_not be_nil
       @new_routine.routine.timestamp.should eq "2015-01-06T16:14:17+00:00"
-      @new_routine.routine.activity_id.should eq 'routine_1337'
+      @new_routine.routine.activity_id.should eq 'routines_1337'
       @new_routine.routine.source.should eq "healthy_yet"
     end
   end

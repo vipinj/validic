@@ -25,17 +25,17 @@ describe Validic::Weight do
 
   context "#create_weight" do
     it "should create new weight record", vcr: true do
-      @new_weight = client.create_weight(ENV['PARTNER_USER_ID'], 'weight_1', organization_id: ENV['PARTNER_ORG_ID'], access_token: ENV['PARTNER_ACCESS_TOKEN'], timestamp: "2015-01-06T16:14:17+00:00")
+      @new_weight = client.create_weight(ENV['PARTNER_USER_ID'], 'weights_7', organization_id: ENV['PARTNER_ORG_ID'], access_token: ENV['PARTNER_ACCESS_TOKEN'], timestamp: "2015-01-06T16:14:17+00:00")
       @new_weight.should_not be_nil
       @new_weight.weight.timestamp.should eq "2015-01-06T16:14:17+00:00"
-      @new_weight.weight.activity_id.should eq 'weight_1'
+      @new_weight.weight.activity_id.should eq 'weights_7'
       @new_weight.weight.source.should eq "healthy_yet"
     end
   end
 
   context "#get_weights by organization" do
     before do
-      @weight = client.get_weights({organization_id: "51aca5a06dedda916400002b", access_token: "ENTERPRISE_KEY"})
+      @weight = client.get_weights({organization_id: ENV['TEST_ORG_ID'], access_token: "ENTERPRISE_KEY"})
     end
 
     it "returns JSON response of Validic::Weight", vcr: true do

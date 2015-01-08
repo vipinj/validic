@@ -1,0 +1,56 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.validic.com/v1/organizations/hy_id/users/hy-user/sleep.json
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"hy-token","sleep":{"activity_id":"sleeps_1337","timestamp":"2015-01-06T16:14:17+00:00","utc_offset":null,"total_sleep":null,"awake":null,"deep":null,"light":null,"rem":null,"times_woken":null}}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby Gem by Validic 0.3.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 08 Jan 2015 16:47:55 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 201 Created
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - _validic_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFVEkiJTI2YTQ3NjlmODI2ZjUxNTg1OGY2OTAxZDk5NWE4M2FhBjsAVA%3D%3D--293414797c32f2e0b3faa90fae437cbeb7685e93;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - d9b07443273fa662fc6018868816331f
+      X-Runtime:
+      - '0.066022'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Request-Id, X-Runtime, X-Rack-Cache
+    body:
+      encoding: UTF-8
+      string: '{"code":201,"message":"Ok","sleep":{"_id":"54aeb4bb98b4b136e2000178","activity_id":"sleeps_1337","awake":null,"deep":null,"extras":null,"light":null,"rem":null,"source":"healthy_yet","source_name":"Healthy
+        Yet","times_woken":null,"timestamp":"2015-01-06T16:14:17+00:00","total_sleep":null,"utc_offset":null,"validated":false,"last_updated":"2015-01-08T16:47:55+00:00"}}'
+    http_version: 
+  recorded_at: Thu, 08 Jan 2015 16:47:51 GMT
+recorded_with: VCR 2.8.0

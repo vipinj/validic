@@ -25,10 +25,10 @@ describe Validic::Fitness do
 
   context "#create_fitness" do
     it "should create new fitness record", vcr: true do
-      @new_fitness = client.create_fitness(ENV['PARTNER_USER_ID'], organization_id: ENV['PARTNER_ORG_ID'], access_token: ENV['PARTNER_ACCESS_TOKEN'], activity_id: 'fitness_1', timestamp: "2015-01-06T16:14:17+00:00", type: "Running")
+      @new_fitness = client.create_fitness(ENV['PARTNER_USER_ID'], organization_id: ENV['PARTNER_ORG_ID'], access_token: ENV['PARTNER_ACCESS_TOKEN'], activity_id: 'fitness_123', timestamp: "2015-01-06T16:14:17+00:00", type: "Running")
       @new_fitness.should_not be_nil
       @new_fitness.fitness.timestamp.should eq "2015-01-06T16:14:17+00:00"
-      @new_fitness.fitness.activity_id.should eq 'fitness_1'
+      @new_fitness.fitness.activity_id.should eq 'fitness_123'
       @new_fitness.fitness.source.should eq "healthy_yet"
     end
   end

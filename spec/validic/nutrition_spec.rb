@@ -25,10 +25,10 @@ describe Validic::Nutrition do
 
   context "#create_nutrition" do
     it "should create new nutrition record", vcr: true do
-      @new_nutrition = client.create_nutrition(ENV['PARTNER_USER_ID'], 'nutrition_1', organization_id: ENV['PARTNER_ORG_ID'], access_token: ENV['PARTNER_ACCESS_TOKEN'], timestamp: "2015-01-06T16:14:17+00:00")
+      @new_nutrition = client.create_nutrition(ENV['PARTNER_USER_ID'], 'nutrition_123', organization_id: ENV['PARTNER_ORG_ID'], access_token: ENV['PARTNER_ACCESS_TOKEN'], timestamp: "2015-01-06T16:14:17+00:00")
       @new_nutrition.should_not be_nil
       @new_nutrition.nutrition.timestamp.should eq "2015-01-06T16:14:17+00:00"
-      @new_nutrition.nutrition.activity_id.should eq 'nutrition_1'
+      @new_nutrition.nutrition.activity_id.should eq 'nutrition_123'
       @new_nutrition.nutrition.source.should eq "healthy_yet"
     end
   end

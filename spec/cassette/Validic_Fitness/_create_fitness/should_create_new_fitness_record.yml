@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.validic.com/v1/organizations/hy_id/users/hy-user/fitness.json
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"hy-token","fitness":{"activity_id":"fitness_123","timestamp":"2015-01-06T16:14:17+00:00","utc_offset":null,"type":"Running","intensity":null,"start_time":null,"distance":null,"duration":null,"calories":null}}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby Gem by Validic 0.3.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 08 Jan 2015 16:55:08 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 201 Created
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - _validic_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFVEkiJThmMDVjYWUzMTQ3MjllNWMyM2QxNTlmMjgzZTVmZWNjBjsAVA%3D%3D--a24f9ffad102a59a342ed67c79c013f289c43f19;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - 7eea28dff8cb8bc0b4dd07b02062f78d
+      X-Runtime:
+      - '0.026364'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Request-Id, X-Runtime, X-Rack-Cache
+    body:
+      encoding: UTF-8
+      string: '{"code":201,"message":"Ok","fitness":{"_id":"54aeb66c84626ba759000214","activity_id":"fitness_123","calories":null,"distance":null,"duration":null,"extras":null,"intensity":null,"source":"healthy_yet","source_name":"HealthyYet","start_time":null,"timestamp":"2015-01-06T16:14:17+00:00","utc_offset":null,"validated":false,"type":"Running","last_updated":"2015-01-08T16:55:08+00:00"}}'
+    http_version: 
+  recorded_at: Thu, 08 Jan 2015 16:55:07 GMT
+recorded_with: VCR 2.8.0
