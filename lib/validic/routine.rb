@@ -37,24 +37,80 @@ module Validic
     # @params :source
     #
     # @return success
-    def create_routine(user_id, options={})
+    def create_routine(user_id, activity_id, options={})
       options = {
         user_id: user_id,
         access_token: options[:access_token] || Validic.access_token,
         organization_id: options[:organization_id] || Validic.organization_id,
         routine: {
-          activity_id: options[:activity_id],
-          timestamp: options[:timestamp],
+          activity_id: activity_id,
+          timestamp: options[:timestamp] || DateTime.now.utc.to_s(:iso8601),
           utc_offset: options[:utc_offset],
           steps: options[:steps],
           distance: options[:distance],
           floors: options[:floors],
           elevation: options[:elevation],
-          calories_burned: options[:calories_burned]
+          calories_burned: options[:calories_burned],
+          extras: options[:extras]
         },
       }
 
       response = post_to_validic('routine', options )
+      response if response
+    end
+
+    ##
+    # Update Routine base on `access_token` and `authentication_token`
+    #
+    # @params :access_token - *required if not specified on your initializer / organization access_token
+    # @params :authentication_token - *required / authentication_token of a specific user
+    #
+    # @params :steps
+    # @params :stairs_climbed
+    # @params :calories_burned
+    # @params :calories_consumed
+    # @params :timestamp
+    # @params :source
+    #
+    # @return success
+    def update_routine(user_id, activity_id, options={})
+      options = {
+        user_id: user_id,
+        activity_id: activity_id,
+        access_token: options[:access_token] || Validic.access_token,
+        organization_id: options[:organization_id] || Validic.organization_id,
+        routine: {
+          timestamp: options[:timestamp] || DateTime.now.utc.to_s(:iso8601),
+          utc_offset: options[:utc_offset],
+          steps: options[:steps],
+          distance: options[:distance],
+          floors: options[:floors],
+          elevation: options[:elevation],
+          calories_burned: options[:calories_burned],
+          extras: options[:extras]
+        },
+      }
+
+      response = put_to_validic('routine', options )
+      response if response
+    end
+
+    ##
+    # Delete routine record
+    #
+    # @params :access_token - *required if not specified on your initializer / organization access_token
+    # @params :authentication_token - *required / authentication_token of a specific user
+    #
+    # @return success
+    def delete_routine(user_id, activity_id, options={})
+      options = {
+        user_id: user_id,
+        activity_id: activity_id,
+        access_token: options[:access_token] || Validic.access_token,
+        organization_id: options[:organization_id] || Validic.organization_id
+      }
+
+      response = delete_to_validic('routine', options)
       response if response
     end
 

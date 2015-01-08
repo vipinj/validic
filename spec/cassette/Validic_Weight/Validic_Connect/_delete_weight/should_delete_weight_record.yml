@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: delete
-    uri: https://api.validic.com/v1/organizations/hy_id/users/hy-user/biometrics/54aeeed898b4b11f9a0001b8.json?access_token=hy-token
+    uri: https://api.validic.com/v1/organizations/hy_id/users/hy-user/weight/54aecd4398b4b177a900017c.json?access_token=hy-token
     body:
       encoding: US-ASCII
       string: ''
@@ -23,7 +23,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 08 Jan 2015 20:56:18 GMT
+      - Thu, 08 Jan 2015 18:43:55 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -37,12 +37,12 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Set-Cookie:
-      - _validic_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFVEkiJThlNjdjOWQxMDVhOGZmNWNlOWEwNzZlM2Y5ODQ5N2ZlBjsAVA%3D%3D--ae73a1ec9e6d14e80e5a88ffedbc863da772e134;
+      - _validic_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFVEkiJTQ4YTIxMzRkNThhYjA5Mzc2MGQ0YzA1ZDZjMzBmMGYyBjsAVA%3D%3D--d2d56c0ffe533110556144ee18765e39b8468022;
         path=/; secure; HttpOnly
       X-Request-Id:
-      - 54b534c103b2f0dec4d780aeb58b7eb1
+      - 369534c4d47a637706d5810e475f3cb3
       X-Runtime:
-      - '0.046310'
+      - '0.040709'
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Expose-Headers:
@@ -51,5 +51,5 @@ http_interactions:
       encoding: UTF-8
       string: '{"code":200,"message":"Ok"}'
     http_version: 
-  recorded_at: Thu, 08 Jan 2015 20:56:13 GMT
+  recorded_at: Thu, 08 Jan 2015 18:43:51 GMT
 recorded_with: VCR 2.8.0
