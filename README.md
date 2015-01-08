@@ -61,11 +61,11 @@ Or install it yourself as:
 
 ## Usage
 
+##### Rails 3+
 First, instantiate the client.
 ```ruby
 require 'validic'
 
-# If you're using Rails 3+
 # config/initializers/validic.rb
 Validic.configure do |config|
   config.api_url          = 'https://api.validic.com'
@@ -75,35 +75,37 @@ Validic.configure do |config|
 end
 
 # Create a Client Object provided you have an initializer
-validic = Validic::Client.new
+client = Validic::Client.new
+```
 
-# If you're using plain RUBY
-# Create Validic::Client Object
+##### Plain ruby
+```ruby
+
 options = {
   api_url:         'https://api.validic.com',
   api_version:     'v1',
   access_token:    'ORGANIZATION_ACCESS_TOKEN',
   organization_id: 'ORGANIZATION_ID'
 }
-validic = Validic::Client.new options
+client = Validic::Client.new options
 ```
 
 Now you can use the wrapper's helper methods to interface with the Validic API.
 ```ruby
 # Get current organization metadata
-validic.get_organization
+client.get_organization
 ```
 
 The wrapper returns the JSON response as a [Hashie::Mash](https://github.com/intridea/hashie#mash) instance for easy
 manipulation.
 ```ruby
 # Get an array of apps for my current organization
-validic.get_apps.apps.map(&:name)
+client.get_apps.apps.map(&:name)
 ```
 
 You can pass a hash of options to calls that fetch data.
 ```ruby
-validic.get_routine(start_date: '2015-01-01T00:00:00+00:00')
+client.get_routine(start_date: '2015-01-01T00:00:00+00:00')
 ```
 
 ### More Examples ###
@@ -123,152 +125,196 @@ options = {
   access_token:    'ORGANIZATION_ACCESS_TOKEN',
   organization_id: 'ORGANIZATION_ID'
 }
-validic = Validic::Client.new options
+client = Validic::Client.new options
+```
 
-###
-#   Organization methods
-###
+## Organization methods
 
-# Get current organization
-validic.get_organization
+##### Get current organization
+```ruby
+client.get_organization
+```
 
-###
-#   User methods
-###
+##   User methods
 
-# Get users from organization credentials
-validic.get_users
+##### Get users from organization credentials
+```ruby
+client.get_users
+```
 
-# Get user id from authentication token
-validic.me('USER_AUTHENTICATION_TOKEN')
+##### Get user id from authentication token
+```ruby
+client.me('USER_AUTHENTICATION_TOKEN')
+```
 
-# Provision new users
-validic.provision_user('UNIQUE_USER_ID')
+##### Provision new users
+```ruby
+client.provision_user('UNIQUE_USER_ID')
+```
 
-# Updating a user
-validic.provision_user('VALIDIC_USER_ID', options)
+##### Updating a user
+```ruby
+client.update_user('VALIDIC_USER_ID', options)
+```
 
-# Suspend a user
-validic.suspend_user('VALIDIC_USER_ID')
+##### Suspend a user
+```ruby
+client.suspend_user('VALIDIC_USER_ID')
+```
 
-# Unsuspend a user
-validic.unsuspend_user('VALIDIC_USER_ID')
+##### Unsuspend a user
+```ruby
+client.unsuspend_user('VALIDIC_USER_ID')
+```
 
-# Refresh authentication token
-validic.refresh_token('VALIDIC_USER_ID')
+##### Refresh authentication token
+```ruby
+client.refresh_token('VALIDIC_USER_ID')
+```
 
-# Delete a user
-validic.delete_user('VALIDIC_USER_ID')
+##### Delete a user
+```ruby
+client.delete_user('VALIDIC_USER_ID')
+```
 
-###
-#   Profile methods
-###
+##   Profile methods
 
-# Get a user profile
-validic.get_profile('USER_AUTHENTICATION_TOKEN')
+##### Get a user profile
+```ruby
+client.get_profile('USER_AUTHENTICATION_TOKEN')
+```
 
-# Create a user profile
-validic.create_profile('USER_AUTHENTICATION_TOKEN', options)
+##### Create a user profile
+```ruby
+client.create_profile('USER_AUTHENTICATION_TOKEN', options)
+```
 
-###
-#   Apps methods
-###
+##   Apps methods
 
-# Get a list of available third-party-apps
-validic.get_apps
+##### Get a list of available third-party-apps
+```ruby
+client.get_apps
+```
 
-# Get a list of apps a user is synced to
-validic.get_synced_apps('USER_AUTHENTICATION_TOKEN')
+##### Get a list of apps a user is synced to
+```ruby
+client.get_synced_apps('USER_AUTHENTICATION_TOKEN')
+```
 
-###
-#   Activity methods
-###
+##   Activity methods
 
-# You can also filter the results of the following methods by passing an options hash
+###### You can also filter the results of the following methods by passing an options hash
 
-# Get an array of fitness records
-validic.get_fitness
+##### Get an array of fitness records
+```ruby
+client.get_fitness
+```
 
-# Get an array of routine records
-validic.get_routine
+##### Get an array of routine records
+```ruby
+client.get_routine
+```
 
-# Get an array of nutrition records
-validic.get_nutritions
+##### Get an array of nutrition records
+```ruby
+client.get_nutritions
+```
 
-# Get an array of weight records
-validic.get_weight
+##### Get an array of weight records
+```ruby
+client.get_weight
+```
 
-# Get an array of diabetes records
-validic.get_diabetes
+##### Get an array of diabetes records
+```ruby
+client.get_diabetes
+```
 
-# Get an array of biometrics records
-validic.get_biometrics
+##### Get an array of biometrics records
+```ruby
+client.get_biometrics
+```
 
-# Get an array of sleep records
-validic.get_sleep
+##### Get an array of sleep records
+```ruby
+client.get_sleep
+```
 
-# Get an array of tobacco cessation records
-validic.get_tobacco_cessations
+##### Get an array of tobacco cessation records
+```ruby
+client.get_tobacco_cessations
+```
 
-###
-#   Connect methods
-###
+##Validic Connect
 
-# Connect helper methods are only available for apps registered with
-# Validic Connect
+##### Fitness
+```ruby
+client.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+client.update_fitness('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+client.delete_fitness('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+```
 
-# Fitness
-validic.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
-validic.update_fitness('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-validic.delete_fitness('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+##### Routine
+```ruby
+client.create_routine('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+client.update_routine('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+client.delete_routine('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+```
 
-# Routine
-validic.create_routine('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
-validic.update_routine('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-validic.delete_routine('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+##### Nutrition
+```ruby
+client.create_nutrition('VALIDIC_USER_ID', 'UNIQUE_ENTRY_ID', options)
+client.update_nutrition('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+client.delete_nutrition('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+```
 
-# Nutrition
-validic.create_nutrition('VALIDIC_USER_ID', 'UNIQUE_ENTRY_ID', options)
-validic.update_nutrition('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-validic.delete_nutrition('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+##### Weight
+```ruby
+client.create_weight('VALIDIC_USER_ID', 'UNIQUE_DATA_ID', options)
+client.update_weight('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+client.delete_weight('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+```
 
-# Weight
-validic.create_weight('VALIDIC_USER_ID', 'UNIQUE_DATA_ID', options)
-validic.update_weight('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-validic.delete_weight('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+##### Diabetes
+```ruby
+client.create_diabetes('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+client.update_diabetes('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+client.delete_diabetes('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+```
 
-# Diabetes
-validic.create_diabetes('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
-validic.update_diabetes('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-validic.delete_diabetes('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+##### Biometrics
+```ruby
+client.create_biometric('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+client.update_biometric('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+client.delete_biometric('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+```
 
-# Biometrics
-validic.create_biometric('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
-validic.update_biometric('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-validic.delete_biometric('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+##### Sleep
+```ruby
+client.create_sleep('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+client.update_sleep('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+client.delete_sleep('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+```
 
-# Sleep
-validic.create_sleep('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
-validic.update_sleep('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-validic.delete_sleep('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+##### Tobacco Cessation
+```ruby
+client.create_tobacco_cessation('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID' options)
+client.update_tobacco_cessation('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+client.delete_tobacco_cessation('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+```
 
-# Tobacco Cessation
-validic.create_tobacco_cessation('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID' options)
-validic.update_tobacco_cessation('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-validic.delete_tobacco_cessation('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+##### You can also create data with your own custom extras as JSON
+```ruby
+client.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', extras: "{\"stars\": 3}")
+```
 
-# You can also create data with your own custom extras as JSON
-validic.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', extras: "{\"stars\": 3}")
+##   Latest Records
 
-###
-#   Latest Records
-###
+###### You can also pass an options hash to filter latest results
 
-# You can also pass an options hash to filter latest results
-
-# Pull latest records for specified type
-validic.latest('routine')
-
+##### Pull latest records for specified type
+```ruby
+client.latest('routine')
 ```
 
 ## Contributing
