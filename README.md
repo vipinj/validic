@@ -73,12 +73,16 @@ Validic.configure do |config|
   config.access_token     = 'ORGANIZATION_ACCESS_TOKEN',
   config.organization_id  = 'ORGANIZATION_ID'
 end
+```
 
 # Create a Client Object provided you have an initializer
+```ruby
 validic = Validic::Client.new
+```
 
 # If you're using plain RUBY
 # Create Validic::Client Object
+```ruby
 options = {
   api_url:         'https://api.validic.com',
   api_version:     'v1',
@@ -124,13 +128,14 @@ options = {
   organization_id: 'ORGANIZATION_ID'
 }
 validic = Validic::Client.new options
+```
 
-###
 #   Organization methods
-###
 
-# Get current organization
+## Get current organization
+```ruby
 validic.get_organization
+```
 
 ###
 #   User methods
