@@ -301,7 +301,7 @@ validic.update_sleep('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
 validic.delete_sleep('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 ```
 
-### Tobacco Cessation
+#### Tobacco Cessation
 ```ruby
 validic.create_tobacco_cessation('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID' options)
 validic.update_tobacco_cessation('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
