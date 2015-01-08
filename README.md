@@ -312,7 +312,7 @@ client.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', extras: "{\"stars
 
 ##   Latest Records
 
-##### You can also pass an options hash to filter latest results
+###### You can also pass an options hash to filter latest results
 
 ##### Pull latest records for specified type
 ```ruby
