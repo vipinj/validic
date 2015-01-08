@@ -61,11 +61,11 @@ Or install it yourself as:
 
 ## Usage
 
+##### Rails 3+
 First, instantiate the client.
 ```ruby
 require 'validic'
 
-# If you're using Rails 3+
 # config/initializers/validic.rb
 Validic.configure do |config|
   config.api_url          = 'https://api.validic.com'
@@ -128,7 +128,7 @@ options = {
 client = Validic::Client.new options
 ```
 
-#   Organization methods
+## Organization methods
 
 ##### Get current organization
 ```ruby
