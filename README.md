@@ -77,7 +77,7 @@ end
 
 ##### Create a Client Object provided you have an initializer
 ```ruby
-validic = Validic::Client.new
+client = Validic::Client.new
 ```
 
 ### If you're using plain RUBY
@@ -89,25 +89,25 @@ options = {
   access_token:    'ORGANIZATION_ACCESS_TOKEN',
   organization_id: 'ORGANIZATION_ID'
 }
-validic = Validic::Client.new options
+client = Validic::Client.new options
 ```
 
 Now you can use the wrapper's helper methods to interface with the Validic API.
 ```ruby
 # Get current organization metadata
-validic.get_organization
+client.get_organization
 ```
 
 The wrapper returns the JSON response as a [Hashie::Mash](https://github.com/intridea/hashie#mash) instance for easy
 manipulation.
 ```ruby
 # Get an array of apps for my current organization
-validic.get_apps.apps.map(&:name)
+client.get_apps.apps.map(&:name)
 ```
 
 You can pass a hash of options to calls that fetch data.
 ```ruby
-validic.get_routine(start_date: '2015-01-01T00:00:00+00:00')
+client.get_routine(start_date: '2015-01-01T00:00:00+00:00')
 ```
 
 ### More Examples ###
@@ -127,80 +127,80 @@ options = {
   access_token:    'ORGANIZATION_ACCESS_TOKEN',
   organization_id: 'ORGANIZATION_ID'
 }
-validic = Validic::Client.new options
+client = Validic::Client.new options
 ```
 
 #   Organization methods
 
 ##### Get current organization
 ```ruby
-validic.get_organization
+client.get_organization
 ```
 
 ##   User methods
 
 ##### Get users from organization credentials
 ```ruby
-validic.get_users
+client.get_users
 ```
 
 ##### Get user id from authentication token
 ```ruby
-validic.me('USER_AUTHENTICATION_TOKEN')
+client.me('USER_AUTHENTICATION_TOKEN')
 ```
 
 ##### Provision new users
 ```ruby
-validic.provision_user('UNIQUE_USER_ID')
+client.provision_user('UNIQUE_USER_ID')
 ```
 
 ##### Updating a user
 ```ruby
-validic.provision_user('VALIDIC_USER_ID', options)
+client.update_user('VALIDIC_USER_ID', options)
 ```
 
 ##### Suspend a user
 ```ruby
-validic.suspend_user('VALIDIC_USER_ID')
+client.suspend_user('VALIDIC_USER_ID')
 ```
 
 ##### Unsuspend a user
 ```ruby
-validic.unsuspend_user('VALIDIC_USER_ID')
+client.unsuspend_user('VALIDIC_USER_ID')
 ```
 
 ##### Refresh authentication token
 ```ruby
-validic.refresh_token('VALIDIC_USER_ID')
+client.refresh_token('VALIDIC_USER_ID')
 ```
 
 ##### Delete a user
 ```ruby
-validic.delete_user('VALIDIC_USER_ID')
+client.delete_user('VALIDIC_USER_ID')
 ```
 
 ##   Profile methods
 
 ##### Get a user profile
 ```ruby
-validic.get_profile('USER_AUTHENTICATION_TOKEN')
+client.get_profile('USER_AUTHENTICATION_TOKEN')
 ```
 
 ##### Create a user profile
 ```ruby
-validic.create_profile('USER_AUTHENTICATION_TOKEN', options)
+client.create_profile('USER_AUTHENTICATION_TOKEN', options)
 ```
 
 ##   Apps methods
 
 ##### Get a list of available third-party-apps
 ```ruby
-validic.get_apps
+client.get_apps
 ```
 
 ##### Get a list of apps a user is synced to
 ```ruby
-validic.get_synced_apps('USER_AUTHENTICATION_TOKEN')
+client.get_synced_apps('USER_AUTHENTICATION_TOKEN')
 ```
 
 ##   Activity methods
@@ -209,105 +209,105 @@ validic.get_synced_apps('USER_AUTHENTICATION_TOKEN')
 
 ##### Get an array of fitness records
 ```ruby
-validic.get_fitness
+client.get_fitness
 ```
 
 ##### Get an array of routine records
 ```ruby
-validic.get_routine
+client.get_routine
 ```
 
 ##### Get an array of nutrition records
 ```ruby
-validic.get_nutritions
+client.get_nutritions
 ```
 
 ##### Get an array of weight records
 ```ruby
-validic.get_weight
+client.get_weight
 ```
 
 ##### Get an array of diabetes records
 ```ruby
-validic.get_diabetes
+client.get_diabetes
 ```
 
 ##### Get an array of biometrics records
 ```ruby
-validic.get_biometrics
+client.get_biometrics
 ```
 
 ##### Get an array of sleep records
 ```ruby
-validic.get_sleep
+client.get_sleep
 ```
 
 ##### Get an array of tobacco cessation records
 ```ruby
-validic.get_tobacco_cessations
+client.get_tobacco_cessations
 ```
 
 ##Validic Connect
 
 ##### Fitness
 ```ruby
-validic.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
-validic.update_fitness('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-validic.delete_fitness('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+client.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+client.update_fitness('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+client.delete_fitness('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 ```
 
 ##### Routine
 ```ruby
-validic.create_routine('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
-validic.update_routine('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-validic.delete_routine('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+client.create_routine('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+client.update_routine('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+client.delete_routine('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 ```
 
 ##### Nutrition
 ```ruby
-validic.create_nutrition('VALIDIC_USER_ID', 'UNIQUE_ENTRY_ID', options)
-validic.update_nutrition('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-validic.delete_nutrition('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+client.create_nutrition('VALIDIC_USER_ID', 'UNIQUE_ENTRY_ID', options)
+client.update_nutrition('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+client.delete_nutrition('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 ```
 
 ##### Weight
 ```ruby
-validic.create_weight('VALIDIC_USER_ID', 'UNIQUE_DATA_ID', options)
-validic.update_weight('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-validic.delete_weight('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+client.create_weight('VALIDIC_USER_ID', 'UNIQUE_DATA_ID', options)
+client.update_weight('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+client.delete_weight('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 ```
 
 ##### Diabetes
 ```ruby
-validic.create_diabetes('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
-validic.update_diabetes('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-validic.delete_diabetes('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+client.create_diabetes('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+client.update_diabetes('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+client.delete_diabetes('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 ```
 
 ##### Biometrics
 ```ruby
-validic.create_biometric('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
-validic.update_biometric('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-validic.delete_biometric('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+client.create_biometric('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+client.update_biometric('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+client.delete_biometric('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 ```
 
 ##### Sleep
 ```ruby
-validic.create_sleep('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
-validic.update_sleep('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-validic.delete_sleep('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+client.create_sleep('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+client.update_sleep('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+client.delete_sleep('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 ```
 
 ##### Tobacco Cessation
 ```ruby
-validic.create_tobacco_cessation('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID' options)
-validic.update_tobacco_cessation('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-validic.delete_tobacco_cessation('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+client.create_tobacco_cessation('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID' options)
+client.update_tobacco_cessation('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+client.delete_tobacco_cessation('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 ```
 
 ##### You can also create data with your own custom extras as JSON
 ```ruby
-validic.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', extras: "{\"stars\": 3}")
+client.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', extras: "{\"stars\": 3}")
 ```
 
 ##   Latest Records
@@ -316,7 +316,7 @@ validic.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', extras: "{\"star
 
 ##### Pull latest records for specified type
 ```ruby
-validic.latest('routine')
+client.latest('routine')
 ```
 
 ## Contributing
