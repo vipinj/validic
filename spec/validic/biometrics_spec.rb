@@ -57,7 +57,7 @@ describe Validic::Biometric do
     end
 
     context "#update_biometric" do
-      it "should update biometric record", vcr: true do
+      pending "should update biometric record", vcr: true do
         @update_biometric = @connect.update_biometric(ENV['PARTNER_USER_ID'], "54aeb32c68c652cd11000111", blood_calcium: 10.0)
         @update_biometric.should_not be_nil
         @update_biometric.biometrics.blood_calcium.should eq 10.0
@@ -66,7 +66,7 @@ describe Validic::Biometric do
     end
 
     context "#delete_biometric" do
-      it "should delete biometric record", vcr: true do
+      pending "should delete biometric record", vcr: true do
         @delete_biometric = @connect.delete_biometric(ENV['PARTNER_USER_ID'], "54aeb32c68c652cd11000111")
         @delete_biometric.code.should eq 200
       end

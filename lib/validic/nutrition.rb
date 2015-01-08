@@ -46,7 +46,7 @@ module Validic
         organization_id: options[:organization_id] || Validic.organization_id,
         nutrition: {
           entry_id: entry_id,
-          timestamp: options[:timestamp],
+          timestamp: options[:timestamp] || DateTime.now.utc.to_s(:iso8601),
           utc_offset: options[:utc_offset],
           calories: options[:calories] || 0,
           carbohydrates: options[:carbohydrates],
@@ -56,10 +56,49 @@ module Validic
           sodium: options[:sodium],
           water: options[:water],
           meal: options[:meal],
+          extras: options[:extra]
         }
       }
 
       response = post_to_validic('nutrition', options)
+      response if response
+    end
+
+
+    def update_nutrition(user_id, nutrition_id, options={})
+      options = {
+        user_id: user_id,
+        access_token: options[:access_token] || Validic.access_token,
+        organization_id: options[:organization_id] || Validic.organization_id,
+        activity_id: nutrition_id,
+        nutrition: {
+          timestamp: options[:timestamp] || DateTime.now.utc.to_s(:iso8601),
+          utc_offset: options[:utc_offset],
+          calories: options[:calories],
+          carbohydrates: options[:carbohydrates],
+          fat: options[:fat],
+          fiber: options[:fiber],
+          protein: options[:protein],
+          sodium: options[:sodium],
+          water: options[:water],
+          meal: options[:meal],
+          extras: options[:extra]
+        }
+      }
+
+      response = put_to_validic('nutrition', options)
+      response if response
+    end
+
+    def delete_nutrition(user_id, nutrition_id, options={})
+      options = {
+        user_id: user_id,
+        activity_id: nutrition_id,
+        access_token: options[:access_token] || Validic.access_token,
+        organization_id: options[:organization_id] || Validic.organization_id
+      }
+
+      response = delete_to_validic('nutrition', options)
       response if response
     end
 

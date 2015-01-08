@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.validic.com/v1/organizations/hy_id/users/hy-user/nutrition.json
     body:
       encoding: UTF-8
-      string: '{"access_token":"hy-token","nutrition":{"entry_id":"nutrition_123","timestamp":"2015-01-06T16:14:17+00:00","utc_offset":null,"calories":0,"carbohydrates":null,"fat":null,"fiber":null,"protein":null,"sodium":null,"water":null,"meal":null}}'
+      string: '{"access_token":"hy-token","nutrition":{"entry_id":"nutrition134-gem","timestamp":"2015-01-08T20:50:53+00:00","utc_offset":null,"calories":850,"carbohydrates":351,"fat":52,"fiber":35,"protein":54,"sodium":855,"water":36,"meal":null,"extras":null}}'
     headers:
       Accept:
       - application/json
@@ -23,7 +23,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 08 Jan 2015 16:46:59 GMT
+      - Thu, 08 Jan 2015 20:50:57 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -37,20 +37,20 @@ http_interactions:
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       Set-Cookie:
-      - _validic_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFVEkiJWY5MWZkMGI3ZmQ3ZThkZWI4NGE5OTQ5NWIyZjk2OWJmBjsAVA%3D%3D--e959a0bf74bb31c0d7a9f5291af9f77d7b93698e;
+      - _validic_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFVEkiJWQ3ZTEzMDZlMmVkYTU1ZjNkZmE4ZWJlYTExNzY0NTAzBjsAVA%3D%3D--31fcf73fef535b44b9db16036ae57f94daed8439;
         path=/; secure; HttpOnly
       X-Request-Id:
-      - b2be51bac34f17c4288e9656ae266f44
+      - d0706157906ae2000be161b16ce5ee54
       X-Runtime:
-      - '0.035953'
+      - '0.044461'
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Expose-Headers:
       - X-Request-Id, X-Runtime, X-Rack-Cache
     body:
       encoding: UTF-8
-      string: '{"code":201,"message":"Ok","nutrition":{"_id":"54aeb48368c6526d2900011c","calories":0.0,"carbohydrates":null,"extras":null,"fat":null,"fiber":null,"meal":null,"protein":null,"sodium":null,"source":"healthy_yet","source_name":"Healthy
-        Yet","timestamp":"2015-01-06T16:14:17+00:00","utc_offset":null,"validated":false,"water":null,"last_updated":"2015-01-08T16:46:59+00:00","activity_id":"nutrition_123"}}'
+      string: '{"code":201,"message":"Ok","nutrition":{"_id":"54aeedb198b4b1d8f20001ac","calories":850.0,"carbohydrates":351.0,"extras":null,"fat":52.0,"fiber":35.0,"meal":null,"protein":54.0,"sodium":855.0,"source":"healthy_yet","source_name":"Healthy
+        Yet","timestamp":"2015-01-08T20:50:53+00:00","utc_offset":null,"validated":false,"water":36.0,"last_updated":"2015-01-08T20:50:57+00:00","activity_id":"nutrition134-gem"}}'
     http_version: 
-  recorded_at: Thu, 08 Jan 2015 16:46:55 GMT
+  recorded_at: Thu, 08 Jan 2015 20:50:53 GMT
 recorded_with: VCR 2.8.0
