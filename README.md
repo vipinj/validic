@@ -217,17 +217,25 @@ validic.get_tobacco_cessations
 # Connect helper methods are only available for apps registered with
 # Validic Connect
 
-# Create a fitness record
+# Fitness
 validic.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+validic.update_fitness('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+validic.delete_fitness('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 
-# Create a routine record
+# Routine
 validic.create_routine('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+validic.update_routine('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+validic.delete_routine('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 
-# Create a nutrition record
+# Nutrition
 validic.create_nutrition('VALIDIC_USER_ID', 'UNIQUE_ENTRY_ID', options)
+validic.update_nutrition('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+validic.delete_nutrition('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 
-# Create a weight record
+# Weight
 validic.create_weight('VALIDIC_USER_ID', 'UNIQUE_DATA_ID', options)
+validic.update_weight('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+validic.delete_weight('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 
 # Diabetes
 validic.create_diabetes('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
@@ -235,15 +243,19 @@ validic.update_diabetes('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
 validic.delete_diabetes('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 
 # Biometrics
-validic.create_biometric('VALIDIC_USER_ID', 'UNIQUE_DATA_ID', options)
+validic.create_biometric('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
 validic.update_biometric('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
 validic.delete_biometric('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 
-# Create a sleep record
+# Sleep
 validic.create_sleep('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+validic.update_sleep('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+validic.delete_sleep('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 
-# Create a tobacco cessation record
-validic.create_tobacco_cessation('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+# Tobacco Cessation
+validic.create_tobacco_cessation('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID' options)
+validic.update_tobacco_cessation('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+validic.delete_tobacco_cessation('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 
 # You can also create data with your own custom extras as JSON
 validic.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', extras: "{\"stars\": 3}")

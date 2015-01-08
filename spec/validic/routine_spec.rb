@@ -23,16 +23,6 @@ describe Validic::Routine do
     end
   end
 
-  context "#create_routine" do
-    it "should create new routine record", vcr: true do
-      @new_routine = client.create_routine(ENV['PARTNER_USER_ID'], organization_id: ENV['PARTNER_ORG_ID'], access_token: ENV['PARTNER_ACCESS_TOKEN'], activity_id: 'routines_1337', timestamp: "2015-01-06T16:14:17+00:00")
-      @new_routine.should_not be_nil
-      @new_routine.routine.timestamp.should eq "2015-01-06T16:14:17+00:00"
-      @new_routine.routine.activity_id.should eq 'routines_1337'
-      @new_routine.routine.source.should eq "healthy_yet"
-    end
-  end
-
   context "#get_routines by organization" do
     before do
       @routine = client.get_routines({organization_id: "51aca5a06dedda916400002b", access_token: "ENTERPRISE_KEY"})
@@ -68,4 +58,39 @@ describe Validic::Routine do
       @routine.summary.should_not be_nil
     end
   end
+
+  context "Validic Connect" do
+    before do
+      @connect = Validic::Client.new(organization_id: ENV['PARTNER_ORG_ID'],
+                                     access_token: ENV['PARTNER_ACCESS_TOKEN'],
+                                     api_url: 'https://api.validic.com',
+                                     api_version: 'v1')
+    end
+
+    context "#create_routine" do
+      it "should create new routine record", vcr: true do
+        @new_routine = @connect.create_routine(ENV['PARTNER_USER_ID'], "routinez")
+        @new_routine.should_not be_nil
+        @new_routine.routine.activity_id.should eq "routinez"
+        @new_routine.routine.source.should eq "healthy_yet"
+      end
+    end
+
+    context "#update_routine" do
+      it "should update routine record", vcr: true do
+        @update_routine = @connect.update_routine(ENV['PARTNER_USER_ID'], "54aeed4d98b4b12cee00019d", calories_burned: 10.0)
+        @update_routine.should_not be_nil
+        @update_routine.routine.calories_burned.should eq 10.0
+        @update_routine.routine.source.should eq "healthy_yet"
+      end
+    end
+
+    context "#delete_routine" do
+      it "should delete routine record", vcr: true do
+        @delete_routine = @connect.delete_routine(ENV['PARTNER_USER_ID'], "54aeed4d98b4b12cee00019d")
+        @delete_routine.code.should eq 200
+      end
+    end
+  end
+
 end

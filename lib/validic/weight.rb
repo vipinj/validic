@@ -38,21 +38,22 @@ module Validic
     # @params :source
     #
     # @return success
-    def create_weight(user_id, data_id, options={})
+    def create_weight(user_id, activity_id, options={})
       options = {
         user_id: user_id,
         access_token: options[:access_token] || Validic.access_token,
         organization_id: options[:organization_id] || Validic.organization_id,
         weight: {
-          data_id: data_id,
-          timestamp: options[:timestamp],
+          activity_id: activity_id,
+          timestamp: options[:timestamp] || DateTime.now.utc.to_s(:iso8601),
           utc_offset: options[:utc_offset],
           weight: options[:weight] || 0,
           height: options[:height],
           free_mass: options[:free_mass],
           fat_percent: options[:fat_percent],
           mass_weight: options[:mass_weight],
-          bmi: options[:bmi]
+          bmi: options[:bmi],
+          extras: options[:extras]
         }
       }
 
@@ -60,5 +61,53 @@ module Validic
       response if response
     end
 
+    ##
+    # Update Weight measurement based on `access_token` and `authentication_token`
+    #
+    # @params :access_token - *required if not specified on your initializer / organization access_token
+    # @params :authentication_token - *required / authentication_token of a specific user
+    #
+    # @return success
+    def update_weight(user_id, activity_id, options={})
+      options = {
+        user_id: user_id,
+        activity_id: activity_id,
+        organization_id: options[:organization_id] || Validic.organization_id,
+        access_token: options[:access_token] || Validic.access_token,
+        weight: {
+          timestamp: options[:timestamp] || DateTime.now.utc.to_s(:iso8601),
+          utc_offset: options[:utc_offset],
+          weight: options[:weight] || 0,
+          height: options[:height],
+          free_mass: options[:free_mass],
+          fat_percent: options[:fat_percent],
+          mass_weight: options[:mass_weight],
+          bmi: options[:bmi],
+          extras: options[:extras]
+        }
+      }
+
+      response = put_to_validic('weight', options)
+      response if response
+    end
+
+    ##
+    # Delete Biometric measurement
+    #
+    # @params :access_token - *required if not specified on your initializer / organization access_token
+    # @params :authentication_token - *required / authentication_token of a specific user
+    #
+    # @return success
+    def delete_weight(user_id, activity_id, options={})
+      options = {
+        user_id: user_id,
+        activity_id: activity_id,
+        access_token: options[:access_token] || Validic.access_token,
+        organization_id: options[:organization_id] || Validic.organization_id
+      }
+
+      response = delete_to_validic('weight', options)
+      response if response
+    end
   end
 end
