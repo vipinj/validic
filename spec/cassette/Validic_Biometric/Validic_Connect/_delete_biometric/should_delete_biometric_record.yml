@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: delete
+    uri: https://api.validic.com/v1/organizations/hy_id/users/hy-user/biometrics/54aeb32c68c652cd11000111.json?access_token=hy-token
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby Gem by Validic 0.3.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 08 Jan 2015 16:42:28 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - _validic_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFVEkiJWIwZDIwNmNlYjI1ODM3MWNhOGY0YjU4ZDVmNzQ3YWFmBjsAVA%3D%3D--da74873baac8fd1b661286c3aeb623b51149620a;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - 5d2507c00d16a39ae63c1db2443644cf
+      X-Runtime:
+      - '0.054448'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Request-Id, X-Runtime, X-Rack-Cache
+    body:
+      encoding: UTF-8
+      string: '{"code":200,"message":"Ok"}'
+    http_version: 
+  recorded_at: Thu, 08 Jan 2015 16:42:23 GMT
+recorded_with: VCR 2.8.0

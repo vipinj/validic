@@ -23,34 +23,55 @@ describe Validic::Nutrition do
     end
   end
 
-  context "#create_nutrition" do
-    it "should create new nutrition record" do
-      pending
-      @new_nutrition = client.create_nutrition({authentication_token: ENV['TEST_USER_AUTHENTICATION_TOKEN'],
-                                                access_token: "DEMO_KEY",
-                                                calories: 850,
-                                                carbohydrates: 351,
-                                                fat: 52,
-                                                fiber: 35,
-                                                protein: 54,
-                                                sodium: 855,
-                                                water: 36,
-                                                timestamp: "2013-05-16 07:12:16 -05:00",
-                                                meal: "Dinner",
-                                                source: "Sample App"})
-      @new_nutrition.should_not be_nil
-      @new_nutrition.nutrition.timestamp.should eq "2013-05-16 07:12:16 -05:00"
-      @new_nutrition.nutrition.calories.should eq 850.0
-      @new_nutrition.nutrition.carbohydrates.should eq 351.0
-      @new_nutrition.nutrition.fat.should eq 52.0
-      @new_nutrition.nutrition.fiber.should eq 35.0
-      @new_nutrition.nutrition.protein.should eq 54.0
-      @new_nutrition.nutrition.sodium.should eq 855.0
-      @new_nutrition.nutrition.water.should eq 36.0
-      @new_nutrition.nutrition.meal.should eq "Dinner"
-      @new_nutrition.nutrition.source.should eq "Sample App"
+  context 'Validic Connect' do
+    let(:connect) { Validic::Client.new(organization_id: ENV['PARTNER_ORG_ID'],
+                                        access_token: ENV['PARTNER_ACCESS_TOKEN'],
+                                        api_url: 'https://api.validic.com',
+                                        api_version: 'v1')
+    }
+
+    let(:user_id) { ENV['PARTNER_USER_ID'] }
+
+    let(:options) { {
+        calories: 850,
+        carbohydrates: 351,
+        fat: 52,
+        fiber: 35,
+        protein: 54,
+        sodium: 855,
+        water: 36,
+      }}
+
+    it "#create_nutrition", vcr: true do
+      new_nutrition = connect.create_nutrition(user_id, 'nutrition134-gem', options)
+
+      new_nutrition.should_not be_nil
+      new_nutrition.nutrition.calories.should eq 850.0
+      new_nutrition.nutrition.carbohydrates.should eq 351.0
+      new_nutrition.nutrition.fat.should eq 52.0
+      new_nutrition.nutrition.fiber.should eq 35.0
+      new_nutrition.nutrition.protein.should eq 54.0
+      new_nutrition.nutrition.sodium.should eq 855.0
+      new_nutrition.nutrition.water.should eq 36.0
+    end
+
+
+    it "#update_nutrition", vcr: true do
+      new_nutrition = connect.create_nutrition(user_id, 'nutrition85-gem', options)
+      update_nutrition = connect.update_nutrition(user_id, new_nutrition.nutrition._id, sodium: 901)
+
+      update_nutrition.should_not be nil
+      expect(update_nutrition.nutrition.sodium).to eq 901
+    end
+
+    it "#delete_nutrition", vcr: true do
+      new_nutrition = connect.create_nutrition(user_id, 'nutrition100-gem', options)
+      delete_nutrition = connect.delete_nutrition(user_id, new_nutrition.nutrition._id)
+
+      delete_nutrition.code.should eq 200
     end
   end
+
 
   context "#get_nutritions by organization" do
     before do

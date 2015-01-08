@@ -8,34 +8,32 @@ module Validic
     #
     # @params :access_token - override for default access_token
     # @return [Hashie::Mash] with list of Profile
-    def get_profile(options={})
-      options = {
-        access_token: options[:access_token]
-      }
+    def get_profile(authentication_token)
+      options = { authentication_token: authentication_token }
       response = get("/#{Validic.api_version}/profile.json", options)
       response if response
     end
 
     ##
-    # Update Profile base on `access_token`
-    # 
+    # Create Profile based on `authentication_token`
+    #
     # @return success
-    # def update_profile(options={})
-    #   options = {
-    #     profile: {
-    #       gender: options[:gender],
-    #       location: options[:location],
-    #       birth_year: options[:birth_year],
-    #       height: options[:height],
-    #       weight: options[:weight],
-    #       first_name: options[:first_name],
-    #       last_name: options[:last_name]
-    #     }
-    #   }
+    def create_profile(authentication_token, options={})
+      options = {
+        authentication_token: authentication_token,
+        profile: {
+          gender: options[:gender],
+          location: options[:location],
+          country: options[:country],
+          birth_year: options[:birth_year],
+          height: options[:height],
+          weight: options[:weight]
+        }
+      }
 
-    #   response = post("/#{Validic.api_version}/profile.json", options)
-    #   response if response
-    # end
+      response = post("/#{Validic.api_version}/profile.json", options)
+      response if response
+    end
 
   end
 end

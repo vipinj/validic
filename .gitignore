@@ -8,7 +8,6 @@ lib/bundler/man
 pkg
 rdoc
 spec/reports
-spec/cassette
 test/tmp
 test/version_tmp
 tmp
@@ -20,3 +19,6 @@ tmp
 .yardoc
 _yardoc
 doc/
+bin/
+tags
+.env

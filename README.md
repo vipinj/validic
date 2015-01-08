@@ -1,15 +1,52 @@
-# Validic
-
-Ruby API Wrapper for [Validic](http://www.validic.com)
+# Validic #
 
 ## Build Status
 [![Codeship Status for Validic/validic](https://www.codeship.io/projects/cc4ff330-9f72-0130-3cf3-0e5a3e2104f7/status?branch=master)](https://www.codeship.io/projects/3456)
 
-
 ## Stable Version: 0.3.2
 
-## Installation
+Ruby API Wrapper for [Validic](http://www.validic.com). It includes the
+following functionality:
 
+## Breaking Changes ##
+- Methods for user provisioning, suspending, and deleting have been renamed
+- Methods will now default to initialized values unless overridden in options
+
+### Organization ###
+- Organization metadata
+
+### Users ###
+- Provision new Validic users
+- Update, Suspend, or Delete users
+- Get users from organization credentials
+- Find user id from authentication token
+- Refresh user authentication token
+
+### Profiles ###
+- Get profile information from user authentication token
+- Create and modify user profiles
+
+### Apps ###
+- List available third party apps
+- List synced apps for a particular user
+
+### Activities ###
+- Fitness, Routine, Nutrition, Sleep, Weight, Diabetes, Biometrics, Tobacco
+  Cessation
+- Get activities scoped to user or organization
+- Activities from specific sources
+- Specified time ranges
+
+### Connect ###
+- Create activities as a Validic Connect partner
+- Post extra data
+
+### Latest Endpoint ###
+- Get latest data recorded, regardless of when the activity occurred
+- Scope to organization or user level
+- Specify start and end points
+
+## Installation
 Add this line to your application's Gemfile:
 
     gem 'validic'
@@ -24,35 +61,202 @@ Or install it yourself as:
 
 ## Usage
 
+First, instantiate the client.
 ```ruby
-    require 'validic'
+require 'validic'
 
-    # If you're using Rails 3+
-    # config/initializers/validic.rb
-    Validic.configure do |config|
-      config.api_url        = 'https://api.validic.com'
-      config.api_version    = 'v1'
-    end
+# If you're using Rails 3+
+# config/initializers/validic.rb
+Validic.configure do |config|
+  config.api_url          = 'https://api.validic.com'
+  config.api_version      = 'v1'
+  config.access_token     = 'ORGANIZATION_ACCESS_TOKEN',
+  config.organization_id  = 'ORGANIZATION_ID'
+end
 
-    # If you're using plain RUBY
-    # Create Validic::Client Object
-    options = {
-      api_url: 'https://api.validic.com',
-      api_version: 'v1',
-      access_token: 'DEMO_KEY' # Replace this with your key
-    }
-    client = Validic::Client.new options
+# Create a Client Object provided you have an initializer
+validic = Validic::Client.new
 
-    # Create a Client Object expecting you have an initializer in place
-    # Validic::Client Object
-    client = Validic::Client.new
+# If you're using plain RUBY
+# Create Validic::Client Object
+options = {
+  api_url:         'https://api.validic.com',
+  api_version:     'v1',
+  access_token:    'ORGANIZATION_ACCESS_TOKEN',
+  organization_id: 'ORGANIZATION_ID'
+}
+validic = Validic::Client.new options
+```
 
-    # => Get Account Fitness
-    client.get_fitness
+Now you can use the wrapper's helper methods to interface with the Validic API.
+```ruby
+# Get current organization metadata
+validic.get_organization
+```
 
-    # => Get Organization Fitness
-    client.get_fitness({organization_id: "YOUR_organization_id",
-                          access_token: "YOUR_ACCESS_TOKEN"})
+The wrapper returns the JSON response as a [Hashie::Mash](https://github.com/intridea/hashie#mash) instance for easy
+manipulation.
+```ruby
+# Get an array of apps for my current organization
+validic.get_apps.apps.map(&:name)
+```
+
+You can pass a hash of options to calls that fetch data.
+```ruby
+validic.get_routine(start_date: '2015-01-01T00:00:00+00:00')
+```
+
+### More Examples ###
+
+You can override initialized organization id and access tokens for all helper
+methods by passing parameters in an options hash as a final parameter.
+
+Below are examples of all helper methods.
+
+```ruby
+require 'validic'
+
+# Alternatively you can use an initializer
+options = {
+  api_url:         'https://api.validic.com',
+  api_version:     'v1',
+  access_token:    'ORGANIZATION_ACCESS_TOKEN',
+  organization_id: 'ORGANIZATION_ID'
+}
+validic = Validic::Client.new options
+
+###
+#   Organization methods
+###
+
+# Get current organization
+validic.get_organization
+
+###
+#   User methods
+###
+
+# Get users from organization credentials
+validic.get_users
+
+# Get user id from authentication token
+validic.me('USER_AUTHENTICATION_TOKEN')
+
+# Provision new users
+validic.provision_user('UNIQUE_USER_ID')
+
+# Updating a user
+validic.provision_user('VALIDIC_USER_ID', options)
+
+# Suspend a user
+validic.suspend_user('VALIDIC_USER_ID')
+
+# Unsuspend a user
+validic.unsuspend_user('VALIDIC_USER_ID')
+
+# Refresh authentication token
+validic.refresh_token('VALIDIC_USER_ID')
+
+# Delete a user
+validic.delete_user('VALIDIC_USER_ID')
+
+###
+#   Profile methods
+###
+
+# Get a user profile
+validic.get_profile('USER_AUTHENTICATION_TOKEN')
+
+# Create a user profile
+validic.create_profile('USER_AUTHENTICATION_TOKEN', options)
+
+###
+#   Apps methods
+###
+
+# Get a list of available third-party-apps
+validic.get_apps
+
+# Get a list of apps a user is synced to
+validic.get_synced_apps('USER_AUTHENTICATION_TOKEN')
+
+###
+#   Activity methods
+###
+
+# You can also filter the results of the following methods by passing an options hash
+
+# Get an array of fitness records
+validic.get_fitness
+
+# Get an array of routine records
+validic.get_routine
+
+# Get an array of nutrition records
+validic.get_nutritions
+
+# Get an array of weight records
+validic.get_weight
+
+# Get an array of diabetes records
+validic.get_diabetes
+
+# Get an array of biometrics records
+validic.get_biometrics
+
+# Get an array of sleep records
+validic.get_sleep
+
+# Get an array of tobacco cessation records
+validic.get_tobacco_cessations
+
+###
+#   Connect methods
+###
+
+# Connect helper methods are only available for apps registered with
+# Validic Connect
+
+# Create a fitness record
+validic.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+
+# Create a routine record
+validic.create_routine('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+
+# Create a nutrition record
+validic.create_nutrition('VALIDIC_USER_ID', 'UNIQUE_ENTRY_ID', options)
+
+# Create a weight record
+validic.create_weight('VALIDIC_USER_ID', 'UNIQUE_DATA_ID', options)
+
+# Diabetes
+validic.create_diabetes('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+validic.update_diabetes('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+validic.delete_diabetes('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+
+# Biometrics
+validic.create_biometric('VALIDIC_USER_ID', 'UNIQUE_DATA_ID', options)
+validic.update_biometric('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
+validic.delete_biometric('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+
+# Create a sleep record
+validic.create_sleep('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+
+# Create a tobacco cessation record
+validic.create_tobacco_cessation('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
+
+# You can also create data with your own custom extras as JSON
+validic.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', extras: "{\"stars\": 3}")
+
+###
+#   Latest Records
+###
+
+# You can also pass an options hash to filter latest results
+
+# Pull latest records for specified type
+validic.latest('routine')
+
 ```
 
 ## Contributing

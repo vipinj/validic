@@ -23,33 +23,6 @@ describe Validic::Diabetes do
     end
   end
 
-  context "#create_diabetes" do
-    it "should create new diabetes record", vcr: true do
-      pending
-      @new_diabetes = client.create_diabetes({authentication_token: ENV['TEST_USER_AUTHENTICATION_TOKEN'],
-                                              access_token: "DEMO_KEY",
-                                              c_peptide: 1,
-                                              fasting_plasma_glucose_test: 50,
-                                              hba1c: 100,
-                                              insulin: 350,
-                                              oral_glucose_tolerance_test: 100,
-                                              random_plasma_glucose_test: 200,
-                                              triglyceride: 100,
-                                              timestamp: "2013-05-16 07:12:16 -05:00",
-                                              source: "Sample App"})
-      @new_diabetes.should_not be_nil
-      @new_diabetes.diabetes.timestamp.should eq "2013-05-16 07:12:16 -05:00"
-      @new_diabetes.diabetes.c_peptide.should eq 1.0
-      @new_diabetes.diabetes.fasting_plasma_glucose_test.should eq 50.0
-      @new_diabetes.diabetes.hba1c.should eq 100.0
-      @new_diabetes.diabetes.insulin.should eq 350.0
-      @new_diabetes.diabetes.oral_glucose_tolerance_test.should eq 100.0
-      @new_diabetes.diabetes.random_plasma_glucose_test.should eq 200.0
-      @new_diabetes.diabetes.triglyceride 100.0
-      @new_diabetes.diabetes.source.should eq "Sample App"
-    end
-  end
-
   context "#get_diabetes by organization" do
     before do
       @org_diabetes = client.get_diabetes({organization_id: "51aca5a06dedda916400002b", access_token: "ENTERPRISE_KEY"})
@@ -60,7 +33,7 @@ describe Validic::Diabetes do
     end
 
     it "status 200" do
-      @org_diabetes.summary.status.should == 200 
+      @org_diabetes.summary.status.should == 200
     end
 
     it "has summary node" do
@@ -78,11 +51,45 @@ describe Validic::Diabetes do
     end
 
     it "status 200" do
-      @user_diabetes.summary.status.should == 200 
+      @user_diabetes.summary.status.should == 200
     end
 
     it "has summary node" do
       @user_diabetes.summary.should_not be_nil
+    end
+  end
+
+  context "Validic Connect" do
+    before do
+      @connect = Validic::Client.new(organization_id: ENV['PARTNER_ORG_ID'],
+                                     access_token: ENV['PARTNER_ACCESS_TOKEN'],
+                                     api_url: 'https://api.validic.com',
+                                     api_version: 'v1')
+    end
+
+    context "#create_diabetes" do
+      it "should create new diabetes record", vcr: true do
+        @new_diabetes = @connect.create_diabetes(ENV['PARTNER_USER_ID'], "diabetes_2015abc")
+        @new_diabetes.should_not be_nil
+        @new_diabetes.diabetes.activity_id.should eq "diabetes_2015abc"
+        @new_diabetes.diabetes.source.should eq "healthy_yet"
+      end
+    end
+
+    context "#update_diabetes" do
+      it "should update diabetes record", vcr: true do
+        @update_diabetes = @connect.update_diabetes(ENV['PARTNER_USER_ID'], "54aeb3c784626b2faf000230", insulin: 10.0)
+        @update_diabetes.should_not be_nil
+        @update_diabetes.diabetes.insulin.should eq 10.0
+        @update_diabetes.diabetes.source.should eq "healthy_yet"
+      end
+    end
+
+    context "#delete_diabetes" do
+      it "should delete diabetes record", vcr: true do
+        @delete_diabetes = @connect.delete_diabetes(ENV['PARTNER_USER_ID'], "54aeb3c784626b2faf000230")
+        @delete_diabetes.code.should eq 200
+      end
     end
   end
 

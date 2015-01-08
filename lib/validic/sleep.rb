@@ -15,10 +15,9 @@ module Validic
     # @params :access_token - override for default access_token
     # @params :source - optional - data per source (e.g 'fitbit')
     # @params :expanded - optional - will show the raw data
-    # 
+    #
     # @return [Hashie::Mash] with list of Sleep
     def get_sleep(params={})
-      params = extract_params(params)
       get_endpoint(:sleep, params)
     end
 
@@ -29,7 +28,7 @@ module Validic
     #
     # @params :access_token - *required if not specified on your initializer / organization access_token
     # @params :authentication_token - *required / authentication_token of a specific user
-    # 
+    #
     # @params :total_sleep
     # @params :awake
     # @params :deep
@@ -40,22 +39,25 @@ module Validic
     # @params :source
     #
     # @return success
-    def create_sleep(options={})
+    def create_sleep(user_id, activity_id, options={})
       options = {
-        access_token: options[:access_token],
+        user_id: user_id,
+        access_token: options[:access_token] || Validic.access_token,
+        organization_id: options[:organization_id] || Validic.organization_id,
         sleep: {
+          activity_id: activity_id,
+          timestamp: options[:timestamp],
+          utc_offset: options[:utc_offset],
           total_sleep: options[:total_sleep],
           awake: options[:awake],
           deep: options[:deep],
           light: options[:light],
           rem: options[:rem],
-          times_woken: options[:times_woken],
-          timestamp: options[:timestamp],
-          source: options[:source]
+          times_woken: options[:times_woken]
         }
       }
 
-      response = post("/#{Validic.api_version}/sleep.json", options)
+      response = post_to_validic('sleep', options)
       response if response
     end
 

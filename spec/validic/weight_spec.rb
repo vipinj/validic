@@ -15,7 +15,7 @@ describe Validic::Weight do
     end
 
     it "status 200" do
-      @weight.summary.status.should == 200 
+      @weight.summary.status.should == 200
     end
 
     it "has summary node" do
@@ -24,34 +24,18 @@ describe Validic::Weight do
   end
 
   context "#create_weight" do
-    it "should create new weight record" do
-      pending
-      @new_weight = client.create_weight({authentication_token: ENV['TEST_USER_AUTHENTICATION_TOKEN'],
-                                          access_token: "DEMO_KEY",
-                                          timestamp: "2013-05-16 07:12:16 -05:00",
-                                          bmi: 133.26,
-                                          fat_percent: 130.5,
-                                          mass_weight: 139.45,
-                                          free_mass: 140.50,
-                                          weight: 69.76,
-                                          height: 167.75,
-                                          source: "Sample App"})
-
+    it "should create new weight record", vcr: true do
+      @new_weight = client.create_weight(ENV['PARTNER_USER_ID'], 'weights_7', organization_id: ENV['PARTNER_ORG_ID'], access_token: ENV['PARTNER_ACCESS_TOKEN'], timestamp: "2015-01-06T16:14:17+00:00")
       @new_weight.should_not be_nil
-      @new_weight.weight.timestamp.should eq "2013-05-16 07:12:16 -05:00"
-      @new_weight.weight.bmi.should eq 133.26
-      @new_weight.weight.fat_percent.should eq 130.5
-      @new_weight.weight.mass_weight.should eq 139.45
-      @new_weight.weight.height.should eq "167.75"
-      @new_weight.weight.free_mass.should eq 140.50
-      @new_weight.weight.weight.should eq 69.76
-      @new_weight.weight.source.should eq "Sample App"
+      @new_weight.weight.timestamp.should eq "2015-01-06T16:14:17+00:00"
+      @new_weight.weight.activity_id.should eq 'weights_7'
+      @new_weight.weight.source.should eq "healthy_yet"
     end
   end
 
   context "#get_weights by organization" do
     before do
-      @weight = client.get_weights({organization_id: "51aca5a06dedda916400002b", access_token: "ENTERPRISE_KEY"})
+      @weight = client.get_weights({organization_id: ENV['TEST_ORG_ID'], access_token: "ENTERPRISE_KEY"})
     end
 
     it "returns JSON response of Validic::Weight", vcr: true do
@@ -59,7 +43,7 @@ describe Validic::Weight do
     end
 
     it "status 200" do
-      @weight.summary.status.should == 200 
+      @weight.summary.status.should == 200
     end
 
     it "has summary node" do
@@ -77,7 +61,7 @@ describe Validic::Weight do
     end
 
     it "status 200" do
-      @weight.summary.status.should == 200 
+      @weight.summary.status.should == 200
     end
 
     it "has summary node" do

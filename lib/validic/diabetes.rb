@@ -18,7 +18,6 @@ module Validic
     #
     # @return [Hashie::Mash] with list of Diabetes
     def get_diabetes(params={})
-      params = extract_params(params)
       get_endpoint(:diabetes, params)
     end
 
@@ -39,11 +38,15 @@ module Validic
     # @params :source
     #
     # @return success
-    def create_diabetes(options={})
+    def create_diabetes(user_id, activity_id, options={})
       options = {
-        authentication_token: options[:authentication_token],
-        access_token: options[:access_token],
+        user_id: user_id,
+        access_token: options[:access_token] || Validic.access_token,
+        organization_id: options[:organization_id] || Validic.organization_id,
         diabetes: {
+          activity_id: activity_id,
+          timestamp: options[:timestamp] || DateTime.now.utc.to_s(:iso8601),
+          utc_offset: options[:utc_offset],
           c_peptide: options[:c_peptide],
           fasting_plasma_glucose_test: options[:fasting_plasma_glucose_test],
           hba1c: options[:hba1c],
@@ -51,12 +54,73 @@ module Validic
           oral_glucose_tolerance_test: options[:oral_glucose_tolerance_test],
           random_plasma_glucose_test: options[:random_plasma_glucose_test],
           triglyceride: options[:triglyceride],
-          timestamp: options[:timestamp],
-          source: options[:source]
+          blood_glucose: options[:blood_glucose],
+          extras: options[:extras]
         }
       }
 
-      response = post("/#{Validic.api_version}/diabetes.json", options)
+      response = post_to_validic('diabetes', options)
+      response if response
+    end
+
+    ##
+    # Update Diabetes record base on `access_token` and `authentication_token`
+    #
+    # @params :access_token - *required if not specified on your initializer / organization access_token
+    # @params :authentication_token - *required / authentication_token of a specific user
+    #
+    # @params :c_peptide
+    # @params :fasting_plasma_glucose_test
+    # @params :hba1c
+    # @params :insulin
+    # @params :oral_glucose_tolerance_test
+    # @params :random_plasma_glucose_test
+    # @params :triglyceride
+    # @params :timestamp
+    # @params :source
+    #
+    # @return success
+    def update_diabetes(user_id, activity_id, options={})
+      options = {
+        user_id: user_id,
+        activity_id: activity_id,
+        access_token: options[:access_token] || Validic.access_token,
+        organization_id: options[:organization_id] || Validic.organization_id,
+        diabetes: {
+          timestamp: options[:timestamp] || DateTime.now.utc.to_s(:iso8601),
+          utc_offset: options[:utc_offset],
+          c_peptide: options[:c_peptide],
+          fasting_plasma_glucose_test: options[:fasting_plasma_glucose_test],
+          hba1c: options[:hba1c],
+          insulin: options[:insulin],
+          oral_glucose_tolerance_test: options[:oral_glucose_tolerance_test],
+          random_plasma_glucose_test: options[:random_plasma_glucose_test],
+          triglyceride: options[:triglyceride],
+          blood_glucose: options[:blood_glucose],
+          extras: options[:extras]
+        }
+      }
+
+      response = put_to_validic('diabetes', options)
+      response if response
+    end
+
+    ##
+    # Delete Diabetes record
+    #
+    # @params :access_token - *required if not specified on your initializer / organization access_token
+    # @params :authentication_token - *required / authentication_token of a specific user
+    #
+    # @return success
+    def delete_diabetes(user_id, activity_id, options={})
+      options = {
+        user_id: user_id,
+        activity_id: activity_id,
+        access_token: options[:access_token] || Validic.access_token,
+        organization_id: options[:organization_id] || Validic.organization_id
+      }
+
+      response = delete_to_validic('diabetes', options)
       response if response
     end
 

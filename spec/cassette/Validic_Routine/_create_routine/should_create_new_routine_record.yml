@@ -1,0 +1,56 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.validic.com/v1/organizations/hy_id/users/hy-user/routine.json
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"hy-token","routine":{"activity_id":"routines_1337","timestamp":"2015-01-06T16:14:17+00:00","utc_offset":null,"steps":null,"distance":null,"floors":null,"elevation":null,"calories_burned":null}}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby Gem by Validic 0.3.3
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 08 Jan 2015 16:46:09 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 201 Created
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - _validic_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFVEkiJWIzNGEyZGNiYTkwMGJiZTIzYjdkMDk0MWZkZmZjMmYwBjsAVA%3D%3D--99adffb49477a0bec7cec575026459b4157dc8d5;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - 7550fe4eb7a0f2f9f2766d3b714767c2
+      X-Runtime:
+      - '0.254967'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Request-Id, X-Runtime, X-Rack-Cache
+    body:
+      encoding: UTF-8
+      string: '{"code":201,"message":"Ok","routine":{"_id":"54aeb45168c65299e4000130","activity_id":"routines_1337","calories_burned":null,"distance":null,"elevation":null,"extras":null,"floors":null,"source":"healthy_yet","source_name":"Healthy
+        Yet","steps":null,"timestamp":"2015-01-06T16:14:17+00:00","utc_offset":null,"validated":false,"last_updated":"2015-01-08T16:46:09+00:00"}}'
+    http_version: 
+  recorded_at: Thu, 08 Jan 2015 16:46:04 GMT
+recorded_with: VCR 2.8.0

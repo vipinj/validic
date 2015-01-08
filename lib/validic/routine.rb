@@ -15,10 +15,9 @@ module Validic
     # @params :access_token - override for default access_token
     # @params :source - optional - data per source (e.g 'fitbit')
     # @params :expanded - optional - will show the raw data
-    # 
+    #
     # @return [Hashie::Mash] with list of Routine
     def get_routine(params={})
-      params = extract_params(params)
       get_endpoint(:routine, params)
     end
 
@@ -29,7 +28,7 @@ module Validic
     #
     # @params :access_token - *required if not specified on your initializer / organization access_token
     # @params :authentication_token - *required / authentication_token of a specific user
-    # 
+    #
     # @params :steps
     # @params :stairs_climbed
     # @params :calories_burned
@@ -38,20 +37,24 @@ module Validic
     # @params :source
     #
     # @return success
-    def create_routine(options={})
+    def create_routine(user_id, options={})
       options = {
-        access_token: options[:access_token],
+        user_id: user_id,
+        access_token: options[:access_token] || Validic.access_token,
+        organization_id: options[:organization_id] || Validic.organization_id,
         routine: {
-          steps: options[:steps],
-          stairs_climbed: options[:stairs_climbed],
-          calories_burned: options[:calories_burned],
-          calories_consumed: options[:calories_consumed],
+          activity_id: options[:activity_id],
           timestamp: options[:timestamp],
-          source: options[:source]
-        }
+          utc_offset: options[:utc_offset],
+          steps: options[:steps],
+          distance: options[:distance],
+          floors: options[:floors],
+          elevation: options[:elevation],
+          calories_burned: options[:calories_burned]
+        },
       }
 
-      response = post("/#{Validic.api_version}/routine.json", options)
+      response = post_to_validic('routine', options )
       response if response
     end
 

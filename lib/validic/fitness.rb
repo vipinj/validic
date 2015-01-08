@@ -18,7 +18,6 @@ module Validic
     #
     # @return [Hashie::Mash] with list of Fitness
     def get_fitness(params={})
-      params = extract_params(params)
       get_endpoint(:fitness, params)
     end
 
@@ -37,23 +36,27 @@ module Validic
     # @params :total_distance
     # @params :duration
     # @params :source
-    # 
+    #
     # @return success
-    def create_fitness(options={})
+    def create_fitness(user_id, options={})
       options = {
-        access_token: options[:access_token],
+        user_id: user_id,
+        access_token: options[:access_token] || Validic.access_token,
+        organization_id: options[:organization_id] || Validic.organization_id,
         fitness: {
+          activity_id: options[:activity_id],
           timestamp: options[:timestamp],
-          primary_type: options[:primary_type],
+          utc_offset: options[:utc_offset],
+          type: options[:type],
           intensity: options[:intensity],
           start_time: options[:start_time],
-          total_distance: options[:total_distance],
+          distance: options[:distance],
           duration: options[:duration],
-          source: options[:source]
+          calories: options[:calories]
         }
       }
 
-      response = post("/#{Validic.api_version}/fitness.json", options)
+      response = post_to_validic('fitness', options)
       response if response
     end
 

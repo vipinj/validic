@@ -15,7 +15,7 @@ describe Validic::Fitness do
     end
 
     it "status 200" do
-      @fitness.summary.status.should == 200 
+      @fitness.summary.status.should == 200
     end
 
     it "has summary node" do
@@ -24,25 +24,12 @@ describe Validic::Fitness do
   end
 
   context "#create_fitness" do
-    it "should create new fitness record" do
-      pending
-      @new_fitness = client.create_fitness({authentication_token: ENV['TEST_USER_AUTHENTICATION_TOKEN'],
-                                            access_token: "DEMO_KEY",
-                                            timestamp: "2013-03-10 07:12:16 -05:00",
-                                            primary_type: "Running",
-                                            intensity: "medium",
-                                            start_time: "2013-03-09 13:55:36 -05:00",
-                                            total_distance: 5149.9,
-                                            duration: 1959.90,
-                                            source: "Sample App"})
-
-      @new_fitness.fitness.timestamp.should eq "2013-03-10 07:12:16 -05:00"
-      @new_fitness.fitness.type.should eq "Running"
-      @new_fitness.fitness.intensity.should eq "medium"
-      @new_fitness.fitness.start_time.should eq "2013-03-09 13:55:36 -05:00"
-      @new_fitness.fitness.total_distance.should eq 5149.9
-      @new_fitness.fitness.duration.should eq 1959.90
-      @new_fitness.fitness.source.should eq "Sample App"
+    it "should create new fitness record", vcr: true do
+      @new_fitness = client.create_fitness(ENV['PARTNER_USER_ID'], organization_id: ENV['PARTNER_ORG_ID'], access_token: ENV['PARTNER_ACCESS_TOKEN'], activity_id: 'fitness_123', timestamp: "2015-01-06T16:14:17+00:00", type: "Running")
+      @new_fitness.should_not be_nil
+      @new_fitness.fitness.timestamp.should eq "2015-01-06T16:14:17+00:00"
+      @new_fitness.fitness.activity_id.should eq 'fitness_123'
+      @new_fitness.fitness.source.should eq "healthy_yet"
     end
   end
 
@@ -56,7 +43,7 @@ describe Validic::Fitness do
     end
 
     it "status 200" do
-      @fitness.summary.status.should == 200 
+      @fitness.summary.status.should == 200
     end
 
     it "has summary node" do
@@ -74,7 +61,7 @@ describe Validic::Fitness do
     end
 
     it "status 200" do
-      @fitness.summary.status.should == 200 
+      @fitness.summary.status.should == 200
     end
 
     it "has summary node" do
