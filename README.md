@@ -78,11 +78,9 @@ end
 ##### Create a Client Object provided you have an initializer
 ```ruby
 client = Validic::Client.new
-```
 
-### If you're using plain RUBY
-### Create Validic::Client Object
-```ruby
+# If you're using plain RUBY
+# Create Validic::Client Object
 options = {
   api_url:         'https://api.validic.com',
   api_version:     'v1',
