@@ -42,12 +42,12 @@ module Validic
         organization_id: options[:organization_id] || Validic.organization_id,
         tobacco_cessation: {
           activity_id: activity_id,
-          timestamp: options[:timestamp] || DateTime.now.utc.to_s(:iso8601),
+          timestamp: options[:timestamp] || DateTime.now.new_offset(0).iso8601,
           utc_offset: options[:utc_offset],
           cigarettes_allowed: options[:cigarettes_allowed] || 0,
           cigarettes_smoked: options[:cigarettes_smoked] || 0,
           cravings: options[:cravings] || 0,
-          last_smoked: options[:last_smoked] || DateTime.now.utc.to_s(:iso8601),
+          last_smoked: options[:last_smoked] || DateTime.now.new_offset(0).iso8601,
           extras: options[:extras]
         }
       }
@@ -77,12 +77,12 @@ module Validic
         access_token: options[:access_token] || Validic.access_token,
         organization_id: options[:organization_id] || Validic.organization_id,
         tobacco_cessation: {
-          timestamp: options[:timestamp] || DateTime.now.utc.to_s(:iso8601),
+          timestamp: options[:timestamp] || DateTime.now.new_offset(0).iso8601,
           utc_offset: options[:utc_offset],
           cigarettes_allowed: options[:cigarettes_allowed] || 0,
           cigarettes_smoked: options[:cigarettes_smoked] || 0,
           cravings: options[:cravings] || 0,
-          last_smoked: options[:last_smoked] || DateTime.now.utc.to_s(:iso8601),
+          last_smoked: options[:last_smoked] || DateTime.now.new_offset(0).iso8601,
           extras: options[:extras]
         }
       }

@@ -1,5 +1,4 @@
 # encoding: utf-8
-require 'active_support/core_ext'
 require 'multi_json'
 
 module Validic
