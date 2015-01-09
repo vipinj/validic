@@ -11,7 +11,7 @@ describe Validic::Profile do
     end
 
     it "returns JSON response of Validic::Profile", vcr: true do
-      @profile.should_not be_nil
+      expect(@profile).not_to be_nil
     end
   end
 
@@ -24,7 +24,7 @@ describe Validic::Profile do
                                        birth_year: "1987",
                                        height: 60.0,
                                        weight: 140)
-      @profile.should_not be_nil
+      expect(@profile).not_to be_nil
     end
   end
 

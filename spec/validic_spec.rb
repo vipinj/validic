@@ -8,11 +8,11 @@ describe Validic do
   context "configure defaults" do
 
     it "uses default API URL" do
-      client.api_url.should eq 'https://api.validic.com'
+      expect(client.api_url).to eq 'https://api.validic.com'
     end
 
     it "uses default API VERSION" do
-      client.api_version.should eq 'v1'
+      expect(client.api_version).to eq 'v1'
     end
 
   end
@@ -24,15 +24,15 @@ describe Validic do
                            organization_id: '1234567') }
 
     it "::Client API_URL configuration" do
-      new_client.api_url.should eq 'https://api.validic.net'
+      expect(new_client.api_url).to eq 'https://api.validic.net'
     end
 
     it "::Client API_VERSION configuration" do
-      new_client.api_version.should eq 'v2'
+      expect(new_client.api_version).to eq 'v2'
     end
 
     it "::Client Organization ID configuration" do
-      new_client.organization_id.should eq '1234567'
+      expect(new_client.organization_id).to eq '1234567'
     end
   end
 

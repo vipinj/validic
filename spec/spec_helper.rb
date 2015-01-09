@@ -36,8 +36,6 @@ end
 RSpec.configure do |c|
   c.include APIMatchers::RSpecMatchers
 
-  c.treat_symbols_as_metadata_keys_with_true_values = true
-
   ##
   # Add gem specific configuration for easy access
   #
