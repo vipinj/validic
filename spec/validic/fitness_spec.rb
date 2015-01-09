@@ -11,15 +11,15 @@ describe Validic::Fitness do
     end
 
     it "returns JSON response of Validic::Fitness", vcr: true do
-      @fitness.should_not be_nil
+      expect(@fitness).not_to be_nil
     end
 
     it "status 200" do
-      @fitness.summary.status.should == 200
+      expect(@fitness.summary.status).to eq(200)
     end
 
     it "has summary node" do
-      @fitness.summary.should_not be_nil
+      expect(@fitness.summary).not_to be_nil
     end
   end
 
@@ -29,15 +29,15 @@ describe Validic::Fitness do
     end
 
     it "returns JSON response of Validic::Fitness", vcr: true do
-      @fitness.should_not be_nil
+      expect(@fitness).not_to be_nil
     end
 
     it "status 200" do
-      @fitness.summary.status.should == 200
+      expect(@fitness.summary.status).to eq(200)
     end
 
     it "has summary node" do
-      @fitness.summary.should_not be_nil
+      expect(@fitness.summary).not_to be_nil
     end
   end
 
@@ -47,15 +47,15 @@ describe Validic::Fitness do
     end
 
     it "returns JSON response of Validic::Fitness", vcr: true do
-      @fitness.should_not be_nil
+      expect(@fitness).not_to be_nil
     end
 
     it "status 200" do
-      @fitness.summary.status.should == 200
+      expect(@fitness.summary.status).to eq(200)
     end
 
     it "has summary node" do
-      @fitness.summary.should_not be_nil
+      expect(@fitness.summary).not_to be_nil
     end
   end
 
@@ -70,25 +70,25 @@ describe Validic::Fitness do
     context "#create_fitness" do
       it "should create new fitness record", vcr: true do
         @new_fitness = @connect.create_fitness(ENV['PARTNER_USER_ID'], "fitnessez")
-        @new_fitness.should_not be_nil
-        @new_fitness.fitness.activity_id.should eq "fitnessez"
-        @new_fitness.fitness.source.should eq "healthy_yet"
+        expect(@new_fitness).not_to be_nil
+        expect(@new_fitness.fitness.activity_id).to eq "fitnessez"
+        expect(@new_fitness.fitness.source).to eq "healthy_yet"
       end
     end
 
     context "#update_fitness" do
       it "should update fitness record", vcr: true do
         @update_fitness = @connect.update_fitness(ENV['PARTNER_USER_ID'], "54aeedef84626b378100025d", calories: 10.0)
-        @update_fitness.should_not be_nil
-        @update_fitness.fitness.calories.should eq 10.0
-        @update_fitness.fitness.source.should eq "healthy_yet"
+        expect(@update_fitness).not_to be_nil
+        expect(@update_fitness.fitness.calories).to eq 10.0
+        expect(@update_fitness.fitness.source).to eq "healthy_yet"
       end
     end
 
     context "#delete_fitness" do
       it "should delete fitness record", vcr: true do
         @delete_fitness = @connect.delete_fitness(ENV['PARTNER_USER_ID'], "54aeedef84626b378100025d")
-        @delete_fitness.code.should eq 200
+        expect(@delete_fitness.code).to eq 200
       end
     end
   end

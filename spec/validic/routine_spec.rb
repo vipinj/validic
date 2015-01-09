@@ -11,15 +11,15 @@ describe Validic::Routine do
     end
 
     it "returns JSON response of Validic::Routine", vcr: true do
-      @routine.should_not be_nil
+      expect(@routine).not_to be_nil
     end
 
     it "status 200" do
-      @routine.summary.status.should == 200
+      expect(@routine.summary.status).to eq(200)
     end
 
     it "has summary node" do
-      @routine.summary.should_not be_nil
+      expect(@routine.summary).not_to be_nil
     end
   end
 
@@ -29,15 +29,15 @@ describe Validic::Routine do
     end
 
     it "returns JSON response of Validic::Routine", vcr: true do
-      @routine.should_not be_nil
+      expect(@routine).not_to be_nil
     end
 
     it "status 200" do
-      @routine.summary.status.should == 200
+      expect(@routine.summary.status).to eq(200)
     end
 
     it "has summary node" do
-      @routine.summary.should_not be_nil
+      expect(@routine.summary).not_to be_nil
     end
   end
 
@@ -47,15 +47,15 @@ describe Validic::Routine do
     end
 
     it "returns JSON response of Validic::Routine", vcr: true do
-      @routine.should_not be_nil
+      expect(@routine).not_to be_nil
     end
 
     it "status 200" do
-      @routine.summary.status.should == 200
+      expect(@routine.summary.status).to eq(200)
     end
 
     it "has summary node" do
-      @routine.summary.should_not be_nil
+      expect(@routine.summary).not_to be_nil
     end
   end
 
@@ -70,25 +70,25 @@ describe Validic::Routine do
     context "#create_routine" do
       it "should create new routine record", vcr: true do
         @new_routine = @connect.create_routine(ENV['PARTNER_USER_ID'], "routinez")
-        @new_routine.should_not be_nil
-        @new_routine.routine.activity_id.should eq "routinez"
-        @new_routine.routine.source.should eq "healthy_yet"
+        expect(@new_routine).not_to be_nil
+        expect(@new_routine.routine.activity_id).to eq "routinez"
+        expect(@new_routine.routine.source).to eq "healthy_yet"
       end
     end
 
     context "#update_routine" do
       it "should update routine record", vcr: true do
         @update_routine = @connect.update_routine(ENV['PARTNER_USER_ID'], "54aeed4d98b4b12cee00019d", calories_burned: 10.0)
-        @update_routine.should_not be_nil
-        @update_routine.routine.calories_burned.should eq 10.0
-        @update_routine.routine.source.should eq "healthy_yet"
+        expect(@update_routine).not_to be_nil
+        expect(@update_routine.routine.calories_burned).to eq 10.0
+        expect(@update_routine.routine.source).to eq "healthy_yet"
       end
     end
 
     context "#delete_routine" do
       it "should delete routine record", vcr: true do
         @delete_routine = @connect.delete_routine(ENV['PARTNER_USER_ID'], "54aeed4d98b4b12cee00019d")
-        @delete_routine.code.should eq 200
+        expect(@delete_routine.code).to eq 200
       end
     end
   end

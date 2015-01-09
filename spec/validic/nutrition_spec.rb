@@ -11,15 +11,15 @@ describe Validic::Nutrition do
     end
 
     it "returns JSON response of Validic::Nutrition", vcr: true do
-      @nutrition.should_not be_nil
+      expect(@nutrition).not_to be_nil
     end
 
     it "status 200" do
-      @nutrition.summary.status.should == 200
+      expect(@nutrition.summary.status).to eq(200)
     end
 
     it "has summary node" do
-      @nutrition.summary.should_not be_nil
+      expect(@nutrition.summary).not_to be_nil
     end
   end
 
@@ -45,14 +45,14 @@ describe Validic::Nutrition do
     it "#create_nutrition", vcr: true do
       new_nutrition = connect.create_nutrition(user_id, 'nutrition134-gem', options)
 
-      new_nutrition.should_not be_nil
-      new_nutrition.nutrition.calories.should eq 850.0
-      new_nutrition.nutrition.carbohydrates.should eq 351.0
-      new_nutrition.nutrition.fat.should eq 52.0
-      new_nutrition.nutrition.fiber.should eq 35.0
-      new_nutrition.nutrition.protein.should eq 54.0
-      new_nutrition.nutrition.sodium.should eq 855.0
-      new_nutrition.nutrition.water.should eq 36.0
+      expect(new_nutrition).not_to be_nil
+      expect(new_nutrition.nutrition.calories).to eq 850.0
+      expect(new_nutrition.nutrition.carbohydrates).to eq 351.0
+      expect(new_nutrition.nutrition.fat).to eq 52.0
+      expect(new_nutrition.nutrition.fiber).to eq 35.0
+      expect(new_nutrition.nutrition.protein).to eq 54.0
+      expect(new_nutrition.nutrition.sodium).to eq 855.0
+      expect(new_nutrition.nutrition.water).to eq 36.0
     end
 
 
@@ -60,7 +60,7 @@ describe Validic::Nutrition do
       new_nutrition = connect.create_nutrition(user_id, 'nutrition85-gem', options)
       update_nutrition = connect.update_nutrition(user_id, new_nutrition.nutrition._id, sodium: 901)
 
-      update_nutrition.should_not be nil
+      expect(update_nutrition).not_to be nil
       expect(update_nutrition.nutrition.sodium).to eq 901
     end
 
@@ -68,7 +68,7 @@ describe Validic::Nutrition do
       new_nutrition = connect.create_nutrition(user_id, 'nutrition100-gem', options)
       delete_nutrition = connect.delete_nutrition(user_id, new_nutrition.nutrition._id)
 
-      delete_nutrition.code.should eq 200
+      expect(delete_nutrition.code).to eq 200
     end
   end
 
@@ -79,15 +79,15 @@ describe Validic::Nutrition do
     end
 
     it "returns JSON response of Validic::Nutrition", vcr: true do
-      @nutrition.should_not be_nil
+      expect(@nutrition).not_to be_nil
     end
 
     it "status 200" do
-      @nutrition.summary.status.should == 200
+      expect(@nutrition.summary.status).to eq(200)
     end
 
     it "has summary node" do
-      @nutrition.summary.should_not be_nil
+      expect(@nutrition.summary).not_to be_nil
     end
   end
 
@@ -97,15 +97,15 @@ describe Validic::Nutrition do
     end
 
     it "returns JSON response of Validic::Nutrition", vcr: true do
-      @nutrition.should_not be_nil
+      expect(@nutrition).not_to be_nil
     end
 
     it "status 200" do
-      @nutrition.summary.status.should == 200
+      expect(@nutrition.summary.status).to eq(200)
     end
 
     it "has summary node" do
-      @nutrition.summary.should_not be_nil
+      expect(@nutrition.summary).not_to be_nil
     end
   end
 

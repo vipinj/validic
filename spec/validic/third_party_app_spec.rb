@@ -11,11 +11,11 @@ describe Validic::ThirdPartyApp do
     end
 
     it "returns JSON response of Validic::ThirdPartyApp", vcr: true do
-      @app_response.should_not be_nil
+      expect(@app_response).not_to be_nil
     end
 
     it "has apps node" do
-      @app_response.apps.should_not be_nil
+      expect(@app_response.apps).not_to be_nil
     end
   end
 
@@ -25,7 +25,7 @@ describe Validic::ThirdPartyApp do
     end
 
     it "returns JSON response of Validic::ThirdPartyApp", vcr: true do
-      @synced_app_response.should_not be_nil
+      expect(@synced_app_response).not_to be_nil
     end
   end
 

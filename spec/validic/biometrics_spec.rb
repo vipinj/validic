@@ -15,26 +15,26 @@ describe Validic::Biometric do
     end
 
     it "returns JSON response of Validic::Biometrics", vcr: true do
-      @user_biometrics.should_not be_nil
+      expect(@user_biometrics).not_to be_nil
     end
 
     it "status 200" do
-      @user_biometrics.summary.status.should == 200
+      expect(@user_biometrics.summary.status).to eq(200)
     end
 
     context "#summary response" do
       it "not nil" do
-        @user_biometrics.summary.should_not be_nil
+        expect(@user_biometrics.summary).not_to be_nil
       end
 
       it "results not 0" do
-        @user_biometrics.summary.results.should_not == 0
+        expect(@user_biometrics.summary.results).not_to eq(0)
       end
     end
 
     context "#biometrics collection" do
       it "has a collection" do
-        @user_biometrics.biometrics.should be_a(Array)
+        expect(@user_biometrics.biometrics).to be_a(Array)
       end
     end
   end
@@ -50,25 +50,25 @@ describe Validic::Biometric do
     context "#create_biometric" do
       it "should create new biometric record", vcr: true do
         @new_biometric = @connect.create_biometric(ENV['PARTNER_USER_ID'], "biometricz")
-        @new_biometric.should_not be_nil
-        @new_biometric.biometrics.activity_id.should eq "biometricz"
-        @new_biometric.biometrics.source.should eq "healthy_yet"
+        expect(@new_biometric).not_to be_nil
+        expect(@new_biometric.biometrics.activity_id).to eq "biometricz"
+        expect(@new_biometric.biometrics.source).to eq "healthy_yet"
       end
     end
 
     context "#update_biometric" do
       it "should update biometric record", vcr: true do
         @update_biometric = @connect.update_biometric(ENV['PARTNER_USER_ID'], "54aeeed898b4b11f9a0001b8", blood_calcium: 10.0)
-        @update_biometric.should_not be_nil
-        @update_biometric.biometrics.blood_calcium.should eq 10.0
-        @update_biometric.biometrics.source.should eq "healthy_yet"
+        expect(@update_biometric).not_to be_nil
+        expect(@update_biometric.biometrics.blood_calcium).to eq 10.0
+        expect(@update_biometric.biometrics.source).to eq "healthy_yet"
       end
     end
 
     context "#delete_biometric" do
       it "should delete biometric record", vcr: true do
         @delete_biometric = @connect.delete_biometric(ENV['PARTNER_USER_ID'], "54aeeed898b4b11f9a0001b8")
-        @delete_biometric.code.should eq 200
+        expect(@delete_biometric.code).to eq 200
       end
     end
   end

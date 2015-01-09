@@ -11,15 +11,15 @@ describe Validic::Organization do
     end
 
     it "returns JSON response of Validic::Organization", vcr: true do
-      @organization_response.should_not be_nil
+      expect(@organization_response).not_to be_nil
     end
 
     it "status 200" do
-      @organization_response.summary.status.should == 200
+      expect(@organization_response.summary.status).to eq(200)
     end
 
     it "has summary node" do
-      @organization_response.summary.should_not be_nil
+      expect(@organization_response.summary).not_to be_nil
     end
   end
 end
