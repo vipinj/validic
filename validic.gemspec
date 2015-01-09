@@ -28,11 +28,11 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "dotenv"
   spec.add_development_dependency "pry"
   spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "rspec", '~> 3.1.0'
   spec.add_development_dependency "shoulda"
   spec.add_development_dependency "simplecov"
   spec.add_development_dependency "simplecov-rcov"
-  spec.add_development_dependency "vcr", '~> 2.8.0'
+  spec.add_development_dependency "vcr", '~> 2.9.3'
   spec.add_development_dependency "webmock", '~> 1.8.0'
   spec.add_development_dependency "yard"
 end
