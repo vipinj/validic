@@ -1,23 +1,8 @@
 require 'validic'
 require 'vcr'
-require 'simplecov'
-require 'simplecov-rcov'
-require 'api_matchers'
 require 'pry'
 require 'dotenv'
 Dotenv.load
-
-class SimpleCov::Formatter::MergedFormatter
-  def format(result)
-    SimpleCov::Formatter::HTMLFormatter.new.format(result)
-    SimpleCov::Formatter::RcovFormatter.new.format(result)
-  end
-end
-
-SimpleCov.formatter = SimpleCov::Formatter::MergedFormatter
-SimpleCov.start do
-  add_filter '/vendor'
-end
 
 VCR.configure do |c|
   c.allow_http_connections_when_no_cassette = true
@@ -34,11 +19,6 @@ VCR.configure do |c|
 end
 
 RSpec.configure do |c|
-  c.include APIMatchers::RSpecMatchers
-
-  ##
-  # Add gem specific configuration for easy access
-  #
   c.before(:each) do
     Validic.configure do |config|
       # This is using ACME Corp Credentials as per Documentation

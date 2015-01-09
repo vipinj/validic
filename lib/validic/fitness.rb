@@ -45,7 +45,7 @@ module Validic
         organization_id: options[:organization_id] || Validic.organization_id,
         fitness: {
           activity_id: activity_id,
-          timestamp: options[:timestamp] || DateTime.now.utc.to_s(:iso8601),
+          timestamp: options[:timestamp] || DateTime.now.new_offset(0).iso8601,
           utc_offset: options[:utc_offset],
           type: options[:type] || 'General',
           intensity: options[:intensity],
@@ -84,7 +84,7 @@ module Validic
         organization_id: options[:organization_id] || Validic.organization_id,
         fitness: {
           activity_id: activity_id,
-          timestamp: options[:timestamp] || DateTime.now.utc.to_s(:iso8601),
+          timestamp: options[:timestamp] || DateTime.now.new_offset(0).iso8601,
           utc_offset: options[:utc_offset],
           type: options[:type] || 'General',
           intensity: options[:intensity],

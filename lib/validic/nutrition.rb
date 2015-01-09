@@ -46,7 +46,7 @@ module Validic
         organization_id: options[:organization_id] || Validic.organization_id,
         nutrition: {
           entry_id: entry_id,
-          timestamp: options[:timestamp] || DateTime.now.utc.to_s(:iso8601),
+          timestamp: options[:timestamp] || DateTime.now.new_offset(0).iso8601,
           utc_offset: options[:utc_offset],
           calories: options[:calories] || 0,
           carbohydrates: options[:carbohydrates],
@@ -72,7 +72,7 @@ module Validic
         organization_id: options[:organization_id] || Validic.organization_id,
         activity_id: nutrition_id,
         nutrition: {
-          timestamp: options[:timestamp] || DateTime.now.utc.to_s(:iso8601),
+          timestamp: options[:timestamp] || DateTime.now.new_offset(0).iso8601,
           utc_offset: options[:utc_offset],
           calories: options[:calories],
           carbohydrates: options[:carbohydrates],
