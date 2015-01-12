@@ -4,7 +4,7 @@ require "validic/client"
 require "validic/version"
 
 module Validic
-
+  BASE_URL = "https://api.validic.com/v1"
   class << self
     attr_accessor :api_url,
       :api_version,

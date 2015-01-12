@@ -19,7 +19,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency 'faraday_middleware', '~> 0.9.0'
-  spec.add_dependency 'hashie', '~> 2.0.3'
   spec.add_dependency 'multi_json'
   spec.add_development_dependency "bundler"
 end

@@ -1,37 +1,37 @@
 # encoding: utf-8
 require 'forwardable'
-require 'validic/request'
-require 'validic/organization'
-require 'validic/user'
-require 'validic/profile'
-require 'validic/fitness'
-require 'validic/weight'
-require 'validic/nutrition'
-require 'validic/sleep'
-require 'validic/diabetes'
-require 'validic/biometric'
-require 'validic/routine'
-require 'validic/tobacco_cessation'
-require 'validic/third_party_app'
+require 'validic/rest/request'
+# require 'validic/organization'
+# require 'validic/user'
+# require 'validic/profile'
+# require 'validic/fitness'
+# require 'validic/weight'
+# require 'validic/nutrition'
+require 'validic/rest/sleep'
+# require 'validic/diabetes'
+# require 'validic/biometric'
+# require 'validic/routine'
+# require 'validic/tobacco_cessation'
+# require 'validic/third_party_app'
 
 module Validic
   class Client
     extend Forwardable
 
-    include Request
-    include Organization
-    include User
-    include Profile
-    include Fitness
-    include Weight
-    include Nutrition
-    include Sleep
-    include Diabetes
-    include Biometric
-    include Routine
-    include TobaccoCessation
-    include ThirdPartyApp
-
+    include REST::Request
+    # include Organization
+    # include User
+    # include Profile
+    # include Fitness
+    # include Weight
+    # include Nutrition
+    include REST::Sleep
+    # include Diabetes
+    # include Biometric
+    # include Routine
+    # include TobaccoCessation
+    # include ThirdPartyApp
+    #
     attr_accessor :api_url,
       :api_version,
       :access_token,
@@ -56,7 +56,7 @@ module Validic
     # @return [Faraday::Connection]
     def connection
       Faraday.new(url: @api_url, headers: default_headers, ssl: { verify: true }) do |faraday|
-        faraday.use FaradayMiddleware::Mashify
+        # faraday.use FaradayMiddleware::Mashify
         faraday.use FaradayMiddleware::ParseJson, content_type: /\bjson$/
         faraday.use FaradayMiddleware::FollowRedirects
         faraday.adapter Faraday.default_adapter
