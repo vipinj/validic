@@ -18,14 +18,17 @@ VCR.configure do |c|
   c.filter_sensitive_data('hy-user')    { ENV['PARTNER_USER_ID'] }
 end
 
-RSpec.configure do |c|
-  c.before(:each) do
-    Validic.configure do |config|
-      # This is using ACME Corp Credentials as per Documentation
-      config.api_url          = 'https://api.validic.com'
-      config.api_version      = 'v1'
-      config.access_token     = ENV['TEST_ORG_TOKEN']
-      config.organization_id  = ENV['TEST_ORG_ID']
+RSpec.configure do |config|
+  config.before(:each) do
+    Validic.configure do |c|
+      c.api_url = 'https://api.validic.com'
+      c.api_version = 'v1'
+      c.access_token = ENV['TEST_ORG_TOKEN']
+      c.organization_id = ENV['TEST_ORG_ID']
     end
+  end
+
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
   end
 end
