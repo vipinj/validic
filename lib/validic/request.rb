@@ -35,5 +35,73 @@ module Validic
       response.body
     end
 
+    ##
+    # Pull the latest endpoint
+    def latest(type, params={})
+      organization_id = params[:organization_id] || Validic.organization_id
+      user_id = params[:user_id]
+
+      if user_id
+        url = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}/latest.json"
+      else
+        url = "/#{Validic.api_version}/organizations/#{organization_id}/#{type.to_s}/latest.json"
+      end
+
+      get(url, params)
+    end
+
+    ##
+    # Generic Pull of Validic Objects
+    def get_endpoint(type, params={})
+      organization_id = params[:organization_id] || Validic.organization_id
+
+      if params[:user_id] && type != :users
+        url = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{params[:user_id]}/#{type.to_s}.json"
+      elsif params[:user_id] && type == :users
+        url = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{params[:user_id]}.json"
+      else
+        url = "/#{Validic.api_version}/organizations/#{organization_id}/#{type.to_s}.json"
+      end
+
+      get(url, params)
+    end
+
+    ##
+    # Generic POST to Validic
+    def post_to_validic(type, params={})
+      user_id = params.delete(:user_id)
+      organization_id = params.delete(:organization_id)
+
+      if user_id
+        url = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}.json"
+      else
+        url = "/#{Validic.api_version}/organizations/#{organization_id}/#{type.to_s}.json"
+      end
+
+      post(url, params)
+    end
+
+    ##
+    # Generic PUT to Validic Connect
+    def put_to_validic(type, params={})
+      user_id = params.delete(:user_id)
+      organization_id = params.delete(:organization_id)
+      activity_id = params.delete(:activity_id)
+      url = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}/#{activity_id}.json"
+
+      put(url, params)
+    end
+
+    ##
+    # Generic DELETE to Validic Connect
+    def delete_to_validic(type, params={})
+      user_id = params.delete(:user_id)
+      organization_id = params.delete(:organization_id)
+      activity_id = params.delete(:activity_id)
+      url = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}/#{activity_id}.json"
+
+      delete(url, params)
+    end
+
   end
 end
