@@ -6,7 +6,7 @@ module Validic
   module REST
     module Sleep
       def get_sleep(params={})
-        resp = get_endpoint(:sleep, params)
+        resp = get_request(:sleep, params)
         build_response_attr(resp)
       end
       alias :get_sleeps :get_sleep

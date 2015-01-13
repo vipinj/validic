@@ -6,7 +6,7 @@ module Validic
     module Request
       def latest(type, options = {})
         organization_id = options[:organization_id] || Validic.organization_id
-        user_id = options[:user_id]
+        user_id = options.delete(:user_id)
         if user_id
           path = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}/latest.json"
         else
