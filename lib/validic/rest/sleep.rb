@@ -122,8 +122,8 @@ module Validic
           organization_id: options[:organization_id] || Validic.organization_id
         }
 
-        response = delete_to_validic('sleep', options)
-        response if response
+        delete_to_validic('sleep', options)
+        true
       end
 
     end

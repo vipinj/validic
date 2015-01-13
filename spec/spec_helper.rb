@@ -26,6 +26,22 @@ def fixture(file)
   File.new(fixture_path + '/' + file)
 end
 
+def a_delete(path)
+  a_request(:delete, Validic::BASE_URL + path)
+end
+
+def a_get(path)
+  a_request(:get, Validic::BASE_URL + path)
+end
+
+def a_post(path)
+  a_request(:post, Validic::BASE_URL + path)
+end
+
+def a_put(path)
+  a_request(:put, Validic::BASE_URL + path)
+end
+
 def stub_delete(path)
   stub_request(:delete, Validic::BASE_URL + path)
 end

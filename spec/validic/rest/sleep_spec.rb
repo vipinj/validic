@@ -1,6 +1,5 @@
 # encoding: utf-8
 require 'spec_helper'
-require 'json'
 
 describe Validic::REST::Sleep do
   let(:client) { Validic::Client.new }
@@ -63,7 +62,7 @@ describe Validic::REST::Sleep do
                                         headers: { content_type: 'application/json; charset=utf-8'} )
     end
 
-    it 'returns a sleep object' do
+    it 'returns a Sleep' do
       @sleep = client.create_sleep('51552cd7fded0807c4000017', '12345',
                                    timestamp: "2013-03-10T07:12:16+00:00",
                                    utc_offset: "+00:00",
@@ -76,6 +75,7 @@ describe Validic::REST::Sleep do
                                    access_token: 'e7ba1f04e88f25d399a91c8cbcd72300e01309e96b7725e40b49cd1effaa5deb')
 
       expect(@sleep).to be_a Validic::Sleep
+      expect(@sleep.total_sleep).to eq 477
     end
   end
 
@@ -102,15 +102,27 @@ describe Validic::REST::Sleep do
                                   times_woken: 4)
     end
 
-    it 'returns sleep obj' do
+    it 'returns a Sleep' do
       expect(@sleep).to be_a Validic::Sleep
     end
 
     it 'makes a sleep request to the correct url' do
       url = "#{Validic::BASE_URL}/organizations/#{ENV['TEST_ORG_ID']}/users/#{ENV['TEST_USER_ID']}/sleep/51552cddfded0807c4000096.json"
-
       expect(a_request(:put, url)).to have_been_made
     end
+  end
 
+  describe '#delete_sleep' do
+    context 'when resource is found' do
+      before do
+        stub_delete("/organizations/#{ENV['TEST_ORG_ID']}/users/51552cd7fded0807c4000017/sleep/51552cddfded0807c4000096.json")
+          .with(query: { access_token: 'e7ba1f04e88f25d399a91c8cbcd72300e01309e96b7725e40b49cd1effaa5deb' })
+          .to_return(status: 200)
+      end
+      it 'returns true' do
+        sleep = client.delete_sleep('51552cd7fded0807c4000017', '51552cddfded0807c4000096', access_token: 'e7ba1f04e88f25d399a91c8cbcd72300e01309e96b7725e40b49cd1effaa5deb')
+        expect(sleep).to be true
+      end
+    end
   end
 end
