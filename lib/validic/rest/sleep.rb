@@ -2,6 +2,7 @@
 require 'validic/sleep'
 require 'validic/response'
 require 'validic/rest/utils'
+
 module Validic
   module REST
     module Sleep
