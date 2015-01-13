@@ -45,25 +45,8 @@ module Validic
       # @params :source
       #
       # @return success
-      def create_sleep(user_id, activity_id, options={})
-        options = {
-          user_id: user_id,
-          access_token: options[:access_token] || Validic.access_token,
-          organization_id: options[:organization_id] || Validic.organization_id,
-          sleep: {
-            timestamp: options[:timestamp] || DateTime.now.new_offset(0).iso8601,
-            utc_offset: options[:utc_offset],
-            total_sleep: options[:total_sleep],
-            awake: options[:awake],
-            deep: options[:deep],
-            light: options[:light],
-            rem: options[:rem],
-            times_woken: options[:times_woken],
-            activity_id: activity_id,
-            extras: options[:extras]
-          }
-        }
-
+      def create_sleep(user_id, options={})
+        options = { user_id: user_id, sleep: options }
         response = post_to_validic('sleep', options)
         Validic::Sleep.new(response['sleep'])
       end
@@ -88,21 +71,8 @@ module Validic
         options = {
           user_id: user_id,
           activity_id: activity_id,
-          access_token: options[:access_token] || Validic.access_token,
-          organization_id: options[:organization_id] || Validic.organization_id,
-          sleep: {
-            timestamp: options[:timestamp] || DateTime.now.new_offset(0).iso8601,
-            utc_offset: options[:utc_offset],
-            total_sleep: options[:total_sleep],
-            awake: options[:awake],
-            deep: options[:deep],
-            light: options[:light],
-            rem: options[:rem],
-            times_woken: options[:times_woken],
-            extras: options[:extras]
-          }
+          sleep: options
         }
-
         response = put_to_validic(:sleep, options)
         Validic::Sleep.new(response['sleep'])
       end

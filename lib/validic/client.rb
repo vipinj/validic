@@ -1,37 +1,37 @@
 # encoding: utf-8
 require 'forwardable'
 require 'validic/rest/request'
-# require 'validic/organization'
-# require 'validic/user'
-# require 'validic/profile'
-# require 'validic/fitness'
-# require 'validic/weight'
-# require 'validic/nutrition'
+require 'validic/organization'
+require 'validic/user'
+require 'validic/profile'
+require 'validic/fitness'
+require 'validic/weight'
+require 'validic/nutrition'
 require 'validic/rest/sleep'
-# require 'validic/diabetes'
-# require 'validic/biometric'
-# require 'validic/routine'
-# require 'validic/tobacco_cessation'
-# require 'validic/third_party_app'
+require 'validic/diabetes'
+require 'validic/biometric'
+require 'validic/routine'
+require 'validic/tobacco_cessation'
+require 'validic/third_party_app'
 
 module Validic
   class Client
     extend Forwardable
 
     include REST::Request
-    # include Organization
-    # include User
-    # include Profile
-    # include Fitness
-    # include Weight
-    # include Nutrition
+    include Organization
+    include User
+    include Profile
+    include Fitness
+    include Weight
+    include Nutrition
     include REST::Sleep
-    # include Diabetes
-    # include Biometric
-    # include Routine
-    # include TobaccoCessation
-    # include ThirdPartyApp
-    #
+    include Diabetes
+    include Biometric
+    include Routine
+    include TobaccoCessation
+    include ThirdPartyApp
+
     attr_accessor :api_url,
       :api_version,
       :access_token,
