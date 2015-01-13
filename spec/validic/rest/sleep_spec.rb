@@ -8,8 +8,10 @@ describe Validic::REST::Sleep do
   describe "#get_sleeps" do
     context 'no user_id given' do
       before do
+        stub_get("/organizations/#{ENV['TEST_ORG_ID']}/sleep.json").
+          with(query: { access_token: ENV['TEST_ORG_TOKEN'] }).
+          to_return(body: fixture('sleep.json'), query: { access_token: ENV['TEST_ORG_TOKEN'] }, headers: {content_type: 'application/json; charset=utf-8'})
         @sleep = client.get_sleep
-        stub_get("/organizations/#{ENV['TEST_ORG_ID']}/sleep.json").to_return(body: fixture('sleep.json'), headers: {content_type: 'application/json; charset=utf-8'})
       end
 
       it 'returns an array of sleep objects' do
@@ -24,9 +26,10 @@ describe Validic::REST::Sleep do
 
     context 'with user_id' do
       before do
+        stub_get("/organizations/#{ENV['TEST_ORG_ID']}/users/#{ENV['TEST_USER_ID']}/sleep.json").
+          with(query: { access_token: ENV['TEST_ORG_TOKEN'] }).
+          to_return(body: fixture('sleep.json'), query: { access_token: ENV['TEST_ORG_TOKEN'] }, headers: {content_type: 'application/json; charset=utf-8'})
         @sleep = client.get_sleep(user_id: ENV['TEST_USER_ID'])
-        stub_get("/organizations/#{ENV['TEST_ORG_ID']}/users/#{ENV['TEST_USER_ID']}/sleep.json").to_return(body: fixture('sleep.json'), headers: {content_type: 'application/json; charset=utf-8'})
-
       end
 
       it 'returns an array of sleep objects' do
