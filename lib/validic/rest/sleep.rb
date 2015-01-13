@@ -103,8 +103,8 @@ module Validic
           }
         }
 
-        response = put_to_validic('sleep', options)
-        response if response
+        response = put_to_validic(:sleep, options)
+        Validic::Sleep.new(response['sleep'])
       end
 
       ##
