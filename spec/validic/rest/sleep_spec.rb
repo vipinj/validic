@@ -102,7 +102,6 @@ describe Validic::REST::Sleep do
     context 'when resource is found' do
       before do
         stub_delete("/organizations/1/users/1/sleep/51552cddfded0807c4000096.json")
-          .with(query: { access_token: '1' })
           .to_return(status: 200)
       end
       it 'returns true' do
