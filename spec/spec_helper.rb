@@ -2,6 +2,7 @@ require 'validic'
 require 'pry'
 require 'dotenv'
 require 'webmock/rspec'
+require 'json'
 Dotenv.load
 
 RSpec.configure do |config|
@@ -9,8 +10,8 @@ RSpec.configure do |config|
     Validic.configure do |c|
       c.api_url = 'https://api.validic.com'
       c.api_version = 'v1'
-      c.access_token = ENV['TEST_ORG_TOKEN']
-      c.organization_id = ENV['TEST_ORG_ID']
+      c.access_token = '1'
+      c.organization_id = '1'
     end
   end
   config.expect_with :rspec do |c|
