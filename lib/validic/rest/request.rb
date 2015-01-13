@@ -38,7 +38,7 @@ module Validic
       # Pull the latest endpoint
       def latest(type, params={})
         organization_id = params[:organization_id] || Validic.organization_id
-        user_id = params[:user_id]
+        user_id = params.delete(:user_id)
         if user_id
           url = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}/latest.json"
         else
