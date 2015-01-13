@@ -42,42 +42,38 @@ describe Validic::REST::Sleep do
   describe '#create_sleep' do
     before do
       stub_post("/organizations/1/users/1/sleep.json").
-        with(body: { access_token: '1',
-                     sleep: { timestamp: '2013-03-10T07:12:16+00:00',
+        with(body: { sleep: { timestamp: '2013-03-10T07:12:16+00:00',
                               utc_offset: '+00:00', total_sleep: 477,
                               awake: 34, deep: 234, light: 94, rem: 115,
-                              times_woken: 4, activity_id: '12345',
-                              extras: nil }}.to_json).
+                              times_woken: 4, activity_id: '12345' },
+                     access_token: '1' }.to_json).
                               to_return(body: fixture('sleep.json'),
                                         headers: { content_type: 'application/json; charset=utf-8'} )
     end
-
     it 'returns a Sleep' do
-      @sleep = client.create_sleep('1', '12345',
-                                   timestamp: "2013-03-10T07:12:16+00:00",
-                                   utc_offset: "+00:00",
-                                   total_sleep: 477,
-                                   awake: 34,
-                                   deep: 234,
-                                   light: 94,
-                                   rem: 115,
-                                   times_woken: 4,
-                                   access_token: '1')
+      @sleep = client.create_sleep('1', timestamp: "2013-03-10T07:12:16+00:00",
+                                        utc_offset: "+00:00",
+                                        total_sleep: 477,
+                                        awake: 34,
+                                        deep: 234,
+                                        light: 94,
+                                        rem: 115,
+                                        times_woken: 4,
+                                        activity_id: '12345')
 
       expect(@sleep).to be_a Validic::Sleep
       expect(@sleep.total_sleep).to eq 477
     end
   end
 
-
   describe "#update_sleep" do
     before do
       stub_put("/organizations/1/users/1/sleep/51552cddfded0807c4000096.json").
-        with(body: { access_token: '1',
-                     sleep: { timestamp: '2013-03-10T07:12:16+00:00',
+        with(body: { sleep: { timestamp: '2013-03-10T07:12:16+00:00',
                               utc_offset: '+00:00', total_sleep: 477,
                               awake: 224, deep: 234, light: 94, rem: 115,
-                              times_woken: 4, extras: nil }}.to_json).
+                              times_woken: 4 },
+                     access_token: '1' }.to_json).
                               to_return(body: fixture('sleep.json'),
                                         headers: {content_type: 'application/json; charset=utf-8'})
 
