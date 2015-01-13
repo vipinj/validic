@@ -41,28 +41,23 @@ describe Validic::REST::Nutrition do
 
   describe '#create_nutrition' do
     before do
-      stub_post("/organizations/1/users/1/nutrition.json").
-        with(body: { nutrition: { timestamp: '2013-03-10T07:12:16+00:00',
-                              utc_offset: '+00:00', total_nutrition: 477,
-                              awake: 34, deep: 234, light: 94, rem: 115,
-                              times_woken: 4, activity_id: '12345' },
-                              access_token: '1' }.to_json).
-                              to_return(body: fixture('nutrition.json'),
-                                        headers: { content_type: 'application/json; charset=utf-8'} )
+      stub_post("/organizations/1/users/1/nutrition.json")
+        .with(body: { nutrition: { timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345' },
+                      access_token: '1' }.to_json)
+        .to_return(body: fixture('nutrition.json'),
+          headers: { content_type: 'application/json; charset=utf-8'} )
+    end
+    it 'requests the correct resource' do
+      client.create_nutrition('1', timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345')
+      expect(a_post('/organizations/1/users/1/nutrition.json')
+        .with(body: { nutrition: { timestamp: '2013-03-10T07:12:16+00:00',
+                                   activity_id: '12345' },
+                      access_token: '1' }.to_json)).to have_been_made
     end
     it 'returns a Nutrition' do
-      @nutrition = client.create_nutrition('1', timestamp: "2013-03-10T07:12:16+00:00",
-                                   utc_offset: "+00:00",
-                                   total_nutrition: 477,
-                                   awake: 34,
-                                   deep: 234,
-                                   light: 94,
-                                   rem: 115,
-                                   times_woken: 4,
-                                   activity_id: '12345')
-
-      expect(@nutrition).to be_a Validic::Nutrition
-      expect(@nutrition.total_nutrition).to eq 477
+      nutrition = client.create_nutrition('1', timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345')
+      expect(nutrition).to be_a Validic::Nutrition
+      expect(nutrition.timestamp).to eq '2013-03-10T07:12:16+00:00'
     end
   end
 
