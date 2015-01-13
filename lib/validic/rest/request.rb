@@ -87,6 +87,7 @@ module Validic
         user_id = params.delete(:user_id)
         organization_id = params.delete(:organization_id)
         activity_id = params.delete(:activity_id)
+
         url = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}/#{activity_id}.json"
 
         put(url, params)
