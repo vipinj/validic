@@ -7,25 +7,22 @@ module Validic
     module Sleep
 
       ##
-      # Get Sleep Activities base on `access_token`
-      # Default data fetched is from yesterday
+      # Get Sleep Activities
+      # Default response is from data fetched yesterday
       #
-      # @params :organization_id - for organization specific
       # @params :user_id - for user specific
       #
       # @params :start_date - optional
       # @params :end_date - optional
-      # @params :access_token - override for default access_token
-      # @params :source - optional - data per source (e.g 'fitbit')
-      # @params :expanded - optional - will show the raw data
+      # @params :access_token - override for default access_token - optional
+      # @params :source - data per source (e.g 'fitbit') - optional
+      # @params :expanded - will show the raw data - optional
       #
-      # @return [Hashie::Mash] with list of Sleep
+      # @return Validic::Response
       def get_sleep(params={})
         resp = get_endpoint(:sleep, params)
         summary = Validic::Summary.new(resp["summary"])
-        sleeps = resp["sleep"].collect do |sleep|
-          Validic::Sleep.new(sleep)
-        end
+        sleeps = resp["sleep"].collect { |sleep| Validic::Sleep.new(sleep) }
 
         Validic::Response.new(summary,sleeps)
       end
