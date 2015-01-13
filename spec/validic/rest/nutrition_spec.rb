@@ -63,33 +63,21 @@ describe Validic::REST::Nutrition do
 
   describe "#update_nutrition" do
     before do
-      stub_put("/organizations/1/users/1/nutrition/51552cddfded0807c4000096.json").
-        with(body: { nutrition: { timestamp: '2013-03-10T07:12:16+00:00',
-                              utc_offset: '+00:00', total_nutrition: 477,
-                              awake: 224, deep: 234, light: 94, rem: 115,
-                              times_woken: 4 },
-                              access_token: '1' }.to_json).
-                              to_return(body: fixture('nutrition.json'),
-                                        headers: {content_type: 'application/json; charset=utf-8'})
-
-                              @nutrition = client.update_nutrition('1', "51552cddfded0807c4000096",
-                                                           timestamp: "2013-03-10T07:12:16+00:00",
-                                                           utc_offset: "+00:00",
-                                                           total_nutrition: 477,
-                                                           awake: 224,
-                                                           deep: 234,
-                                                           light: 94,
-                                                           rem: 115,
-                                                           times_woken: 4)
+      stub_put("/organizations/1/users/1/nutrition/51552cddfded0807c4000096.json")
+        .with(body: { nutrition: { timestamp: '2013-03-10T07:12:16+00:00' },
+                                   access_token: '1' }.to_json)
+        .to_return(body: fixture('nutrition.json'),
+                   headers: {content_type: 'application/json; charset=utf-8'})
     end
-
-    it 'returns a Nutrition' do
-      expect(@nutrition).to be_a Validic::Nutrition
-    end
-
     it 'makes a nutrition request to the correct url' do
-      url = "#{Validic::BASE_URL}/organizations/1/users/1/nutrition/51552cddfded0807c4000096.json"
-      expect(a_request(:put, url)).to have_been_made
+      client.update_nutrition('1', '51552cddfded0807c4000096', timestamp: '2013-03-10T07:12:16+00:00')
+      expect(a_put('/organizations/1/users/1/nutrition/51552cddfded0807c4000096.json')
+        .with(body: { nutrition: { timestamp: '2013-03-10T07:12:16+00:00' },
+                      access_token: '1' }.to_json)).to have_been_made
+    end
+    it 'returns a Nutrition' do
+      nutrition = client.update_nutrition('1', '51552cddfded0807c4000096', timestamp: '2013-03-10T07:12:16+00:00')
+      expect(nutrition).to be_a Validic::Nutrition
     end
   end
 
@@ -100,7 +88,7 @@ describe Validic::REST::Nutrition do
           .to_return(status: 200)
       end
       it 'returns true' do
-        nutrition = client.delete_nutrition('1', '51552cddfded0807c4000096', access_token: '1')
+        nutrition = client.delete_nutrition('1', '51552cddfded0807c4000096')
         expect(nutrition).to be true
       end
     end
@@ -138,5 +126,4 @@ describe Validic::REST::Nutrition do
       end
     end
   end
-
 end

@@ -26,7 +26,7 @@ module Validic
         Validic::Nutrition.new(response['nutrition'])
       end
 
-      def delete_nutrition(user_id, activity_id, options = {})
+      def delete_nutrition(user_id, activity_id)
         options = { user_id: user_id, activity_id: activity_id }
         delete_request(:nutrition, options)
         true
