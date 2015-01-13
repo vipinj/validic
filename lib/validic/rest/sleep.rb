@@ -51,7 +51,6 @@ module Validic
           access_token: options[:access_token] || Validic.access_token,
           organization_id: options[:organization_id] || Validic.organization_id,
           sleep: {
-            activity_id: activity_id,
             timestamp: options[:timestamp] || DateTime.now.new_offset(0).iso8601,
             utc_offset: options[:utc_offset],
             total_sleep: options[:total_sleep],
@@ -60,12 +59,13 @@ module Validic
             light: options[:light],
             rem: options[:rem],
             times_woken: options[:times_woken],
+            activity_id: activity_id,
             extras: options[:extras]
           }
         }
 
         response = post_to_validic('sleep', options)
-        response if response
+        Validic::Sleep.new(response['sleep'])
       end
 
       ##
