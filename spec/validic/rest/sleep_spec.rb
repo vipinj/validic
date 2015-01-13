@@ -2,7 +2,6 @@
 require 'spec_helper'
 
 describe Validic::REST::Sleep do
-
   let(:client) { Validic::Client.new }
 
   describe "#get_sleeps" do
@@ -14,11 +13,11 @@ describe Validic::REST::Sleep do
         @sleep = client.get_sleep
       end
 
-      it 'returns an array of sleep objects' do
+      it 'returns a validic response object' do
         expect(@sleep).to be_kind_of Validic::Response
       end
 
-      it 'makes a sleep request' do
+      it 'makes a sleep request to the correct url' do
         url = "#{Validic::BASE_URL}/organizations/#{ENV['TEST_ORG_ID']}/sleep.json"
         expect(a_request(:get, url).with(query: { access_token: ENV['TEST_ORG_TOKEN'] })).to have_been_made
       end
@@ -32,15 +31,14 @@ describe Validic::REST::Sleep do
         @sleep = client.get_sleep(user_id: ENV['TEST_USER_ID'])
       end
 
-      it 'returns an array of sleep objects' do
+      it 'returns a validic response object' do
         expect(@sleep).to be_kind_of Validic::Response
       end
 
-      it 'makes a sleep request' do
+      it 'makes a sleep request to the correct url' do
         url = "#{Validic::BASE_URL}/organizations/#{ENV['TEST_ORG_ID']}/users/#{ENV['TEST_USER_ID']}/sleep.json"
         expect(a_request(:get, url).with(query: { access_token: ENV['TEST_ORG_TOKEN'] })).to have_been_made
       end
     end
-
   end
 end
