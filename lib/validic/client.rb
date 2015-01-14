@@ -1,13 +1,14 @@
 # encoding: utf-8
 require 'forwardable'
+require 'validic/rest/nutrition'
 require 'validic/rest/request'
-require 'validic/rest/weight'
 require 'validic/rest/sleep'
+require 'validic/rest/weight'
 
 module Validic
   class Client
     extend Forwardable
-
+    include REST::Nutrition
     include REST::Request
     include REST::Sleep
     include REST::Weight
