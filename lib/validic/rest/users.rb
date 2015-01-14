@@ -1,8 +1,17 @@
 require 'validic/user'
+require 'validic/rest/utils'
 
 module Validic
   module REST
     module Users
+      include Validic::REST::Utils
+
+      def get_users(options = {})
+        resp = get_request(:users, options)
+        build_response_attr(resp)
+      end
+      alias :get_user :get_users
+
       def provision_user(options = {})
         options = { user: options }
         response = post_request(:users, options)
