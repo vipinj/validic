@@ -43,6 +43,8 @@ module Validic
         activity_id = options.delete(:activity_id)
         if activity_id
           path = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}/#{activity_id}.json"
+        elsif user_id && type == :users
+          path = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}.json"
         elsif user_id
           path = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}.json"
         else
