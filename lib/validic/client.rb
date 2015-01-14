@@ -11,6 +11,7 @@ require 'validic/rest/tobacco_cessation'
 require 'validic/rest/users'
 require 'validic/rest/weight'
 require 'validic/rest/apps'
+require 'validic/rest/profile'
 
 module Validic
   class Client
@@ -26,6 +27,7 @@ module Validic
     include REST::Users
     include REST::Weight
     include REST::Apps
+    include REST::Profile
 
     attr_accessor :api_url,
       :api_version,

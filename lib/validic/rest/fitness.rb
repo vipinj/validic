@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'validic/fitness'
 require 'validic/response'
 require 'validic/rest/utils'
