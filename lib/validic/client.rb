@@ -10,6 +10,11 @@ require 'validic/rest/sleep'
 require 'validic/rest/tobacco_cessation'
 require 'validic/rest/users'
 require 'validic/rest/weight'
+<<<<<<< HEAD
+=======
+require 'validic/rest/routine'
+require 'validic/rest/apps'
+>>>>>>> Update to apps and synced_apps
 
 module Validic
   class Client
@@ -24,6 +29,11 @@ module Validic
     include REST::TobaccoCessation
     include REST::Users
     include REST::Weight
+<<<<<<< HEAD
+=======
+    include REST::Routine
+    include REST::Apps
+>>>>>>> Update to apps and synced_apps
 
     attr_accessor :api_url,
       :api_version,
