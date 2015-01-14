@@ -105,7 +105,7 @@ describe Validic::REST::Weight do
     end
   end
 
-  describe '#latests_weight' do
+  describe '#latest_weight' do
     context 'with user_id' do
       before do
         stub_get("/organizations/1/users/2/weight/latest.json").
