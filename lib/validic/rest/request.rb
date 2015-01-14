@@ -49,6 +49,8 @@ module Validic
           path = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}.json"
         elsif type == :me
           path = "/#{Validic.api_version}/me.json"
+        elsif type == :profile
+          path = "/#{Validic.api_version}/profile.json"
         else
           path = "/#{Validic.api_version}/organizations/#{organization_id}/#{type.to_s}.json"
         end
