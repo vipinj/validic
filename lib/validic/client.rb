@@ -2,6 +2,7 @@
 require 'forwardable'
 require 'validic/rest/biometrics'
 require 'validic/rest/diabetes'
+require 'validic/rest/fitness'
 require 'validic/rest/nutrition'
 require 'validic/rest/request'
 require 'validic/rest/sleep'
@@ -12,6 +13,7 @@ module Validic
     extend Forwardable
     include REST::Biometrics
     include REST::Diabetes
+    include REST::Fitness
     include REST::Nutrition
     include REST::Request
     include REST::Sleep
