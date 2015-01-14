@@ -12,7 +12,7 @@ module Validic
         resp = get_request(:fitness, options)
         build_response_attr(resp)
       end
-      alias :get_fitnesss :get_fitness
+      alias :get_fitnesses :get_fitness
 
       def create_fitness(user_id, options = {})
         options = { user_id: user_id, fitness: options }

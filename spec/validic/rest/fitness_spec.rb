@@ -4,7 +4,7 @@ require 'spec_helper'
 describe Validic::REST::Fitness do
   let(:client) { Validic::Client.new }
 
-  describe "#get_fitnesses" do
+  describe "#get_fitness" do
     context 'no user_id given' do
       before do
         stub_get("/organizations/1/fitness.json")
