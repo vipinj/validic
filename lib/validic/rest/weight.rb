@@ -1,10 +1,8 @@
 require 'validic/weight'
 require 'validic/summary'
-require 'validic/rest/utils'
 module Validic
   module REST
     module Weight
-      include Validic::REST::Utils
 
       def get_weight(params={})
         resp = get_request(:weight, params)

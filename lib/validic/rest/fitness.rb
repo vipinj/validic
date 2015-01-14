@@ -1,11 +1,9 @@
 require 'validic/fitness'
 require 'validic/response'
-require 'validic/rest/utils'
 
 module Validic
   module REST
     module Fitness
-      include Validic::REST::Utils
 
       def get_fitness(options = {})
         resp = get_request(:fitness, options)

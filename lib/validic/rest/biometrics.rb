@@ -1,12 +1,9 @@
-# encoding: utf-8
 require 'validic/biometrics'
 require 'validic/response'
-require 'validic/rest/utils'
 
 module Validic
   module REST
     module Biometrics
-      include Validic::REST::Utils
 
       def get_biometrics(options = {})
         resp = get_request(:biometrics, options)

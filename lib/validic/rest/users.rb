@@ -4,7 +4,6 @@ require 'validic/rest/utils'
 module Validic
   module REST
     module Users
-      include Validic::REST::Utils
 
       def get_users(options = {})
         resp = get_request(:users, options)

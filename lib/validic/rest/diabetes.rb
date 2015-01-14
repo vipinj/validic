@@ -1,12 +1,9 @@
-# encoding: utf-8
 require 'validic/diabetes'
 require 'validic/response'
-require 'validic/rest/utils'
 
 module Validic
   module REST
     module Diabetes
-      include Validic::REST::Utils
 
       def get_diabetes(options = {})
         resp = get_request(:diabetes, options)
