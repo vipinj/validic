@@ -101,12 +101,13 @@ describe Validic::REST::Nutrition do
           with(query: { access_token: '1' }).
           to_return(body: fixture('nutritions.json'),
                     headers: { content_type: 'application/json; charset=utf-8' })
-          @latest = client.latest_nutrition(user_id: '2')
       end
       it 'makes a latest for nutrition' do
-        expect(@latest).to be_a Validic::Response
+        latest = client.latest_nutrition(user_id: '2')
+        expect(latest).to be_a Validic::Response
       end
       it 'builds a latest url' do
+        client.latest_nutrition(user_id: '2')
         expect(a_get('/organizations/1/users/2/nutrition/latest.json').with(query: { access_token: '1' })).to have_been_made
       end
     end
@@ -116,12 +117,13 @@ describe Validic::REST::Nutrition do
           with(query: { access_token: '1' }).
           to_return(body: fixture('nutritions.json'),
                     headers: { content_type: 'application/json; charset=utf-8' })
-          @latest = client.latest_nutrition
       end
       it 'makes a latest for nutrition' do
-        expect(@latest).to be_a Validic::Response
+        latest = client.latest_nutrition
+        expect(latest).to be_a Validic::Response
       end
       it 'builds a latest url' do
+        client.latest_nutrition
         expect(a_get('/organizations/1/nutrition/latest.json').with(query: { access_token: '1' })).to have_been_made
       end
     end
