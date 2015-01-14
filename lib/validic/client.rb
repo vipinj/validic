@@ -5,10 +5,11 @@ require 'validic/rest/diabetes'
 require 'validic/rest/fitness'
 require 'validic/rest/nutrition'
 require 'validic/rest/request'
+require 'validic/rest/routine'
 require 'validic/rest/sleep'
 require 'validic/rest/tobacco_cessation'
+require 'validic/rest/users'
 require 'validic/rest/weight'
-require 'validic/rest/routine'
 
 module Validic
   class Client
@@ -18,10 +19,11 @@ module Validic
     include REST::Fitness
     include REST::Nutrition
     include REST::Request
+    include REST::Routine
     include REST::Sleep
     include REST::TobaccoCessation
+    include REST::Users
     include REST::Weight
-    include REST::Routine
 
     attr_accessor :api_url,
       :api_version,
