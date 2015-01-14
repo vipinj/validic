@@ -14,7 +14,6 @@ module Validic
         resp = get_request(:sync_apps, authentication_token: authentication_token)
         build_response_attr(resp)
       end
-
     end
   end
 end
