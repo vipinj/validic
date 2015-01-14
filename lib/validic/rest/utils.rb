@@ -6,8 +6,8 @@ module Validic
       def build_response_attr(resp)
         summary = Validic::Summary.new(resp.delete("summary"))
         klass = Validic.const_get(camelize_response_key(resp))
-        sleeps = resp.values.flatten.collect { |obj| klass.new(obj) }
-        Validic::Response.new(summary, sleeps)
+        records = resp.values.flatten.collect { |obj| klass.new(obj) }
+        Validic::Response.new(summary, records)
       end
 
       def camelize_response_key(resp)

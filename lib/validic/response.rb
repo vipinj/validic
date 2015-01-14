@@ -1,10 +1,9 @@
 module Validic
   class Response
-    attr_reader :summary, :sleeps
+    attr_reader :summary, :records
     def initialize(summary, record_array)
       @summary = summary
-      @sleeps = record_array
+      @records = record_array
     end
-
   end
 end
