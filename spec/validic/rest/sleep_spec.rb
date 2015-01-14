@@ -111,7 +111,7 @@ describe Validic::REST::Sleep do
     end
   end
 
-  describe '#latests_sleep' do
+  describe '#latest_sleep' do
     context 'with user_id' do
       before do
         stub_get("/organizations/1/users/2/sleep/latest.json").

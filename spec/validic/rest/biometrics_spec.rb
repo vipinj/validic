@@ -94,7 +94,7 @@ describe Validic::REST::Biometrics do
     end
   end
 
-  describe '#latests_biometrics' do
+  describe '#latest_biometrics' do
     context 'with user_id' do
       before do
         stub_get("/organizations/1/users/2/biometrics/latest.json").

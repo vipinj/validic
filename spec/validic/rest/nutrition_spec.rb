@@ -94,7 +94,7 @@ describe Validic::REST::Nutrition do
     end
   end
 
-  describe '#latests_nutrition' do
+  describe '#latest_nutrition' do
     context 'with user_id' do
       before do
         stub_get("/organizations/1/users/2/nutrition/latest.json").

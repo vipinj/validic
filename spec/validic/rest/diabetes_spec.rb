@@ -94,7 +94,7 @@ describe Validic::REST::Diabetes do
     end
   end
 
-  describe '#latests_diabetes' do
+  describe '#latest_diabetes' do
     context 'with user_id' do
       before do
         stub_get("/organizations/1/users/2/diabetes/latest.json").

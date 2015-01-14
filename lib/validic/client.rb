@@ -6,6 +6,7 @@ require 'validic/rest/nutrition'
 require 'validic/rest/request'
 require 'validic/rest/sleep'
 require 'validic/rest/weight'
+require 'validic/rest/routine'
 
 module Validic
   class Client
@@ -16,6 +17,7 @@ module Validic
     include REST::Request
     include REST::Sleep
     include REST::Weight
+    include REST::Routine
 
     attr_accessor :api_url,
       :api_version,
