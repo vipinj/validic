@@ -6,6 +6,7 @@ require 'validic/rest/fitness'
 require 'validic/rest/nutrition'
 require 'validic/rest/request'
 require 'validic/rest/sleep'
+require 'validic/rest/tobacco_cessation'
 require 'validic/rest/weight'
 require 'validic/rest/routine'
 
@@ -18,6 +19,7 @@ module Validic
     include REST::Nutrition
     include REST::Request
     include REST::Sleep
+    include REST::TobaccoCessation
     include REST::Weight
     include REST::Routine
 
