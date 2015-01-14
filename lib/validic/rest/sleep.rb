@@ -8,8 +8,8 @@ module Validic
     module Sleep
       include Validic::REST::Utils
 
-      def get_sleep(params = {})
-        resp = get_request(:sleep, params)
+      def get_sleep(options = {})
+        resp = get_request(:sleep, options)
         build_response_attr(resp)
       end
       alias :get_sleeps :get_sleep
@@ -21,11 +21,7 @@ module Validic
       end
 
       def update_sleep(user_id, activity_id, options = {})
-        options = {
-          user_id: user_id,
-          activity_id: activity_id,
-          sleep: options
-        }
+        options = { user_id: user_id, activity_id: activity_id, sleep: options }
         response = put_request(:sleep, options)
         Validic::Sleep.new(response['sleep'])
       end

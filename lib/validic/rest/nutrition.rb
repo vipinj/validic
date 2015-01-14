@@ -1,16 +1,16 @@
 # encoding: utf-8
 require 'validic/nutrition'
-require 'validic/summary'
 require 'validic/response'
+require 'validic/rest/utils'
 
 module Validic
   module REST
     module Nutrition
+      include Validic::REST::Utils
+
       def get_nutrition(options = {})
         resp = get_request(:nutrition, options)
-        summary = Validic::Summary.new(resp["summary"])
-        nutritions = resp["nutrition"].collect { |nutrition| Validic::Nutrition.new(nutrition) }
-        Validic::Response.new(summary, nutritions)
+        build_response_attr(resp)
       end
       alias :get_nutritions :get_nutrition
 
@@ -34,9 +34,7 @@ module Validic
 
       def latest_nutrition(options = {})
         resp = latest(:nutrition, options)
-        summary = Validic::Summary.new(resp["summary"])
-        nutritions = resp["nutrition"].collect { |nutrition| Validic::Nutrition.new(nutrition) }
-        Validic::Response.new(summary, nutritions)
+        build_response_attr(resp)
       end
     end
   end
