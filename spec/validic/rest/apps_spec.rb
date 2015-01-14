@@ -28,11 +28,9 @@ describe Validic::REST::Apps do
       headers: { content_type: 'application/json; charset=utf-8' })
       @synced_apps = client.get_user_synced_apps('2')
     end
-
     it 'returns a response object' do
       expect(@synced_apps).to be_a Validic::Response
     end
-
     it 'makes a sync apps call to the correct url' do
       expect(a_get('/organizations/1/sync_apps.json')
         .with(query: { authentication_token: '2', access_token: '1' }))
