@@ -17,6 +17,18 @@ module Validic
         response = post_request(:users, options)
         Validic::User.new(response['user'])
       end
+
+      def update_user(user_id, options = {})
+        options = { user_id: user_id, user: options }
+        response = put_request(:users, options)
+        Validic::User.new(response['user'])
+      end
+
+      def delete_user(user_id)
+        options = { user_id: user_id }
+        delete_request(:users, options)
+        true
+      end
     end
   end
 end

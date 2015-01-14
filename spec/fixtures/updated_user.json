@@ -1,8 +1,9 @@
 {
   "user": {
     "_id": "1",
-    "uid": "123467890",
+    "uid": "abcde",
     "access_token": "1",
     "profile": null
   }
 }
+
