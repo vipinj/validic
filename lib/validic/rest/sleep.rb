@@ -1,10 +1,12 @@
 # encoding: utf-8
 require 'validic/sleep'
-require 'validic/summary'
 require 'validic/response'
+require 'validic/rest/utils'
 module Validic
   module REST
     module Sleep
+      include Validic::REST::Utils
+
       def get_sleep(params={})
         resp = get_request(:sleep, params)
         build_response_attr(resp)
@@ -32,22 +34,13 @@ module Validic
         build_response_attr(resp)
       end
 
-      def delete_sleep(user_id, activity_id, options={})
+      def delete_sleep(user_id, activity_id)
         options = {
           user_id: user_id,
           activity_id: activity_id,
-          organization_id: options[:organization_id] || Validic.organization_id
         }
         delete_request(:sleep, options)
         true
-      end
-
-      private
-
-      def build_response_attr(resp)
-        summary = Validic::Summary.new(resp["summary"])
-        sleeps = resp["sleep"].collect { |sleep| Validic::Sleep.new(sleep) }
-        Validic::Response.new(summary, sleeps)
       end
     end
   end

@@ -105,7 +105,7 @@ describe Validic::REST::Sleep do
           .to_return(status: 200)
       end
       it 'returns true' do
-        sleep = client.delete_sleep('1', '51552cddfded0807c4000096', access_token: '1')
+        sleep = client.delete_sleep('1', '51552cddfded0807c4000096')
         expect(sleep).to be true
       end
     end
