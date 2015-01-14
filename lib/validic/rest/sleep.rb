@@ -1,12 +1,10 @@
 # encoding: utf-8
 require 'validic/sleep'
 require 'validic/response'
-require 'validic/rest/utils'
 
 module Validic
   module REST
     module Sleep
-      include Validic::REST::Utils
 
       def get_sleep(options = {})
         resp = get_request(:sleep, options)

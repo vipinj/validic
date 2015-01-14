@@ -12,6 +12,8 @@ require 'validic/rest/users'
 require 'validic/rest/weight'
 require 'validic/rest/apps'
 require 'validic/rest/profile'
+require 'validic/rest/organizations'
+require 'validic/rest/utils'
 
 module Validic
   class Client
@@ -28,6 +30,8 @@ module Validic
     include REST::Weight
     include REST::Apps
     include REST::Profile
+    include REST::Organizations
+    include REST::Utils
 
     attr_accessor :api_url,
       :api_version,

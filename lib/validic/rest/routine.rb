@@ -1,11 +1,9 @@
 require 'validic/response'
-require 'validic/rest/utils'
 require 'validic/routine'
 
 module Validic
   module REST
     module Routine
-      include Validic::REST::Utils
 
       def get_routine(params = {})
         resp = get_request(:routine, params)

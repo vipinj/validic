@@ -1,12 +1,9 @@
-# encoding: utf-8
 require 'validic/tobacco_cessation'
 require 'validic/response'
-require 'validic/rest/utils'
 
 module Validic
   module REST
     module TobaccoCessation
-      include Validic::REST::Utils
 
       def get_tobacco_cessation(options = {})
         resp = get_request(:tobacco_cessation, options)

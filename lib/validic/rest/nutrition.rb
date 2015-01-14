@@ -1,12 +1,10 @@
 # encoding: utf-8
 require 'validic/nutrition'
 require 'validic/response'
-require 'validic/rest/utils'
 
 module Validic
   module REST
     module Nutrition
-      include Validic::REST::Utils
 
       def get_nutrition(options = {})
         resp = get_request(:nutrition, options)

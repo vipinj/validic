@@ -1,9 +1,7 @@
 require 'validic/app'
-
 module Validic
   module REST
     module Apps
-      include Validic::REST::Utils
 
       def get_org_apps
         resp = get_request(:apps)

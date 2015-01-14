@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'multi_json'
 
 module Validic
@@ -51,6 +50,8 @@ module Validic
           path = "/#{Validic.api_version}/me.json"
         elsif type == :profile
           path = "/#{Validic.api_version}/profile.json"
+        elsif type == :organizations
+          path = "/#{Validic.api_version}/organizations/#{organization_id}.json"
         else
           path = "/#{Validic.api_version}/organizations/#{organization_id}/#{type.to_s}.json"
         end
