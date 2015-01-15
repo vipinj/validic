@@ -6,7 +6,7 @@ describe Validic::REST::Routine do
   describe "#get_routine" do
     context 'no user_id given' do
       before do
-        stub_get("/organizations/1/routine.json")
+        stub_get('/organizations/1/routine.json')
           .with(query: { access_token: '1' })
           .to_return(body: fixture('routines.json'),
         headers: { content_type: 'application/json; charset=utf-8' })
@@ -22,10 +22,9 @@ describe Validic::REST::Routine do
     end
     context 'with user_id' do
       before do
-        stub_get("/organizations/1/users/1/routine.json")
+        stub_get('/organizations/1/users/1/routine.json')
           .with(query: { access_token: '1' })
-          .to_return(body: fixture('routines.json'),
-        headers: { content_type: 'application/json; charset=utf-8' })
+          .to_return(body: fixture('routines.json'), headers: { content_type: 'application/json; charset=utf-8' })
       end
       it 'returns a Response' do
         routine = client.get_routine(user_id: '1')
@@ -34,6 +33,16 @@ describe Validic::REST::Routine do
       it 'makes a routine request to the correct url' do
         client.get_routine(user_id: '1')
         expect(a_get('/organizations/1/users/1/routine.json').with(query: { access_token: '1' })).to have_been_made
+      end
+      context 'not found' do
+        before do
+          stub_get('/organizations/1/users/0/routine.json')
+            .with(query: { access_token: '1' })
+            .to_return(status: 404, body: fixture('not_found.json'), headers: {content_type: 'application/json; charset=utf-8'})
+        end
+        it 'raises a NotFound error' do
+          expect { client.get_routine(user_id: '0') }.to raise_error(Validic::Error::NotFound)
+        end
       end
     end
   end

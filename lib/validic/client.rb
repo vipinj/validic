@@ -1,4 +1,5 @@
 require 'forwardable'
+require 'validic/error'
 require 'validic/rest/biometrics'
 require 'validic/rest/diabetes'
 require 'validic/rest/fitness'
