@@ -1,4 +1,5 @@
 require 'validic/profile'
+
 module Validic
   module REST
     module Profile

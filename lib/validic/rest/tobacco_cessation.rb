@@ -1,5 +1,4 @@
 require 'validic/tobacco_cessation'
-require 'validic/response'
 
 module Validic
   module REST

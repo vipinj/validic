@@ -1,7 +1,4 @@
-require "faraday"
-require "faraday_middleware"
-require "validic/client"
-require "validic/version"
+require 'validic/client'
 
 module Validic
   BASE_URL = "https://api.validic.com/v1"

@@ -1,5 +1,4 @@
 require 'validic/biometrics'
-require 'validic/response'
 
 module Validic
   module REST

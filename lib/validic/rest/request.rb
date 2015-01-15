@@ -1,4 +1,5 @@
 require 'multi_json'
+require 'validic/error'
 
 module Validic
   module REST

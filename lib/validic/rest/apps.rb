@@ -1,4 +1,5 @@
 require 'validic/app'
+
 module Validic
   module REST
     module Apps

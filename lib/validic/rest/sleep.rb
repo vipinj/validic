@@ -1,6 +1,4 @@
-# encoding: utf-8
 require 'validic/sleep'
-require 'validic/response'
 
 module Validic
   module REST

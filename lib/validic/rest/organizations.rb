@@ -1,4 +1,3 @@
-require 'validic/response'
 require 'validic/organization'
 
 module Validic
