@@ -85,8 +85,8 @@ module Validic
             request.body = MultiJson.encode(options) unless options.empty?
           end
         end
-        raise Validic::Error::Forbidden.from_response(response.body) if response.status == 403
-        raise Validic::Error::NotFound.from_response(response.body) if response.status == 404
+        error = Validic::Error::ERRORS[response.status]
+        raise klass.from_response(response.body) if error
         response.body
       end
     end

@@ -26,4 +26,15 @@ describe Validic::Error do
       expect { client.get_organization(organization_id: '0', access_token: '0') }.to raise_error(Validic::Error::Forbidden)
     end
   end
+
+  context 'unprocessable entity' do
+    before do
+      stub_post("/organizations/1/users/1/nutrition.json")
+        .with(body: { nutrition: {}, access_token: '1' })
+        .to_return(status: 422, body: fixture('unprocessable_entity.json'), headers: {content_type: 'application/json; charset=utf-8'})
+    end
+    it 'raises an UnprocessableEntity error' do
+      expect { client.create_nutrition('1') }.to raise_error(Validic::Error::UnprocessableEntity)
+    end
+  end
 end
