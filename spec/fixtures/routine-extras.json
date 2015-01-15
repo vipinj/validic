@@ -8,7 +8,7 @@
     "elevation": 3.4,
     "calories_burned": 2874,
     "activity_id": "12345",
-    "extras": "{\"stars\": 3}"
+    "extras": {"stars": 3}
   },
   "access_token": "e7ba1f04e88f25d399a91c8cbcd72300e01309e96b7725e40b49cd1effaa5deb"
 }

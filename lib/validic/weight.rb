@@ -1,11 +1,8 @@
 module Validic
   class Weight
-    def initialize(attrs={})
-      #create attr_reader for all key value pairs
-      attrs.each do |k, v|
-        instance_variable_set("@#{k}", v)
-        self.class.send(:attr_reader, k)
-      end
+    include Validic::Utils
+    def initialize(attrs = {})
+      attributes_builder(attrs, self)
     end
   end
 end
