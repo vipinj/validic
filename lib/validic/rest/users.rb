@@ -1,5 +1,4 @@
 require 'validic/user'
-require 'validic/rest/utils'
 
 module Validic
   module REST

@@ -1,5 +1,5 @@
 require 'validic/weight'
-require 'validic/summary'
+
 module Validic
   module REST
     module Weight

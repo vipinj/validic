@@ -1,5 +1,4 @@
 require 'validic/fitness'
-require 'validic/response'
 
 module Validic
   module REST

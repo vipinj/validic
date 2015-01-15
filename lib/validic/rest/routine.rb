@@ -1,6 +1,3 @@
-require 'validic/response'
-require 'validic/routine'
-
 module Validic
   module REST
     module Routine

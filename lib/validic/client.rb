@@ -1,37 +1,35 @@
-require 'forwardable'
-require 'validic/error'
+require 'validic/rest/apps'
 require 'validic/rest/biometrics'
 require 'validic/rest/diabetes'
 require 'validic/rest/fitness'
 require 'validic/rest/nutrition'
+require 'validic/rest/organizations'
+require 'validic/rest/profile'
 require 'validic/rest/request'
 require 'validic/rest/routine'
 require 'validic/rest/sleep'
 require 'validic/rest/tobacco_cessation'
 require 'validic/rest/users'
-require 'validic/rest/weight'
-require 'validic/rest/apps'
-require 'validic/rest/profile'
-require 'validic/rest/organizations'
 require 'validic/rest/utils'
+require 'validic/rest/weight'
+require 'validic/routine'
 
 module Validic
   class Client
-    extend Forwardable
+    include REST::Apps
     include REST::Biometrics
     include REST::Diabetes
     include REST::Fitness
     include REST::Nutrition
+    include REST::Organizations
+    include REST::Profile
     include REST::Request
     include REST::Routine
     include REST::Sleep
     include REST::TobaccoCessation
     include REST::Users
-    include REST::Weight
-    include REST::Apps
-    include REST::Profile
-    include REST::Organizations
     include REST::Utils
+    include REST::Weight
 
     attr_accessor :api_url,
       :api_version,
@@ -47,7 +45,6 @@ module Validic
       @api_version    = options[:api_version].nil? ? 'v1' : options[:api_version]
       @access_token   = options[:access_token].nil? ? Validic.access_token : options[:access_token]
       @organization_id = options[:organization_id].nil? ? Validic.organization_id : options[:organization_id]
-
       reload_config
     end
 

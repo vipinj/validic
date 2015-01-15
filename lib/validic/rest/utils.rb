@@ -1,3 +1,6 @@
+require 'validic/response'
+require 'validic/summary'
+
 module Validic
   module REST
     module Utils

@@ -1,5 +1,4 @@
 require 'validic/diabetes'
-require 'validic/response'
 
 module Validic
   module REST
