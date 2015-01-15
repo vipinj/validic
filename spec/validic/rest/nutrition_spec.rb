@@ -56,53 +56,100 @@ describe Validic::REST::Nutrition do
           .with(query: { access_token: '1', expanded: '1' }))
           .to have_been_made
       end
-
     end
   end
 
   describe '#create_nutrition' do
-    before do
-      stub_post("/organizations/1/users/1/nutrition.json")
-        .with(body: { nutrition: { timestamp: '2013-03-10T07:12:16+00:00',
-      activity_id: '12345' }, access_token: '1' }.to_json)
-        .to_return(body: fixture('nutrition.json'),
-      headers: { content_type: 'application/json; charset=utf-8'} )
+    context 'standard data'do
+      before do
+        stub_post("/organizations/1/users/1/nutrition.json")
+          .with(body: { nutrition: { timestamp: '2013-03-10T07:12:16+00:00',
+        activity_id: '12345' }, access_token: '1' }.to_json)
+          .to_return(body: fixture('nutrition.json'),
+        headers: { content_type: 'application/json; charset=utf-8'} )
+      end
+      it 'requests the correct resource' do
+        client.create_nutrition('1', timestamp: '2013-03-10T07:12:16+00:00',
+                                activity_id: '12345')
+        expect(a_post('/organizations/1/users/1/nutrition.json')
+          .with(body: { nutrition: { timestamp: '2013-03-10T07:12:16+00:00',
+        activity_id: '12345' },
+        access_token: '1' }.to_json)).to have_been_made
+      end
+      it 'returns a Nutrition' do
+        nutrition = client.create_nutrition('1', timestamp: '2013-03-10T07:12:16+00:00',
+                                            activity_id: '12345')
+        expect(nutrition).to be_a Validic::Nutrition
+        expect(nutrition.timestamp).to eq '2013-03-10T07:12:16+00:00'
+      end
     end
-    it 'requests the correct resource' do
-      client.create_nutrition('1', timestamp: '2013-03-10T07:12:16+00:00',
-                              activity_id: '12345')
-      expect(a_post('/organizations/1/users/1/nutrition.json')
-        .with(body: { nutrition: { timestamp: '2013-03-10T07:12:16+00:00',
-      activity_id: '12345' },
-      access_token: '1' }.to_json)).to have_been_made
-    end
-    it 'returns a Nutrition' do
-      nutrition = client.create_nutrition('1', timestamp: '2013-03-10T07:12:16+00:00',
-                                          activity_id: '12345')
-      expect(nutrition).to be_a Validic::Nutrition
-      expect(nutrition.timestamp).to eq '2013-03-10T07:12:16+00:00'
+    context 'expanded data' do
+      before do
+        stub_post("/organizations/1/users/1/nutrition.json")
+          .with(body: { nutrition: { timestamp: '2013-03-10T07:12:16+00:00',
+        activity_id: '12345', extras: "{\"stars\": 3}" }, access_token: '1' }.to_json)
+          .to_return(body: fixture('nutrition-extras.json'),
+        headers: { content_type: 'application/json; charset=utf-8'} )
+          @nutrition = client.create_nutrition('1', timestamp: '2013-03-10T07:12:16+00:00',
+                                            activity_id: '12345',
+                                            extras: "{\"stars\": 3}")
+      end
+      it 'requests the correct resource' do
+        expect(a_post('/organizations/1/users/1/nutrition.json')
+          .with(body: { nutrition: { timestamp: '2013-03-10T07:12:16+00:00',
+        activity_id: '12345', extras: "{\"stars\": 3}"},
+          access_token: '1' }.to_json)).to have_been_made
+      end
+      it 'returns a Nutrition object' do
+        expect(@nutrition).to be_a Validic::Nutrition
+        expect(@nutrition.timestamp).to eq '2013-03-10T07:12:16+00:00'
+      end
     end
   end
 
   describe "#update_nutrition" do
-    before do
-      stub_put("/organizations/1/users/1/nutrition/51552cddfded0807c4000096.json")
-        .with(body: { nutrition: { timestamp: '2013-03-10T07:12:16+00:00' },
-      access_token: '1' }.to_json)
-        .to_return(body: fixture('nutrition.json'),
-      headers: {content_type: 'application/json; charset=utf-8'})
+    context 'standard data' do
+      before do
+        stub_put("/organizations/1/users/1/nutrition/51552cddfded0807c4000096.json")
+          .with(body: { nutrition: { timestamp: '2013-03-10T07:12:16+00:00' },
+        access_token: '1' }.to_json)
+          .to_return(body: fixture('nutrition.json'),
+        headers: {content_type: 'application/json; charset=utf-8'})
+      end
+      it 'makes a nutrition request to the correct url' do
+        client.update_nutrition('1', '51552cddfded0807c4000096',
+                                timestamp: '2013-03-10T07:12:16+00:00')
+        expect(a_put('/organizations/1/users/1/nutrition/51552cddfded0807c4000096.json')
+          .with(body: { nutrition: { timestamp: '2013-03-10T07:12:16+00:00' },
+        access_token: '1' }.to_json)).to have_been_made
+      end
+      it 'returns a Nutrition' do
+        nutrition = client.update_nutrition('1', '51552cddfded0807c4000096',
+                                            timestamp: '2013-03-10T07:12:16+00:00')
+        expect(nutrition).to be_a Validic::Nutrition
+      end
     end
-    it 'makes a nutrition request to the correct url' do
-      client.update_nutrition('1', '51552cddfded0807c4000096',
-                              timestamp: '2013-03-10T07:12:16+00:00')
-      expect(a_put('/organizations/1/users/1/nutrition/51552cddfded0807c4000096.json')
-        .with(body: { nutrition: { timestamp: '2013-03-10T07:12:16+00:00' },
-      access_token: '1' }.to_json)).to have_been_made
-    end
-    it 'returns a Nutrition' do
-      nutrition = client.update_nutrition('1', '51552cddfded0807c4000096',
-                                          timestamp: '2013-03-10T07:12:16+00:00')
-      expect(nutrition).to be_a Validic::Nutrition
+    context 'expanded data'do
+      before do
+        stub_put("/organizations/1/users/1/nutrition/51552cddfded0807c4000096.json")
+          .with(body: { nutrition: { timestamp: '2013-03-10T07:12:16+00:00',
+        extras: "{\"stars\": 3}"}, access_token: '1' }.to_json)
+          .to_return(body: fixture('nutrition-extras.json'),
+        headers: { content_type: 'application/json; charset=utf-8'} )
+          @nutrition = client.update_nutrition('1', "51552cddfded0807c4000096",
+                                               timestamp: '2013-03-10T07:12:16+00:00',
+                                               extras: "{\"stars\": 3}")
+      end
+      it 'requests the correct resource' do
+        expect(a_put('/organizations/1/users/1/nutrition/51552cddfded0807c4000096.json')
+          .with(body: { nutrition: { timestamp: '2013-03-10T07:12:16+00:00',
+        extras: "{\"stars\": 3}"},
+          access_token: '1' }.to_json)).to have_been_made
+      end
+      it 'returns a Nutrition object' do
+        expect(@nutrition).to be_a Validic::Nutrition
+        expect(@nutrition.timestamp).to eq '2013-03-10T07:12:16+00:00'
+      end
     end
   end
 
