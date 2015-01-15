@@ -12,8 +12,9 @@ module Validic
 
       def camelize_response_key(resp)
         key = resp.keys.first
-        key.include?('_') ? key.split('_').map(&:capitalize).join : key.capitalize
-        key.chomp('s') if key = 'Users' || 'Apps'
+        key = key.include?('_') ? key.split('_').map(&:capitalize).join : key.capitalize
+        key = key.chop if (key == 'Users') || (key == 'Apps')
+        key
       end
     end
   end

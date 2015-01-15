@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'forwardable'
 require 'validic/rest/biometrics'
 require 'validic/rest/diabetes'
@@ -43,7 +42,7 @@ module Validic
     #
     # @params options[Hash]
     def initialize(options={})
-      @api_url        = options[:api_url].nil? ? Validic.api_url : options[:api_url]
+      @api_url        = options[:api_url].nil? ? 'https://api.validic.com' : options[:api_url]
       @api_version    = options[:api_version].nil? ? 'v1' : options[:api_version]
       @access_token   = options[:access_token].nil? ? Validic.access_token : options[:access_token]
       @organization_id = options[:organization_id].nil? ? Validic.organization_id : options[:organization_id]
