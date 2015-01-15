@@ -7,7 +7,7 @@
     "fiber": 1959,
     "calories": 350,
     "activity_id": "12345",
-    "extras": "{\"stars\": 3}"
+    "extras": {"stars": 3}
   },
   "access_token": "1"
 }
