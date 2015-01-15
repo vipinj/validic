@@ -1,3 +1,5 @@
+require 'validic/routine'
+
 module Validic
   module REST
     module Routine

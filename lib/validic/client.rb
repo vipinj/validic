@@ -1,3 +1,6 @@
+require 'faraday'
+require 'faraday_middleware'
+
 require 'validic/rest/apps'
 require 'validic/rest/biometrics'
 require 'validic/rest/diabetes'
@@ -12,7 +15,7 @@ require 'validic/rest/tobacco_cessation'
 require 'validic/rest/users'
 require 'validic/rest/utils'
 require 'validic/rest/weight'
-require 'validic/routine'
+require 'validic/version'
 
 module Validic
   class Client
