@@ -34,16 +34,6 @@ describe Validic::REST::Routine do
         client.get_routine(user_id: '1')
         expect(a_get('/organizations/1/users/1/routine.json').with(query: { access_token: '1' })).to have_been_made
       end
-      context 'not found' do
-        before do
-          stub_get('/organizations/1/users/0/routine.json')
-            .with(query: { access_token: '1' })
-            .to_return(status: 404, body: fixture('not_found.json'), headers: {content_type: 'application/json; charset=utf-8'})
-        end
-        it 'raises a NotFound error' do
-          expect { client.get_routine(user_id: '0') }.to raise_error(Validic::Error::NotFound)
-        end
-      end
     end
   end
 

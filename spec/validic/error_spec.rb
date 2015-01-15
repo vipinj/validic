@@ -15,4 +15,15 @@ describe Validic::Error do
       end
     end
   end
+
+  context 'forbidden' do
+    before do
+      stub_get("/organizations/0.json")
+        .with(query: { access_token: '0' })
+        .to_return(status: 403, body: fixture('forbidden.json'), headers: {content_type: 'application/json; charset=utf-8'})
+    end
+    it 'raises a Forbidden error' do
+      expect { client.get_organization(organization_id: '0', access_token: '0') }.to raise_error(Validic::Error::Forbidden)
+    end
+  end
 end
