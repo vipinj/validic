@@ -85,6 +85,7 @@ module Validic
             request.body = MultiJson.encode(options) unless options.empty?
           end
         end
+        raise Validic::Error::NotFound.new('No user found') if response.status == 404
         response.body
       end
     end
