@@ -9,7 +9,6 @@ module Validic
         resp = get_request(:routine, params)
         build_response_attr(resp)
       end
-
       alias :get_routines :get_routine
 
       def create_routine(user_id, options = {})

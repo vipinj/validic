@@ -1,9 +1,7 @@
 require 'validic'
 require 'pry'
-require 'dotenv'
 require 'webmock/rspec'
 require 'json'
-Dotenv.load
 
 RSpec.configure do |config|
   config.before(:each) do

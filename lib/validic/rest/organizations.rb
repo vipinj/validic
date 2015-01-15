@@ -1,4 +1,6 @@
 require 'validic/response'
+require 'validic/organization'
+
 module Validic
   module REST
     module Organizations
