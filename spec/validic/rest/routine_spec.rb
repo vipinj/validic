@@ -6,7 +6,7 @@ describe Validic::REST::Routine do
   describe "#get_routine" do
     context 'no user_id given' do
       before do
-        stub_get("/organizations/1/routine.json")
+        stub_get('/organizations/1/routine.json')
           .with(query: { access_token: '1' })
           .to_return(body: fixture('routines.json'),
         headers: { content_type: 'application/json; charset=utf-8' })
@@ -22,10 +22,9 @@ describe Validic::REST::Routine do
     end
     context 'with user_id' do
       before do
-        stub_get("/organizations/1/users/1/routine.json")
+        stub_get('/organizations/1/users/1/routine.json')
           .with(query: { access_token: '1' })
-          .to_return(body: fixture('routines.json'),
-        headers: { content_type: 'application/json; charset=utf-8' })
+          .to_return(body: fixture('routines.json'), headers: { content_type: 'application/json; charset=utf-8' })
       end
       it 'returns a Response' do
         routine = client.get_routine(user_id: '1')
