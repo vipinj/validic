@@ -40,23 +40,6 @@ describe Validic::REST::Nutrition do
           .to have_been_made
       end
     end
-    context 'with expanded data' do
-      before do
-        stub_get("/organizations/1/nutrition.json")
-          .with(query: { access_token: '1', expanded: '1' })
-          .to_return(body: fixture('nutritions-expanded.json'),
-        headers: { content_type: 'application/json; charset=utf-8' })
-          @nutrition = client.get_nutrition(expanded: '1')
-      end
-      it 'returns a validic response' do
-        expect(@nutrition).to be_a Validic::Response
-      end
-      it 'makes a nutrition request with expanded' do
-        expect(a_get("/organizations/1/nutrition.json")
-          .with(query: { access_token: '1', expanded: '1' }))
-          .to have_been_made
-      end
-    end
   end
 
   describe '#create_nutrition' do

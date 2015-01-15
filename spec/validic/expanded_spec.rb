@@ -55,6 +55,25 @@ describe 'expanded for all objects' do
         expect(@obj.timestamp).to eq '2013-03-10T07:12:16+00:00'
       end
     end
+    context "#get #{object}" do
+      before do
+        stub_get("/organizations/1/#{object}.json")
+          .with(query: { access_token: '1', expanded: '1' })
+          .to_return(body: fixture("#{object}-expanded.json"),
+        headers: { content_type: 'application/json; charset=utf-8' })
+
+          @obj = client.send("get_#{object}", expanded: '1')
+      end
+      it 'returns a validic response' do
+        expect(@obj).to be_a Validic::Response
+      end
+      it 'makes an object URI request with expanded' do
+        expect(a_get("/organizations/1/#{object}.json")
+          .with(query: { access_token: '1', expanded: '1' }))
+          .to have_been_made
+      end
+    end
+
   end
 end
 
