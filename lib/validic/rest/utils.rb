@@ -13,7 +13,7 @@ module Validic
       def camelize_response_key(resp)
         key = resp.keys.first
         key = key.include?('_') ? key.split('_').map(&:capitalize).join : key.capitalize
-        key = key.chop if (key == 'Users') || (key == 'Apps')
+        key.chop! if %w(Users Apps).include?(key) #strip last letter off to match ::User or ::App
         key
       end
     end
