@@ -86,7 +86,7 @@ module Validic
           end
         end
         error = Validic::Error::ERRORS[response.status]
-        raise klass.from_response(response.body) if error
+        raise error.from_response(response.body) if error
         response.body
       end
     end
