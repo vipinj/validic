@@ -26,7 +26,7 @@ describe Validic::REST::Apps do
         .with(query: { authentication_token: '2', access_token: '1' })
         .to_return(body: fixture('synced_apps.json'),
       headers: { content_type: 'application/json; charset=utf-8' })
-      @synced_apps = client.get_user_synced_apps('2')
+      @synced_apps = client.get_user_synced_apps(authentication_token: '2')
     end
     it 'returns a response object' do
       expect(@synced_apps).to be_a Validic::Response
