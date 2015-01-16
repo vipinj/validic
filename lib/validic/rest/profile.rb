@@ -5,7 +5,6 @@ module Validic
     module Profile
       def get_profile(user_authentication_token)
         resp = get_request(:profile, authentication_token: user_authentication_token)
-
         Validic::Profile.new(resp)
       end
 
@@ -14,7 +13,6 @@ module Validic
                     profile: options
         }
         resp = post_request(:profile, options)
-
         Validic::Profile.new(resp['profile'])
       end
     end

@@ -40,6 +40,7 @@ following functionality:
 ### Connect ###
 - Create activities as a Validic Connect partner
 - Post extra data
+- Update or Delete activities by Validic activity id
 
 ### Latest Endpoint ###
 - Get latest data recorded, regardless of when the activity occurred
@@ -96,11 +97,12 @@ Now you can use the wrapper's helper methods to interface with the Validic API.
 client.get_organization
 ```
 
-The wrapper returns the JSON response as a [Hashie::Mash](https://github.com/intridea/hashie#mash) instance for easy
-manipulation.
+When your requests return an object they are returned as a Validic::Response
+object. The Validic::Response typically includes summary metadata and an array
+of record objects.
 ```ruby
-# Get an array of apps for my current organization
-client.get_apps.apps.map(&:name)
+client.get_routine.summary.results
+client.get_routine.records.first.steps
 ```
 
 You can pass a hash of options to calls that fetch data.
@@ -218,9 +220,19 @@ client.get_organization
 client.get_users
 ```
 
+Get user by Validic user id.
+```ruby
+client.get_users(user_id: '5499a29b84626b0339000094')
+```
+
+##### Refresh authentication token
+```ruby
+client.refresh_token('5499a29b84626b0339000094')
+```
+
 ##### Get user id from authentication token
 ```ruby
-client.me('USER_AUTHENTICATION_TOKEN')
+client.me('L9RFSRnJvkwfiZm8vEc4')
 ```
 
 ##### Provision new users
@@ -241,11 +253,6 @@ client.suspend_user('VALIDIC_USER_ID')
 ##### Unsuspend a user
 ```ruby
 client.unsuspend_user('VALIDIC_USER_ID')
-```
-
-##### Refresh authentication token
-```ruby
-client.refresh_token('VALIDIC_USER_ID')
 ```
 
 ##### Delete a user

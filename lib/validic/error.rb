@@ -1,15 +1,20 @@
 module Validic
   class Error < StandardError
     ClientError = Class.new(self)
+    ServerError = Class.new(self)
 
     NotFound = Class.new(ClientError)
     Forbidden = Class.new(ClientError)
     UnprocessableEntity = Class.new(ClientError)
+    Conflict = Class.new(ClientError)
+    InternalServerError = Class.new(ServerError)
 
     ERRORS = {
       403 => Validic::Error::Forbidden,
       404 => Validic::Error::NotFound,
-      422 => Validic::Error::UnprocessableEntity
+      409 => Validic::Error::Conflict,
+      422 => Validic::Error::UnprocessableEntity,
+      500 => Validic::Error::InternalServerError
     }
 
     def self.from_response(body)
