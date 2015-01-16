@@ -9,8 +9,9 @@ module Validic
         build_response_attr(resp)
       end
 
-      def get_user_synced_apps(authentication_token)
-        resp = get_request(:sync_apps, authentication_token: authentication_token)
+      def get_user_synced_apps(options = {})
+        resp = get_request(:sync_apps,
+                           authentication_token: options[:authentication_token])
         build_response_attr(resp)
       end
     end
