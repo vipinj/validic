@@ -60,15 +60,29 @@ describe Validic::REST::Users do
         .to_return(body: fixture('updated_user.json'), headers: { content_type: 'application/json; charset=utf-8' })
     end
     it 'requests the correct resource' do
-      client.update_user('1', uid: 'abcde')
+      client.update_user(user_id: '1', uid: 'abcde')
       expect(a_put('/organizations/1/users/1.json')
         .with(body: { user: { uid: 'abcde' }, access_token: '1' }.to_json))
         .to have_been_made
     end
     it 'returns a User' do
-      user = client.update_user('1', uid: 'abcde')
+      user = client.update_user(user_id: '1', uid: 'abcde')
       expect(user).to be_a Validic::User
       expect(user.uid).to eq 'abcde'
+    end
+    context 'with optional profile' do
+      before do
+        stub_put('/organizations/1/users/1.json')
+          .with(body: { user: { uid: '123467890', profile: { gender: 'M' } }, access_token: '1' }.to_json)
+          .to_return(body: fixture('user_with_profile.json'), headers: { content_type: 'application/json; charset=utf-8' })
+      end
+      it 'returns a User with profile' do
+        user = client.update_user(user_id: '1', uid: '123467890', profile: { gender: 'M' })
+        expect(user).to be_a Validic::User
+        expect(user.uid).to eq '123467890'
+        expect(user.profile).to be_a Validic::Profile
+        expect(user.profile.gender).to eq 'M'
+      end
     end
   end
 
@@ -77,7 +91,7 @@ describe Validic::REST::Users do
       stub_delete('/organizations/1/users/1.json').to_return(status: 200)
     end
     it 'returns true' do
-      response = client.delete_user('1')
+      response = client.delete_user(user_id: '1')
       expect(response).to be true
     end
   end
@@ -106,13 +120,13 @@ describe Validic::REST::Users do
         .to_return(status: 200)
     end
     it 'makes a request to the correct resource' do
-      client.suspend_user('1')
+      client.suspend_user(user_id: '1')
       expect(a_put('/organizations/1/users/1.json')
         .with(body: { suspend: '1', access_token: '1' }.to_json))
         .to have_been_made
     end
     it 'returns true' do
-      response = client.suspend_user('1')
+      response = client.suspend_user(user_id: '1')
       expect(response).to be true
     end
   end
@@ -124,13 +138,13 @@ describe Validic::REST::Users do
         .to_return(status: 200)
     end
     it 'makes a request to the correct resource' do
-      client.unsuspend_user('1')
+      client.unsuspend_user(user_id: '1')
       expect(a_put('/organizations/1/users/1.json')
         .with(body: { suspend: '0', access_token: '1' }.to_json))
         .to have_been_made
     end
     it 'returns true' do
-      response = client.unsuspend_user('1')
+      response = client.unsuspend_user(user_id: '1')
       expect(response).to be true
     end
   end

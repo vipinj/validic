@@ -247,22 +247,28 @@ client.provision_user(uid: '123', profile: { gender: 'M' })
 
 ##### Updating a user
 ```ruby
-client.update_user('VALIDIC_USER_ID', options)
+client.update_user(user_id: '5499a29b84626b0339000094', uid: '123')
+```
+
+With optional profile.
+```ruby
+client.update_user(user_id: '5499a29b84626b0339000094',
+                   uid: '123', profile: { gender: 'M' })
 ```
 
 ##### Suspend a user
 ```ruby
-client.suspend_user('VALIDIC_USER_ID')
+client.suspend_user(user_id: '5499a29b84626b0339000094')
 ```
 
 ##### Unsuspend a user
 ```ruby
-client.unsuspend_user('VALIDIC_USER_ID')
+client.unsuspend_user(user_id: '5499a29b84626b0339000094')
 ```
 
 ##### Delete a user
 ```ruby
-client.delete_user('VALIDIC_USER_ID')
+client.delete_user(user_id: '5499a29b84626b0339000094')
 ```
 
 ##   Profile methods
