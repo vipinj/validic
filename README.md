@@ -130,6 +130,82 @@ client = Validic::Client.new options
 
 ## Organization methods
 
+### Get Requests
+Get requests will always return a Validic::Response object.  It will look like this:
+```ruby
+sleeps = client.get_sleep
+=> #<Validic::Response:0x007ff3c9e4daa8
+ @records=
+  [#<Validic::Sleep:0x007ff3c9e4eb60
+    @_id="54b9242798b4b18fff00000d",
+    @awake=12.0,
+    @deep=nil,
+    @last_updated="2015-01-16T14:45:59+00:00",
+    @light=nil,
+    @rem=nil,
+    @source="healthy_yet",
+    @source_name="HealthyYet",
+    @times_woken=nil,
+    @timestamp="2015-01-16T14:45:38+00:00",
+    @total_sleep=nil,
+    @user_id="54a2eda484626bb50a00002c",
+    @utc_offset="+00:00">
+ @summary=
+  #<Validic::Summary:0x007ff3c9e4eea8
+   @end_date="2015-01-17T23:59:59+00:00",
+   @limit=100,
+   @message="Ok",
+   @next=nil,
+   @offset=0,
+   @previous=nil,
+   @results=2,
+   @start_date="2015-01-15T00:00:00+00:00",
+   @status=200,
+   @timestamp=nil>>
+```
+
+Now you have access to a `Summary` object and an array of activity objects.  You can step through either object like so:
+
+```ruby
+sleeps.summary
+=> #<Validic::Summary:0x007ff3ca2d98d8
+ @end_date="2015-01-17T23:59:59+00:00",
+ @limit=100,
+ @message="Ok",
+ @next=nil,
+ @offset=0,
+ @previous=nil,
+ @results=2,
+ @start_date="2015-01-15T00:00:00+00:00",
+ @status=200,
+ @timestamp=nil>
+
+
+sleeps.summary.status
+=> 200
+
+
+sleeps.records.first
+=> #<Validic::Sleep:0x007ff3ca2d9590
+ @_id="54b9242798b4b18fff00000d",
+ @awake=12.0,
+ @deep=nil,
+ @last_updated="2015-01-16T14:45:59+00:00",
+ @light=nil,
+ @rem=nil,
+ @source="healthy_yet",
+ @source_name="HealthyYet",
+ @times_woken=nil,
+ @timestamp="2015-01-16T14:45:38+00:00",
+ @total_sleep=nil,
+ @user_id="54a2eda484626bb50a00002c",
+ @utc_offset="+00:00">
+
+
+sleeps.records.first.awake
+=> 12.0
+```
+
 ##### Get current organization
 ```ruby
 client.get_organization
@@ -247,6 +323,65 @@ client.get_tobacco_cessations
 
 ##Validic Connect
 
+
+##### CRUD Operations
+As a Validic Connect partner you have access to all CRUD operations including create, update and delete.  The gem supports all 3 of these:
+
+**Create**
+```ruby
+client.create_sleep(user_id: 'VALIDIC_USER_ID, activity_id: 'UNIQUE_ACTIVITY_ID', awake: 2, rem: 1, deep: 7)
+=>  #<Validic::Sleep:0x007fafcc2cdd40
+ @_id="54b93e1b84626b0581000012",
+ @activity_id="22323",
+ @awake=2.0,
+ @deep=7.0,
+ @extras=nil,
+ @last_updated="2015-01-16T16:36:43+00:00",
+ @light=nil,
+ @rem=1.0,
+ @source="healthy_yet",
+ @source_name="Healthy Yet",
+ @times_woken=nil,
+ @timestamp="2015-01-16T16:36:43+00:00",
+ @total_sleep=nil,
+ @utc_offset=nil,
+ @validated=false>
+```
+
+**Update**
+
+```ruby
+client.update_sleep(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID', timestamp: DateTime.now.new_offset(0).iso8601, rem: 4)
+
+=> #<Validic::Sleep:0x007fafcc38fd28
+ @_id="54b93e1b84626b0581000012",
+ @activity_id="22323",
+ @awake=2.0,
+ @deep=7.0,
+ @extras=nil,
+ @last_updated="2015-01-16T16:38:23+00:00",
+ @light=nil,
+ @rem=4.0,
+ @source="healthy_yet",
+ @source_name="Healthy Yet",
+ @times_woken=nil,
+ @timestamp="2015-01-16T16:38:02+00:00",
+ @total_sleep=nil,
+ @utc_offset=nil,
+ @validated=false>
+[13] pry(main)>
+```
+
+**Delete**
+
+```ruby
+client.delete_sleep(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID')
+=> true
+```
+
+All objects have the same actions as outlined below.
+
+
 ##### Fitness
 ```ruby
 client.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
@@ -291,6 +426,8 @@ client.delete_biometric('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 
 ##### Sleep
 ```ruby
+client.create_sleep(user_id: 'VALIDIC_USER_ID, activity_id: 'UNIQUE_ACTIVITY_ID', awake: 2, rem: 1, deep: 7)
+client.update_sleep(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_SLEEP_ID', options={})
 client.create_sleep('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
 client.update_sleep('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
 client.delete_sleep('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')

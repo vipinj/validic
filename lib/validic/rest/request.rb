@@ -40,7 +40,7 @@ module Validic
       def construct_path(type, options)
         organization_id = options.delete(:organization_id) || Validic.organization_id
         user_id = options.delete(:user_id)
-        activity_id = options.delete(:activity_id)
+        activity_id = options.delete(:_id)
         if activity_id
           path = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}/#{activity_id}.json"
         elsif user_id && type == :users

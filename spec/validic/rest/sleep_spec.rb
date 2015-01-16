@@ -50,7 +50,7 @@ describe Validic::REST::Sleep do
                                         headers: { content_type: 'application/json; charset=utf-8'} )
     end
     it 'returns a Sleep' do
-      @sleep = client.create_sleep('1', timestamp: "2013-03-10T07:12:16+00:00",
+      @sleep = client.create_sleep(user_id: '1', timestamp: "2013-03-10T07:12:16+00:00",
                                    utc_offset: "+00:00",
                                    total_sleep: 477,
                                    awake: 34,
@@ -76,7 +76,8 @@ describe Validic::REST::Sleep do
                               to_return(body: fixture('sleep.json'),
                                         headers: {content_type: 'application/json; charset=utf-8'})
 
-                              @sleep = client.update_sleep('1', "51552cddfded0807c4000096",
+                              @sleep = client.update_sleep(user_id: '1',
+                                                           _id: "51552cddfded0807c4000096",
                                                            timestamp: "2013-03-10T07:12:16+00:00",
                                                            utc_offset: "+00:00",
                                                            total_sleep: 477,
@@ -87,7 +88,7 @@ describe Validic::REST::Sleep do
                                                            times_woken: 4)
     end
 
-    it 'returns a Sleep' do
+    it 'returns a sleep object' do
       expect(@sleep).to be_a Validic::Sleep
     end
 
@@ -104,7 +105,8 @@ describe Validic::REST::Sleep do
           .to_return(status: 200)
       end
       it 'returns true' do
-        sleep = client.delete_sleep('1', '51552cddfded0807c4000096')
+        sleep = client.delete_sleep(user_id: '1',
+                                    _id: '51552cddfded0807c4000096')
         expect(sleep).to be true
       end
     end
