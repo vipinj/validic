@@ -213,7 +213,7 @@ sleeps.records.first.awake
 client.get_organization
 ```
 
-##   User methods
+##   [User methods](https://validic.com/api/docs#users)
 
 ##### Get users from organization credentials
 ```ruby
@@ -270,7 +270,7 @@ client.unsuspend_user(user_id: '5499a29b84626b0339000094')
 client.delete_user(user_id: '5499a29b84626b0339000094')
 ```
 
-##   Profile methods
+##   [Profile methods](https://validic.com/api/docs#profile)
 
 ##### Get a user profile
 ```ruby
@@ -338,7 +338,7 @@ client.get_sleep
 client.get_tobacco_cessations
 ```
 
-##Validic Connect
+##   [Validic Connect](https://validic.com/api/partners)
 
 
 ##### CRUD Operations
@@ -399,56 +399,56 @@ client.delete_sleep(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID')
 All objects have the same actions as outlined below.
 
 
-##### Fitness
+##### [Fitness](https://validic.com/api/docs/#fitness)
 ```ruby
 client.create_fitness(user_id: 'VALIDIC_USER_ID', activity_id: 'UNIQUE_ACTIVITY_ID', options)
 client.update_fitness(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID', options)
 client.delete_fitness(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID')
 ```
 
-##### Routine
+##### [Routine](https://validic.com/api/docs/#routine)
 ```ruby
 client.create_routine(user_id: 'VALIDIC_USER_ID', activity_id: 'UNIQUE_ACTIVITY_ID', options)
 client.update_routine(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID', options)
 client.delete_routine(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID')
 ```
 
-##### Nutrition
+##### [Nutrition](https://validic.com/api/docs/#nutrition)
 ```ruby
 client.create_nutrition(user_id: 'VALIDIC_USER_ID', activity_id: 'UNIQUE_ENTRY_ID', options)
 client.update_nutrition(user_id: 'VALIDIC_USER_ID', _id: 'UNIQUE_ENTRY_ID', options)
 client.delete_nutrition(user_id: 'VALIDIC_USER_ID', _id: 'UNIQUE_ENTRY_ID')
 ```
 
-##### Weight
+##### [Weight](https://validic.com/api/docs/#weight)
 ```ruby
 client.create_weight(user_id: 'VALIDIC_USER_ID', data_id: 'UNIQUE_ENTRY_ID', options)
 client.update_weight(user_id: 'VALIDIC_USER_ID', _id: 'UNIQUE_ENTRY_ID', options)
 client.delete_weight(user_id: 'VALIDIC_USER_ID', _id: 'UNIQUE_ENTRY_ID')
 ```
 
-##### Diabetes
+##### [Diabetes](https://validic.com/api/docs/#diabetes)
 ```ruby
 client.create_diabetes(user_id: 'VALIDIC_USER_ID', activity_id: 'UNIQUE_ACTIVITY_ID', options)
 client.update_diabetes(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID', options)
 client.delete_diabetes(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID')
 ```
 
-##### Biometrics
+##### [Biometrics](https://validic.com/api/docs/#biometrics)
 ```ruby
 client.create_biometrics(user_id: 'VALIDIC_USER_ID', data_id: 'UNIQUE_ENTRY_ID', options)
 client.update_biometrics(user_id: 'VALIDIC_USER_ID', _id: 'UNIQUE_ENTRY_ID', options)
 client.delete_biometrics(user_id: 'VALIDIC_USER_ID', _id: 'UNIQUE_ENTRY_ID')
 ```
 
-##### Sleep
+##### [Sleep](https://validic.com/api/docs/#sleep)
 ```ruby
 client.create_sleep(user_id: 'VALIDIC_USER_ID', activity_id: 'UNIQUE_ACTIVITY_ID', options)
 client.update_sleep(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_SLEEP_ID', options)
 client.delete_sleep(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID')
 ```
 
-##### Tobacco Cessation
+##### [Tobacco Cessation](https://validic.com/api/docs/#tobacco_cessation)
 ```ruby
 client.create_tobacco_cessation(user_id: 'VALIDIC_USER_ID', activity_id: 'UNIQUE_ACTIVITY_ID' options)
 client.update_tobacco_cessation(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID', options)
@@ -460,7 +460,7 @@ client.delete_tobacco_cessation(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVI
 client.create_fitness(user_id: 'VALIDIC_USER_ID', activity_id: 'UNIQUE_ACTIVITY_ID', extras: "{\"stars\": 3}")
 ```
 
-##   Latest Records
+##   [Latest Records](https://validic.com/api/bulkdata/#latest)
 
 ###### You can also pass an options hash to filter latest results
 
