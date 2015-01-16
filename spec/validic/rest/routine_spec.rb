@@ -46,14 +46,14 @@ describe Validic::REST::Routine do
           headers: { content_type: 'application/json; charset=utf-8'} )
     end
     it 'requests the correct resource' do
-      client.create_routine('1', timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345')
+      client.create_routine(user_id: '1', timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345')
       expect(a_post('/organizations/1/users/1/routine.json')
         .with(body: { routine: { timestamp: '2013-03-10T07:12:16+00:00',
                                    activity_id: '12345' },
                       access_token: '1' }.to_json)).to have_been_made
     end
     it 'returns a routine' do
-      routine = client.create_routine('1', timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345')
+      routine = client.create_routine(user_id: '1', timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345')
       expect(routine).to be_a Validic::Routine
       expect(routine.timestamp).to eq '2013-03-10T07:12:16+00:00'
     end
@@ -68,13 +68,13 @@ describe Validic::REST::Routine do
                    headers: {content_type: 'application/json; charset=utf-8'})
     end
     it 'makes a routine request to the correct url' do
-      client.update_routine('1', '51552cddfded0807c4000096', timestamp: '2013-03-10T07:12:16+00:00')
+      client.update_routine(user_id: '1', _id: '51552cddfded0807c4000096', timestamp: '2013-03-10T07:12:16+00:00')
       expect(a_put('/organizations/1/users/1/routine/51552cddfded0807c4000096.json')
         .with(body: { routine: { timestamp: '2013-03-10T07:12:16+00:00' },
                       access_token: '1' }.to_json)).to have_been_made
     end
     it 'returns a routine' do
-      routine = client.update_routine('1', '51552cddfded0807c4000096', timestamp: '2013-03-10T07:12:16+00:00')
+      routine = client.update_routine(user_id: '1', _id: '51552cddfded0807c4000096', timestamp: '2013-03-10T07:12:16+00:00')
       expect(routine).to be_a Validic::Routine
     end
   end
@@ -86,7 +86,7 @@ describe Validic::REST::Routine do
           .to_return(status: 200)
       end
       it 'returns true' do
-        routine = client.delete_routine('1', '51552cddfded0807c4000096')
+        routine = client.delete_routine(user_id: '1', _id: '51552cddfded0807c4000096')
         expect(routine).to be true
       end
     end
