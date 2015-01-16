@@ -34,7 +34,7 @@ describe Validic::Error do
         .to_return(status: 422, body: fixture('unprocessable_entity.json'), headers: {content_type: 'application/json; charset=utf-8'})
     end
     it 'raises an UnprocessableEntity error' do
-      expect { client.create_nutrition('1') }.to raise_error(Validic::Error::UnprocessableEntity)
+      expect { client.create_nutrition(user_id: '1') }.to raise_error(Validic::Error::UnprocessableEntity)
     end
   end
 end

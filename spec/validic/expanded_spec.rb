@@ -16,7 +16,7 @@ describe 'expanded for all objects' do
         headers: { content_type: 'application/json; charset=utf-8'} )
 
           #use the create_object method
-          @obj = client.send("create_#{object}", '1', timestamp: '2013-03-10T07:12:16+00:00',
+          @obj = client.send("create_#{object}", user_id: '1', timestamp: '2013-03-10T07:12:16+00:00',
                              activity_id: '12345',
                              extras: "{\"stars\": 3}")
       end
@@ -39,7 +39,7 @@ describe 'expanded for all objects' do
         extras: "{\"stars\": 3}"}, access_token: '1' }.to_json)
           .to_return(body: fixture("#{object}-extras.json"),
         headers: { content_type: 'application/json; charset=utf-8'} )
-          @obj = client.send("update_#{object}", '1', "51552cddfded0807c4000096",
+          @obj = client.send("update_#{object}", user_id: '1', _id: "51552cddfded0807c4000096",
                                                timestamp: '2013-03-10T07:12:16+00:00',
                                                extras: "{\"stars\": 3}")
       end

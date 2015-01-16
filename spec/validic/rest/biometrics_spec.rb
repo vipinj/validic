@@ -48,14 +48,14 @@ describe Validic::REST::Biometrics do
           headers: { content_type: 'application/json; charset=utf-8'} )
     end
     it 'requests the correct resource' do
-      client.create_biometrics('1', timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345')
+      client.create_biometrics(user_id: '1', timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345')
       expect(a_post('/organizations/1/users/1/biometrics.json')
         .with(body: { biometrics: { timestamp: '2013-03-10T07:12:16+00:00',
                                   activity_id: '12345' },
                       access_token: '1' }.to_json)).to have_been_made
     end
     it 'returns a Biometrics' do
-      biometrics_record = client.create_biometrics('1', timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345')
+      biometrics_record = client.create_biometrics(user_id: '1', timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345')
       expect(biometrics_record).to be_a Validic::Biometrics
       expect(biometrics_record.timestamp).to eq '2013-03-10T07:12:16+00:00'
     end
@@ -70,13 +70,13 @@ describe Validic::REST::Biometrics do
                    headers: {content_type: 'application/json; charset=utf-8'})
     end
     it 'makes a biometrics request to the correct url' do
-      client.update_biometrics('1', '51552cddfded0807c4000096', timestamp: '2013-03-10T07:12:16+00:00')
+      client.update_biometrics(user_id: '1', _id: '51552cddfded0807c4000096', timestamp: '2013-03-10T07:12:16+00:00')
       expect(a_put('/organizations/1/users/1/biometrics/51552cddfded0807c4000096.json')
         .with(body: { biometrics: { timestamp: '2013-03-10T07:12:16+00:00' },
                       access_token: '1' }.to_json)).to have_been_made
     end
     it 'returns a Biometrics' do
-      biometrics_record = client.update_biometrics('1', '51552cddfded0807c4000096', timestamp: '2013-03-10T07:12:16+00:00')
+      biometrics_record = client.update_biometrics(user_id: '1', _id: '51552cddfded0807c4000096', timestamp: '2013-03-10T07:12:16+00:00')
       expect(biometrics_record).to be_a Validic::Biometrics
     end
   end
@@ -88,7 +88,7 @@ describe Validic::REST::Biometrics do
           .to_return(status: 200)
       end
       it 'returns true' do
-        biometrics_record = client.delete_biometrics('1', '51552cddfded0807c4000096')
+        biometrics_record = client.delete_biometrics(user_id: '1', _id: '51552cddfded0807c4000096')
         expect(biometrics_record).to be true
       end
     end

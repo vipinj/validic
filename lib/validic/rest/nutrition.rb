@@ -10,20 +10,23 @@ module Validic
       end
       alias :get_nutritions :get_nutrition
 
-      def create_nutrition(user_id, options = {})
+      def create_nutrition(options = {})
+        user_id, _id = options.delete(:user_id), options.delete(:_id)
         options = { user_id: user_id, nutrition: options }
         response = post_request(:nutrition, options)
         Validic::Nutrition.new(response['nutrition'])
       end
 
-      def update_nutrition(user_id, activity_id, options = {})
-        options = { user_id: user_id, activity_id: activity_id, nutrition: options }
+      def update_nutrition(options = {})
+        user_id, _id = options.delete(:user_id), options.delete(:_id)
+        options = { user_id: user_id, _id: _id, nutrition: options }
         response = put_request(:nutrition, options)
         Validic::Nutrition.new(response['nutrition'])
       end
 
-      def delete_nutrition(user_id, activity_id)
-        options = { user_id: user_id, activity_id: activity_id }
+      def delete_nutrition(options = {})
+        user_id, _id = options.delete(:user_id), options.delete(:_id)
+        options = { user_id: user_id, _id: _id }
         delete_request(:nutrition, options)
         true
       end
