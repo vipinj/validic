@@ -275,12 +275,13 @@ client.delete_user(user_id: '5499a29b84626b0339000094')
 
 ##### Get a user profile
 ```ruby
-client.get_profile('USER_AUTHENTICATION_TOKEN')
+client.get_profile(authentication_token: 'L9RFSRnJvkwfiZm8vEc4')
 ```
 
 ##### Create a user profile
 ```ruby
-client.create_profile('USER_AUTHENTICATION_TOKEN', options)
+client.create_profile(authentication_token: 'L9RFSRnJvkwfiZm8vEc4',
+                      gender: 'M')
 ```
 
 ##   Apps methods

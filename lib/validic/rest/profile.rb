@@ -3,16 +3,14 @@ require 'validic/profile'
 module Validic
   module REST
     module Profile
-      def get_profile(user_authentication_token)
-        resp = get_request(:profile, authentication_token: user_authentication_token)
+      def get_profile(options = {})
+        resp = get_request(:profile, options)
         Validic::Profile.new(resp)
       end
 
-      def create_profile(user_authentication_token, options = {})
-        options = { authentication_token: user_authentication_token,
-                    profile: options
-        }
-        resp = post_request(:profile, options)
+      def create_profile(options = {})
+        token = options.delete(:authentication_token)
+        resp = post_request(:profile, authentication_token: token, profile: options)
         Validic::Profile.new(resp['profile'])
       end
     end

@@ -3,6 +3,7 @@ module Validic
     ClientError = Class.new(self)
     ServerError = Class.new(self)
 
+    Unauthorized = Class.new(ClientError)
     NotFound = Class.new(ClientError)
     Forbidden = Class.new(ClientError)
     UnprocessableEntity = Class.new(ClientError)
@@ -10,6 +11,7 @@ module Validic
     InternalServerError = Class.new(ServerError)
 
     ERRORS = {
+      401 => Validic::Error::Unauthorized,
       403 => Validic::Error::Forbidden,
       404 => Validic::Error::NotFound,
       409 => Validic::Error::Conflict,
