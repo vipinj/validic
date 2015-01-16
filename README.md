@@ -252,8 +252,7 @@ client.update_user(user_id: '5499a29b84626b0339000094', uid: '123')
 
 With optional profile.
 ```ruby
-client.update_user(user_id: '5499a29b84626b0339000094',
-                   uid: '123', profile: { gender: 'M' })
+client.update_user(user_id: '5499a29b84626b0339000094', uid: '123', profile: { gender: 'M' })
 ```
 
 ##### Suspend a user
@@ -280,20 +279,19 @@ client.get_profile(authentication_token: 'L9RFSRnJvkwfiZm8vEc4')
 
 ##### Create a user profile
 ```ruby
-client.create_profile(authentication_token: 'L9RFSRnJvkwfiZm8vEc4',
-                      gender: 'M')
+client.create_profile(authentication_token: 'L9RFSRnJvkwfiZm8vEc4', gender: 'M')
 ```
 
 ##   Apps methods
 
 ##### Get a list of available third-party-apps
 ```ruby
-client.get_apps
+client.get_org_apps
 ```
 
 ##### Get a list of apps a user is synced to
 ```ruby
-client.get_synced_apps('USER_AUTHENTICATION_TOKEN')
+client.get_user_synced_apps(authentication_token: 'L9RFSRnJvkwfiZm8vEc4')
 ```
 
 ##   Activity methods
@@ -403,16 +401,16 @@ All objects have the same actions as outlined below.
 
 ##### Fitness
 ```ruby
-client.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
-client.update_fitness('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-client.delete_fitness('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+client.create_fitness(user_id: 'VALIDIC_USER_ID', activity_id: 'UNIQUE_ACTIVITY_ID', options)
+client.update_fitness(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID', options)
+client.delete_fitness(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID')
 ```
 
 ##### Routine
 ```ruby
-client.create_routine('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
-client.update_routine('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-client.delete_routine('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+client.create_routine(user_id: 'VALIDIC_USER_ID', activity_id: 'UNIQUE_ACTIVITY_ID', options)
+client.update_routine(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID', options)
+client.delete_routine(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID')
 ```
 
 ##### Nutrition
@@ -431,9 +429,9 @@ client.delete_weight(user_id: 'VALIDIC_USER_ID', _id: 'UNIQUE_ENTRY_ID')
 
 ##### Diabetes
 ```ruby
-client.create_diabetes('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
-client.update_diabetes('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-client.delete_diabetes('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+client.create_diabetes(user_id: 'VALIDIC_USER_ID', activity_id: 'UNIQUE_ACTIVITY_ID', options)
+client.update_diabetes(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID', options)
+client.delete_diabetes(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID')
 ```
 
 ##### Biometrics
@@ -445,21 +443,21 @@ client.delete_biometrics(user_id: 'VALIDIC_USER_ID', _id: 'UNIQUE_ENTRY_ID')
 
 ##### Sleep
 ```ruby
-client.create_sleep(user_id: 'VALIDIC_USER_ID, activity_id: 'UNIQUE_ACTIVITY_ID', options)
+client.create_sleep(user_id: 'VALIDIC_USER_ID', activity_id: 'UNIQUE_ACTIVITY_ID', options)
 client.update_sleep(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_SLEEP_ID', options)
 client.delete_sleep(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID')
 ```
 
 ##### Tobacco Cessation
 ```ruby
-client.create_tobacco_cessation('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID' options)
-client.update_tobacco_cessation('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-client.delete_tobacco_cessation('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+client.create_tobacco_cessation(user_id: 'VALIDIC_USER_ID', activity_id: 'UNIQUE_ACTIVITY_ID' options)
+client.update_tobacco_cessation(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID', options)
+client.delete_tobacco_cessation(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID')
 ```
 
 ##### You can also create data with your own custom extras as JSON
 ```ruby
-client.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', extras: "{\"stars\": 3}")
+client.create_fitness(user_id: 'VALIDIC_USER_ID', activity_id: 'UNIQUE_ACTIVITY_ID', extras: "{\"stars\": 3}")
 ```
 
 ##   Latest Records
@@ -468,7 +466,7 @@ client.create_fitness('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', extras: "{\"stars
 
 ##### Pull latest records for specified type
 ```ruby
-client.latest('routine')
+client.latest_routine
 ```
 
 ## Contributing
