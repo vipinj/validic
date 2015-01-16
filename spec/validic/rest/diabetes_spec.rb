@@ -48,14 +48,14 @@ describe Validic::REST::Diabetes do
           headers: { content_type: 'application/json; charset=utf-8'} )
     end
     it 'requests the correct resource' do
-      client.create_diabetes('1', timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345')
+      client.create_diabetes(user_id: '1', timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345')
       expect(a_post('/organizations/1/users/1/diabetes.json')
         .with(body: { diabetes: { timestamp: '2013-03-10T07:12:16+00:00',
                                   activity_id: '12345' },
                       access_token: '1' }.to_json)).to have_been_made
     end
     it 'returns a Diabetes' do
-      diabetes_record = client.create_diabetes('1', timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345')
+      diabetes_record = client.create_diabetes(user_id: '1', timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345')
       expect(diabetes_record).to be_a Validic::Diabetes
       expect(diabetes_record.timestamp).to eq '2013-03-10T07:12:16+00:00'
     end
@@ -70,13 +70,13 @@ describe Validic::REST::Diabetes do
                    headers: {content_type: 'application/json; charset=utf-8'})
     end
     it 'makes a diabetes request to the correct url' do
-      client.update_diabetes('1', '51552cddfded0807c4000096', timestamp: '2013-03-10T07:12:16+00:00')
+      client.update_diabetes(user_id: '1', _id: '51552cddfded0807c4000096', timestamp: '2013-03-10T07:12:16+00:00')
       expect(a_put('/organizations/1/users/1/diabetes/51552cddfded0807c4000096.json')
         .with(body: { diabetes: { timestamp: '2013-03-10T07:12:16+00:00' },
                       access_token: '1' }.to_json)).to have_been_made
     end
     it 'returns a Diabetes' do
-      diabetes_record = client.update_diabetes('1', '51552cddfded0807c4000096', timestamp: '2013-03-10T07:12:16+00:00')
+      diabetes_record = client.update_diabetes(user_id: '1', _id: '51552cddfded0807c4000096', timestamp: '2013-03-10T07:12:16+00:00')
       expect(diabetes_record).to be_a Validic::Diabetes
     end
   end
@@ -88,7 +88,7 @@ describe Validic::REST::Diabetes do
           .to_return(status: 200)
       end
       it 'returns true' do
-        diabetes_record = client.delete_diabetes('1', '51552cddfded0807c4000096')
+        diabetes_record = client.delete_diabetes(user_id: '1', _id: '51552cddfded0807c4000096')
         expect(diabetes_record).to be true
       end
     end

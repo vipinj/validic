@@ -10,20 +10,23 @@ module Validic
       end
       alias :get_fitnesses :get_fitness
 
-      def create_fitness(user_id, options = {})
+      def create_fitness(options = {})
+        user_id = options.delete(:user_id)
         options = { user_id: user_id, fitness: options }
         response = post_request(:fitness, options)
         Validic::Fitness.new(response['fitness'])
       end
 
-      def update_fitness(user_id, activity_id, options = {})
-        options = { user_id: user_id, activity_id: activity_id, fitness: options }
+      def update_fitness(options = {})
+        user_id, _id = options.delete(:user_id), options.delete(:_id)
+        options = { user_id: user_id, _id: _id, fitness: options }
         response = put_request(:fitness, options)
         Validic::Fitness.new(response['fitness'])
       end
 
-      def delete_fitness(user_id, activity_id)
-        options = { user_id: user_id, activity_id: activity_id }
+      def delete_fitness(options = {})
+        user_id, _id = options.delete(:user_id), options.delete(:_id)
+        options = { user_id: user_id, _id: _id }
         delete_request(:fitness, options)
         true
       end

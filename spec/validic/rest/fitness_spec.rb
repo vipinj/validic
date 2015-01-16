@@ -48,14 +48,14 @@ describe Validic::REST::Fitness do
           headers: { content_type: 'application/json; charset=utf-8'} )
     end
     it 'requests the correct resource' do
-      client.create_fitness('1', timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345')
+      client.create_fitness(user_id: '1', timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345')
       expect(a_post('/organizations/1/users/1/fitness.json')
         .with(body: { fitness: { timestamp: '2013-03-10T07:12:16+00:00',
                                    activity_id: '12345' },
                       access_token: '1' }.to_json)).to have_been_made
     end
     it 'returns a Fitness' do
-      fitness = client.create_fitness('1', timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345')
+      fitness = client.create_fitness(user_id: '1', timestamp: '2013-03-10T07:12:16+00:00', activity_id: '12345')
       expect(fitness).to be_a Validic::Fitness
       expect(fitness.timestamp).to eq '2013-03-10T07:12:16+00:00'
     end
@@ -70,13 +70,13 @@ describe Validic::REST::Fitness do
                    headers: {content_type: 'application/json; charset=utf-8'})
     end
     it 'makes a fitness request to the correct url' do
-      client.update_fitness('1', '51552cddfded0807c4000096', timestamp: '2013-03-10T07:12:16+00:00')
+      client.update_fitness(user_id: '1', _id: '51552cddfded0807c4000096', timestamp: '2013-03-10T07:12:16+00:00')
       expect(a_put('/organizations/1/users/1/fitness/51552cddfded0807c4000096.json')
         .with(body: { fitness: { timestamp: '2013-03-10T07:12:16+00:00' },
                       access_token: '1' }.to_json)).to have_been_made
     end
     it 'returns a Fitness' do
-      fitness = client.update_fitness('1', '51552cddfded0807c4000096', timestamp: '2013-03-10T07:12:16+00:00')
+      fitness = client.update_fitness(user_id: '1', _id: '51552cddfded0807c4000096', timestamp: '2013-03-10T07:12:16+00:00')
       expect(fitness).to be_a Validic::Fitness
     end
   end
@@ -88,7 +88,7 @@ describe Validic::REST::Fitness do
           .to_return(status: 200)
       end
       it 'returns true' do
-        fitness = client.delete_fitness('1', '51552cddfded0807c4000096')
+        fitness = client.delete_fitness(user_id: '1', _id: '51552cddfded0807c4000096')
         expect(fitness).to be true
       end
     end
