@@ -227,17 +227,22 @@ client.get_users(user_id: '5499a29b84626b0339000094')
 
 ##### Refresh authentication token
 ```ruby
-client.refresh_token('5499a29b84626b0339000094')
+client.refresh_token(user_id: '5499a29b84626b0339000094')
 ```
 
 ##### Get user id from authentication token
 ```ruby
-client.me('L9RFSRnJvkwfiZm8vEc4')
+client.me(authentication_token: 'L9RFSRnJvkwfiZm8vEc4')
 ```
 
 ##### Provision new users
 ```ruby
-client.provision_user('UNIQUE_USER_ID')
+client.provision_user(uid: '123')
+```
+
+With optional profile.
+```ruby
+client.provision_user(uid: '123', profile: { gender: 'M' })
 ```
 
 ##### Updating a user

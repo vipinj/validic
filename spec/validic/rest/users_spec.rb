@@ -37,6 +37,20 @@ describe Validic::REST::Users do
       expect(user).to be_a Validic::User
       expect(user.uid).to eq '123467890'
     end
+    context 'with optional profile' do
+      before do
+        stub_post('/organizations/1/users.json')
+          .with(body: { user: { uid: '123467890', profile: { gender: 'M' } }, access_token: '1' }.to_json)
+          .to_return(body: fixture('user_with_profile.json'), headers: { content_type: 'application/json; charset=utf-8' })
+      end
+      it 'returns a User with profile' do
+        user = client.provision_user(uid: '123467890', profile: { gender: 'M' })
+        expect(user).to be_a Validic::User
+        expect(user.uid).to eq '123467890'
+        expect(user.profile).to be_a Validic::Profile
+        expect(user.profile.gender).to eq 'M'
+      end
+    end
   end
 
   describe '#update_user' do
@@ -75,12 +89,12 @@ describe Validic::REST::Users do
             headers: { content_type: 'application/json; charset=utf-8' })
     end
     it 'makes a request to the correct resource' do
-      client.me('auth_token')
+      client.me(authentication_token: 'auth_token')
       expect(a_get('/me.json').with(query: { access_token: '1', authentication_token: 'auth_token' }))
         .to have_been_made
     end
     it 'returns a String' do
-      me = client.me('auth_token')
+      me = client.me(authentication_token: 'auth_token')
       expect(me).to eq '1'
     end
   end
@@ -129,13 +143,13 @@ describe Validic::REST::Users do
                    headers: { content_type: 'application/json; charset=utf-8' })
     end
     it 'makes a request to the correct resource' do
-      client.refresh_token('1')
+      client.refresh_token(user_id: '1')
       expect(a_get('/organizations/1/users/1/refresh_token.json')
         .with(query: { access_token: '1' }))
         .to have_been_made
     end
     it 'returns a User' do
-      user = client.refresh_token('1')
+      user = client.refresh_token(user_id: '1')
       expect(user).to be_a Validic::User
     end
   end
