@@ -398,16 +398,16 @@ client.delete_routine('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 
 ##### Nutrition
 ```ruby
-client.create_nutrition('VALIDIC_USER_ID', 'UNIQUE_ENTRY_ID', options)
-client.update_nutrition('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-client.delete_nutrition('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+client.create_nutrition(user_id: 'VALIDIC_USER_ID', activity_id: 'UNIQUE_ENTRY_ID', options)
+client.update_nutrition(user_id: 'VALIDIC_USER_ID', _id: 'UNIQUE_ENTRY_ID', options)
+client.delete_nutrition(user_id: 'VALIDIC_USER_ID', _id: 'UNIQUE_ENTRY_ID')
 ```
 
 ##### Weight
 ```ruby
-client.create_weight('VALIDIC_USER_ID', 'UNIQUE_DATA_ID', options)
-client.update_weight('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-client.delete_weight('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+client.create_weight(user_id: 'VALIDIC_USER_ID', data_id: 'UNIQUE_ENTRY_ID', options)
+client.update_weight(user_id: 'VALIDIC_USER_ID', _id: 'UNIQUE_ENTRY_ID', options)
+client.delete_weight(user_id: 'VALIDIC_USER_ID', _id: 'UNIQUE_ENTRY_ID')
 ```
 
 ##### Diabetes
@@ -419,18 +419,16 @@ client.delete_diabetes('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
 
 ##### Biometrics
 ```ruby
-client.create_biometric('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
-client.update_biometric('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-client.delete_biometric('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+client.create_biometrics(user_id: 'VALIDIC_USER_ID', data_id: 'UNIQUE_ENTRY_ID', options)
+client.update_biometrics(user_id: 'VALIDIC_USER_ID', _id: 'UNIQUE_ENTRY_ID', options)
+client.delete_biometrics(user_id: 'VALIDIC_USER_ID', _id: 'UNIQUE_ENTRY_ID')
 ```
 
 ##### Sleep
 ```ruby
-client.create_sleep(user_id: 'VALIDIC_USER_ID, activity_id: 'UNIQUE_ACTIVITY_ID', awake: 2, rem: 1, deep: 7)
-client.update_sleep(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_SLEEP_ID', options={})
-client.create_sleep('VALIDIC_USER_ID', 'UNIQUE_ACTIVITY_ID', options)
-client.update_sleep('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID', options)
-client.delete_sleep('VALIDIC_USER_ID', 'VALIDIC_ACTIVITY_ID')
+client.create_sleep(user_id: 'VALIDIC_USER_ID, activity_id: 'UNIQUE_ACTIVITY_ID', options)
+client.update_sleep(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_SLEEP_ID', options)
+client.delete_sleep(user_id: 'VALIDIC_USER_ID', _id: 'VALIDIC_ACTIVITY_ID')
 ```
 
 ##### Tobacco Cessation

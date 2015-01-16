@@ -9,20 +9,23 @@ module Validic
         build_response_attr(resp)
       end
 
-      def create_biometrics(user_id, options = {})
+      def create_biometrics(options = {})
+        user_id = options.delete(:user_id)
         options = { user_id: user_id, biometrics: options }
         response = post_request(:biometrics, options)
         Validic::Biometrics.new(response['biometrics'])
       end
 
-      def update_biometrics(user_id, activity_id, options = {})
-        options = { user_id: user_id, activity_id: activity_id, biometrics: options }
+      def update_biometrics(options = {})
+        user_id, _id = options.delete(:user_id), options.delete(:_id)
+        options = { user_id: user_id, _id: _id, biometrics: options }
         response = put_request(:biometrics, options)
         Validic::Biometrics.new(response['biometrics'])
       end
 
-      def delete_biometrics(user_id, activity_id)
-        options = { user_id: user_id, activity_id: activity_id }
+      def delete_biometrics(options = {})
+        user_id, _id = options.delete(:user_id), options.delete(:_id)
+        options = { user_id: user_id, _id: _id }
         delete_request(:biometrics, options)
         true
       end
