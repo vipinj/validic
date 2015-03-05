@@ -11,7 +11,6 @@ describe Validic::Profile do
     end
 
     it "returns JSON response of Validic::Profile", vcr: true do
-      pending
       @profile.should_not be_nil
     end
   end

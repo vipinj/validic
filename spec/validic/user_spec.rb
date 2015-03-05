@@ -30,7 +30,6 @@ describe Validic::User do
     end
 
     it "returns JSON response of Validic::User", vcr: true do
-      pending
       @me.should_not be_nil
     end
 
