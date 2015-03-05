@@ -5,6 +5,13 @@ Ruby API Wrapper for [Validic](http://www.validic.com)
 ## Build Status
 [![Codeship Status for Validic/validic](https://www.codeship.io/projects/cc4ff330-9f72-0130-3cf3-0e5a3e2104f7/status?branch=master)](https://www.codeship.io/projects/3456)
 
+## Migration in progress
+All development is currently being done on the 0.4.0 branch. Beginning
+04/05/2015 that branch will become the new master branch and development will
+continue there.
+
+Feel free to start using the 0.4.0 version now as it includes many changes and
+additions. It also has support for the Validic Connect API.
 
 ## Stable Version: 0.3.2
 
