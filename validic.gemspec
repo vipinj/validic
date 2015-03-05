@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'faraday_middleware', '~> 0.9.0'
   spec.add_dependency 'hashie', '~> 2.0.3'
-  spec.add_dependency 'activesupport'
+spec.add_dependency 'activesupport', '~>3.2'
   spec.add_dependency 'multi_json'
 
   spec.add_development_dependency "bundler"
