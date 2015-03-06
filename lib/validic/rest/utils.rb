@@ -12,10 +12,8 @@ module Validic
       end
 
       def response_object(resp)
-        klass = Validic.const_get(camelize_response_key(resp))
-
         return resp.values.first if resp.values.first.is_a? Hash
-
+        klass = Validic.const_get(camelize_response_key(resp))
         resp.values.flatten.collect { |obj| klass.new(obj) }
       end
 
