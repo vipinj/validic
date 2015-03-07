@@ -8,9 +8,13 @@ module Validic
 
       def build_response_attr(resp)
         summary = Validic::Summary.new(resp.delete("summary"))
+        Validic::Response.new(summary, response_object(resp))
+      end
+
+      def response_object(resp)
+        return resp.values.first if resp.values.first.is_a? Hash
         klass = Validic.const_get(camelize_response_key(resp))
-        records = resp.values.flatten.collect { |obj| klass.new(obj) }
-        Validic::Response.new(summary, records)
+        resp.values.flatten.collect { |obj| klass.new(obj) }
       end
 
       def camelize_response_key(resp)

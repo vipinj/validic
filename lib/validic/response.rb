@@ -1,9 +1,15 @@
 module Validic
   class Response
-    attr_reader :summary, :records
-    def initialize(summary, record_array)
+    attr_reader :summary, :records, :attributes
+    def initialize(summary, response)
       @summary = summary
-      @records = record_array
+
+      case response
+      when Array
+        @records = response
+      when Hash
+        @attributes = response
+      end
     end
   end
 end
