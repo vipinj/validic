@@ -1,44 +1,58 @@
 require 'validic'
-require 'vcr'
-require 'simplecov'
-require 'simplecov-rcov'
-require 'api_matchers'
+require 'pry'
+require 'webmock/rspec'
+require 'json'
 
-class SimpleCov::Formatter::MergedFormatter
-  def format(result)
-    SimpleCov::Formatter::HTMLFormatter.new.format(result)
-    SimpleCov::Formatter::RcovFormatter.new.format(result)
-  end
-end
-
-SimpleCov.formatter = SimpleCov::Formatter::MergedFormatter
-SimpleCov.start do
-  add_filter '/vendor'
-end
-
-VCR.configure do |c|
-  c.allow_http_connections_when_no_cassette = true
-  c.cassette_library_dir = 'spec/cassette'
-  c.hook_into :webmock
-  c.configure_rspec_metadata!
-  c.default_cassette_options = { record: :new_episodes }
-end
-
-RSpec.configure do |c|
-  c.include APIMatchers::RSpecMatchers
-
-  c.treat_symbols_as_metadata_keys_with_true_values = true
-
-  ##
-  # Add gem specific configuration for easy access
-  #
-  c.before(:each) do
-    Validic.configure do |config|
-      # This is using ACME Corp Credentials as per Documentation
-      config.api_url          = 'https://api.validic.com'
-      config.api_version      = 'v1'
-      config.access_token     = ENV['TEST_ORG_TOKEN']
-      config.organization_id  = '51aca5a06dedda916400002b'
+RSpec.configure do |config|
+  config.before(:each) do
+    Validic.configure do |c|
+      c.api_url = 'https://api.validic.com'
+      c.api_version = 'v1'
+      c.access_token = '1'
+      c.organization_id = '1'
     end
   end
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
+end
+
+def fixture_path
+  File.expand_path('../fixtures', __FILE__)
+end
+
+def fixture(file)
+  File.new(fixture_path + '/' + file)
+end
+
+def a_delete(path)
+  a_request(:delete, Validic::BASE_URL + path)
+end
+
+def a_get(path)
+  a_request(:get, Validic::BASE_URL + path)
+end
+
+def a_post(path)
+  a_request(:post, Validic::BASE_URL + path)
+end
+
+def a_put(path)
+  a_request(:put, Validic::BASE_URL + path)
+end
+
+def stub_delete(path)
+  stub_request(:delete, Validic::BASE_URL + path)
+end
+
+def stub_get(path)
+  stub_request(:get, Validic::BASE_URL + path)
+end
+
+def stub_post(path)
+  stub_request(:post, Validic::BASE_URL + path)
+end
+
+def stub_put(path)
+  stub_request(:put, Validic::BASE_URL + path)
 end
