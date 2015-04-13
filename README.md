@@ -342,11 +342,11 @@ client.get_tobacco_cessations
 
 
 ##### CRUD Operations
-As a Validic Connect partner you have access to all CRUD operations including create, update and delete.  The gem supports all 3 of these:
+As a Validic Connect partner you have access to all CRUD operations.  The gem supports all of these:
 
 **Create**
 ```ruby
-client.create_sleep(user_id: 'VALIDIC_USER_ID, activity_id: 'UNIQUE_ACTIVITY_ID', awake: 2, rem: 1, deep: 7)
+client.create_sleep(user_id: 'VALIDIC_USER_ID', activity_id: 'UNIQUE_ACTIVITY_ID', awake: 2, rem: 1, deep: 7)
 =>  #<Validic::Sleep:0x007fafcc2cdd40
  @_id="54b93e1b84626b0581000012",
  @activity_id="22323",
