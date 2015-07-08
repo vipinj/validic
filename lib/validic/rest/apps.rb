@@ -4,8 +4,8 @@ module Validic
   module REST
     module Apps
 
-      def get_org_apps
-        resp = get_request(:apps)
+      def get_org_apps(params = {})
+        resp = get_request(:apps, params)
         build_response_attr(resp)
       end
       alias :get_apps :get_org_apps
