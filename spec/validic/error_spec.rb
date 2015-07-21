@@ -70,4 +70,20 @@ describe Validic::Error do
       expect { client.get_profile }.to raise_error(Validic::Error::Unauthorized)
     end
   end
+
+  context 'Invalid date' do
+    before do
+      stub_request(:get, /fitness/)
+        .to_return(status: 406, body: fixture('invalid_date.json'),
+                   headers: { content_type: 'application/json; charset=utf-8' })
+    end
+    it 'raises an InvalidDate error' do
+      start_date = DateTime.new(2015, 07, 15, 12)
+      end_date = DateTime.new(2015, 07, 15, 13)
+
+      expect {
+        client.get_fitness(start_date: start_date, end_date: end_date)
+      }.to raise_error Validic::Error::InvalidDate
+    end
+  end
 end
