@@ -3,6 +3,7 @@ module Validic
     attr_reader :timestamp, :start_date, :end_date, :offset, :message,
       :results, :limit, :previous, :next, :status
     def initialize(sum_hash)
+      sum_hash = Hash(sum_hash)
       @timestamp = sum_hash["timestamp"]
       @status = sum_hash["status"]
       @offset = sum_hash["offset"]
