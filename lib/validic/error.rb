@@ -9,11 +9,13 @@ module Validic
     UnprocessableEntity = Class.new(ClientError)
     Conflict = Class.new(ClientError)
     InternalServerError = Class.new(ServerError)
+    InvalidDate = Class.new(ClientError)
 
     ERRORS = {
       401 => Validic::Error::Unauthorized,
       403 => Validic::Error::Forbidden,
       404 => Validic::Error::NotFound,
+      406 => Validic::Error::InvalidDate,
       409 => Validic::Error::Conflict,
       422 => Validic::Error::UnprocessableEntity,
       500 => Validic::Error::InternalServerError
