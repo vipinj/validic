@@ -88,7 +88,7 @@ options = {
   access_token:    'ORGANIZATION_ACCESS_TOKEN',
   organization_id: 'ORGANIZATION_ID'
 }
-client = Validic::Client.new options
+client = Validic::Client.new(options)
 ```
 
 Now you can use the wrapper's helper methods to interface with the Validic API.
@@ -112,7 +112,7 @@ client.get_routine(start_date: '2015-01-01T00:00:00+00:00')
 
 ### More Examples ###
 
-You can override initialized organization id and access tokens for all helper
+You can override initialized organization_id and access tokens for all helper
 methods by passing parameters in an options hash as a final parameter.
 
 Below are examples of all helper methods.
@@ -230,7 +230,7 @@ client.get_users(user_id: '5499a29b84626b0339000094')
 client.refresh_token(user_id: '5499a29b84626b0339000094')
 ```
 
-##### Get user id from authentication token
+##### Get user_id from authentication token
 ```ruby
 client.me(authentication_token: 'L9RFSRnJvkwfiZm8vEc4')
 ```
@@ -342,7 +342,7 @@ client.get_tobacco_cessations
 
 
 ##### CRUD Operations
-As a Validic Connect partner you have access to all CRUD operations.  The gem supports all of these:
+As a Validic Connect partner you have access to all CRUD operations.
 
 **Create**
 ```ruby
