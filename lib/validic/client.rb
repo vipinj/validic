@@ -48,6 +48,7 @@ module Validic
       @api_version      = options.fetch(:api_version, 'v1')
       @access_token     = options.fetch(:access_token, Validic.access_token)
       @organization_id  = options.fetch(:organization_id, Validic.organization_id)
+      reload_config
     end
 
     ##

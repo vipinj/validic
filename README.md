@@ -112,9 +112,6 @@ client.get_routine(start_date: '2015-01-01T00:00:00+00:00')
 
 ### More Examples ###
 
-You can override initialized organization_id and access tokens for all helper
-methods by passing parameters in an options hash as a final parameter.
-
 Below are examples of all helper methods.
 
 ```ruby
