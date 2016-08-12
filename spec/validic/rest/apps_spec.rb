@@ -41,7 +41,7 @@ describe Validic::REST::Apps do
 
   describe '#get_user_synced_apps' do
     before do
-      stub_get('/organizations/1/sync_apps.json')
+      stub_get('/organizations/1/apps.json')
         .with(query: { authentication_token: '2', access_token: '1' })
         .to_return(body: fixture('synced_apps.json'),
       headers: { content_type: 'application/json; charset=utf-8' })
@@ -51,7 +51,7 @@ describe Validic::REST::Apps do
       expect(@synced_apps).to be_a Validic::Response
     end
     it 'makes a sync apps call to the correct url' do
-      expect(a_get('/organizations/1/sync_apps.json')
+      expect(a_get('/organizations/1/apps.json')
         .with(query: { authentication_token: '2', access_token: '1' }))
         .to have_been_made
     end
