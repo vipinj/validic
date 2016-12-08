@@ -47,6 +47,15 @@ describe Validic::Client do
       expect(client.access_token).to eq 'abcd'
       expect(client.organization_id).to eq 2
     end
+    
+
+
+    it 'options uses defaults' do
+      client = Validic::Client.new({})
+
+      expect(client.api_url).to eq 'https://api.validic.com'
+      expect(client.api_version).to eq 'v1'
+    end
   end
 
   describe '#connection' do
