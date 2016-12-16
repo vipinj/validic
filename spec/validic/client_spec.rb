@@ -47,8 +47,6 @@ describe Validic::Client do
       expect(client.access_token).to eq 'abcd'
       expect(client.organization_id).to eq 2
     end
-    
-
 
     it 'options uses defaults' do
       client = Validic::Client.new({})
