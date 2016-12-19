@@ -8,9 +8,9 @@ module Validic
         organization_id = options[:organization_id] || Validic.organization_id
         user_id = options.delete(:user_id)
         if user_id
-          path = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}/latest.json"
+          path = "#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}/latest.json"
         else
-          path = "/#{Validic.api_version}/organizations/#{organization_id}/#{type.to_s}/latest.json"
+          path = "#{Validic.api_version}/organizations/#{organization_id}/#{type.to_s}/latest.json"
         end
         get(path, options)
       end
@@ -42,19 +42,19 @@ module Validic
         user_id = options.delete(:user_id)
         activity_id = options.delete(:_id)
         if activity_id
-          path = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}/#{activity_id}.json"
+          path = "#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}/#{activity_id}.json"
         elsif user_id && type == :users
-          path = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}.json"
+          path = "#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}.json"
         elsif user_id
-          path = "/#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}.json"
+          path = "#{Validic.api_version}/organizations/#{organization_id}/users/#{user_id}/#{type.to_s}.json"
         elsif type == :me
-          path = "/#{Validic.api_version}/me.json"
+          path = "#{Validic.api_version}/me.json"
         elsif type == :profile
-          path = "/#{Validic.api_version}/profile.json"
+          path = "#{Validic.api_version}/profile.json"
         elsif type == :organizations
-          path = "/#{Validic.api_version}/organizations/#{organization_id}.json"
+          path = "#{Validic.api_version}/organizations/#{organization_id}.json"
         else
-          path = "/#{Validic.api_version}/organizations/#{organization_id}/#{type.to_s}.json"
+          path = "#{Validic.api_version}/organizations/#{organization_id}/#{type.to_s}.json"
         end
         path
       end

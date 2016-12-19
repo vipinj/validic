@@ -59,12 +59,15 @@ describe Validic::REST::Weight do
      expect(@weight).to be_a Validic::Weight
     end
     it 'builds the correct url' do
-      pending
       expect(a_post('/organizations/1/users/1/weight.json')
-          .with(body: { weight: { timestamp: '2013-03-10T07:12:16+00:00',
-      utf_offset: '+00:00', weight: 177,
-      height: 34, data_id: '12345'},
-      access_token: '1' })).to have_been_made
+        .with(body: {
+              weight: {
+                timestamp: '2013-03-10T07:12:16+00:00',
+                utc_offset: '+00:00', weight: 177,
+                height: 34, data_id: '12345'
+              },
+              access_token: '1' }
+             )).to have_been_made
     end
   end
 
