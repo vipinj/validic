@@ -7,7 +7,6 @@ module Validic
       def get_routine(params = {})
         build_response(get_request(:routine, params))
       end
-      alias :get_routines :get_routine
 
       def create_routine(options = {})
         user_id = options.delete(:user_id)
